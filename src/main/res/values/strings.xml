@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">20240120dailywork</string>
+    <string name="true_botton">同意</string>
+    <string name="false_botton">不同意</string>
+    <string name="sign_in_botton">登录</string>
+    <string name="sign_up_botton">注册</string>
+    <string name="visitor_signin_botton">游客登录</string>
+
+    <string name="sign_in_succeed_toast">登录成功</string>
+    <string name="sign_in_failing_toast">登录失败</string>
+</resources>
