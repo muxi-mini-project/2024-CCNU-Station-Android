@@ -2,13 +2,77 @@ package com.example.ccnu_station;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomePage extends AppCompatActivity {
+    public Map<String,Integer> ChatRoomMap = new HashMap<String,Integer>()
+    {{
+        put("HuaChat",0);
+        //此处省略一堆建筑
+    }};
+    private Button btnZhaomu;
+    private Button btnHuaCat;
+    private Button btnHuaChat;
+    private Button btnRank;
+    private Button btnPersonal;
+    private String User;
+    private static final String User_Identity =
+            "com.example.ccnu_station.HomePage.UserIdentity";
+    public static Intent newIntent(Context packgeContext, String userIdentity)
+    {
+        Intent intent = new Intent(packgeContext,HomePage.class);
+        intent.putExtra(User_Identity,userIdentity);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        User = getIntent().getStringExtra(User_Identity);
+        btnZhaomu = findViewById(R.id.btnZhaomu);
+        btnZhaomu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //页面跳转；
+            }
+        });
+        btnHuaCat = findViewById(R.id.btnHuaCat);
+        btnHuaCat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //页面跳转
+            }
+        });
+        btnHuaChat = findViewById(R.id.btnHuaChat);
+        btnHuaChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //页面跳转
+                Intent intent = ChatPage.newIntent(HomePage.this,User,ChatRoomMap.get("HuaChat"));
+                startActivity(intent);
+            }
+        });
+        btnRank = findViewById(R.id.btnRank);
+        btnRank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //页面跳转
+            }
+        });
+        btnPersonal = findViewById(R.id.btnPersonal);
+        btnPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //页面跳转
+            }
+        });
     }
 }

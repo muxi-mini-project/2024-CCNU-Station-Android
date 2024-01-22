@@ -9,13 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnYkLogin;
     private EditText editUsername;
     private EditText editPassword;
     private TextView textHint;
+    boolean passwordCheck = true;
+    boolean firstCheck = true;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.EditTextKey);
         editUsername = findViewById(R.id.EditTextUsername);
         textHint = findViewById(R.id.textHint);
+
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -33,12 +40,37 @@ public class MainActivity extends AppCompatActivity {
             {
                 String strUsername = editUsername.getText().toString();
                 String strPassword = editPassword.getText().toString();
-                boolean passwordCheck=true;
-                //此处省略一个接口
+                CCNU_API api = CCNU_Application.getApi();
+                Call<Data<LoginData>> LogingCall = api.getLoginData(strUsername,strPassword);
+                LogingCall.enqueue(new Callback<Data<LoginData>>() {
+                    @Override
+                    public void onResponse(Call<Data<LoginData>> call, Response<Data<LoginData>> response) {
+                        Toast.makeText(MainActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                        Data<LoginData> body = response.body();
+                        if(body == null) return;
+                        LoginData dataString = body.getData();
+                        if(dataString == null) return;
+                        if(dataString.getLogin()=="Yes") passwordCheck = true;
+                        else passwordCheck = false;
+                        if(dataString.getFirst()=="Yes") firstCheck = true;
+                        else firstCheck = false;
+                    }
+
+                    @Override
+                    public void onFailure(Call<Data<LoginData>> call, Throwable t) {
+                        Toast.makeText(MainActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
                 if(!passwordCheck) textHint.setText("用户名或密码错误！");
                 else
                 {
-                    Intent intent = SetOutLookActivity.newIntent(MainActivity.this,strUsername);
+                    Intent intent;
+                    if(firstCheck) {
+                        intent = SetOutLookActivity.newIntent(MainActivity.this,strUsername);
+                    }
+                    else {
+                        intent = HomePage.newIntent(MainActivity.this,strUsername);
+                    }
                     startActivity(intent);
                 }
             }
@@ -48,9 +80,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = SetOutLookActivity.newIntent(MainActivity.this,"0");
+                Intent intent = HomePage.newIntent(MainActivity.this,"0");
                 startActivity(intent);
             }
         });
     }
+
 }
