@@ -4,19 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private  static final  String TAG ="MainActivity";
-    private Button mTrueButton;
-    private Button mFalseButton;
-    private Button mNextButton;
+    private ImageButton mTrueButton;
+    private ImageButton mFalseButton;
+    private ImageButton mNextButton;
+    private ImageButton mBackButton;
     private TextView mQuestionTextview;
-
+    private TextView mTextViewbtn;
     private Question[] mQuestionBank =new Question[]{
             new Question(R.string.question_africas,false),
             new Question(R.string.question_Amaricas,true),
@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG,"onCreat(Bundle) called");
         setContentView(R.layout.activity_main);
 
         mQuestionTextview=(TextView) findViewById(R.id.question_text_View);
@@ -54,7 +53,17 @@ public class MainActivity extends AppCompatActivity {
 //        mQuestionTextview.setText(question);
         updateQuestion();
 
-        mNextButton =(Button) findViewById(R.id.next_btn);
+        mTextViewbtn=(TextView) findViewById(R.id.question_text_View);
+        mTextViewbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCurrentIndex =(mCurrentIndex + 1)%mQuestionBank.length;
+                updateQuestion();
+            }
+        });
+
+
+        mNextButton =(ImageButton) findViewById(R.id.next_btn);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,9 +74,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mBackButton =(ImageButton) findViewById(R.id.back_btn);
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCurrentIndex =(mCurrentIndex - 1)%mQuestionBank.length;
+                updateQuestion();
+            }
+        });
 
-
-        mTrueButton =(Button) findViewById(R.id.true_btn);
+        mTrueButton =(ImageButton) findViewById(R.id.true_btn);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 //                        Toast.LENGTH_SHORT).show();
             }
         });
-        mFalseButton =(Button) findViewById(R.id.false_btn);
+        mFalseButton =(ImageButton) findViewById(R.id.false_btn);
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,29 +104,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public void onStart(){
-        super.onStart();
-        Log.d(TAG,"onStart() called");
-    }
-    @Override
-    public void onResume(){
-        super.onResume();
-        Log.d(TAG,"onResume() called");
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause() called");
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG,"onStop() called");
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG,"onDestroy() called");
-    }
+
 }

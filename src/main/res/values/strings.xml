@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">learning</string>
-    <string name="false_btn">False</string>
-    <string name="true_btn">True</string>
-    <string name="next_btn">Next</string>
+    <string name="false_btn">FALSE</string>
+    <string name="true_btn">TRUE</string>
+    <string name="next_btn">》</string>
+    <string name="back_btn">《</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
 

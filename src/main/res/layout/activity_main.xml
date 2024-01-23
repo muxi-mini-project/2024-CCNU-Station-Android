@@ -27,23 +27,47 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/true_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/true_btn" />
+                android:src="@drawable/baseline_check_24"
+                android:contentDescription="@string/true_btn"/>
+<!--                android:text="@string/true_btn" />-->
 
-            <Button
+            <ImageButton
                 android:id="@+id/false_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/false_btn" />
+                android:src="@drawable/baseline_close_24"
+                android:contentDescription="@string/false_btn"/>
+<!--                android:text="@string/false_btn" />-->
 
-            <Button
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_keyboard_double_arrow_left_24"
+                android:contentDescription="@string/back_btn"/>
+
+<!--                android:text="@string/back_btn" />-->
+
+            <ImageButton
                 android:id="@+id/next_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/next_btn" />
+                android:src="@drawable/baseline_keyboard_double_arrow_right_24"
+                android:contentDescription="@string/next_btn"/>
+
+<!--                android:text="@string/next_btn" />-->
+
         </LinearLayout>
 
     </LinearLayout>
