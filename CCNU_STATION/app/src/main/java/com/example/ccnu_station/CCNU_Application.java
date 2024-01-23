@@ -7,11 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CCNU_Application extends Application {
     private static CCNU_API api;
-    public void onCreat()
+    public void onCreate()
     {
         super.onCreate();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http")
+                .baseUrl("http://10.131.122.150:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(CCNU_API.class);

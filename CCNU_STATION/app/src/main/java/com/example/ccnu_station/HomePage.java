@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +23,15 @@ public class HomePage extends AppCompatActivity {
     private Button btnHuaChat;
     private Button btnRank;
     private Button btnPersonal;
-    private String User;
-    private static final String User_Identity =
+    private String User_token;
+    /*private static final String User_Identity =
             "com.example.ccnu_station.HomePage.UserIdentity";
+
+     */
     public static Intent newIntent(Context packgeContext, String userIdentity)
     {
         Intent intent = new Intent(packgeContext,HomePage.class);
-        intent.putExtra(User_Identity,userIdentity);
+        //intent.putExtra(User_Identity,userIdentity);
         return intent;
     }
 
@@ -36,7 +39,8 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        User = getIntent().getStringExtra(User_Identity);
+        SharedPreferences sp = getSharedPreferences("User_Details",Context.MODE_PRIVATE);
+        User_token = sp.getString("token","null");
         btnZhaomu = findViewById(R.id.btnZhaomu);
         btnZhaomu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +60,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //页面跳转
-                Intent intent = ChatPage.newIntent(HomePage.this,User,ChatRoomMap.get("HuaChat"));
+                Intent intent = ChatPage.newIntent(HomePage.this,ChatRoomMap.get("HuaChat"));
                 startActivity(intent);
             }
         });
