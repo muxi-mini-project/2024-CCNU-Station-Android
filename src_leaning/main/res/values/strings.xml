@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">learning</string>
+    <string name="false_btn">False</string>
+    <string name="true_btn">True</string>
+    <string name="next_btn">Next</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+
+
+<!--    <string name="question_text">this is a question</string>-->
+    <string name="question_australia">Canberra is the captital of Ausralia.</string>
+    <string name="question_oceans">The Pacific Ocean is larger than the Atantic.</string>
+    <string name="question_africas">The source of the Nile River is in Egypt.</string>
+    <string name="question_Amaricas">The Amazon River is the longest river in the Americas.</string>
+    <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
+</resources>
