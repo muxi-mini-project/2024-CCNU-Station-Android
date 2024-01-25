@@ -3,6 +3,8 @@ package com.example.ccnu_station;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -37,12 +39,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SetOutLookActivity extends AppCompatActivity {
+    private CCNU_API api;
     private Uri UriAvatar;
     private String QiniuToken;
-    private String avatarUrl = "https://pic.imgdb.cn/item/65b06ff9871b83018aff45e6.png";
+    private SetOutLookActivityData Data;
+    private CCNU_ViewModel<SetOutLookActivityData> viewModel;
     private static final String User_Identity =
             "com.example.ccnu_station.SetOutLookActivity.UserIdentity";
-    private String User_token;
+    private String User_token="null";
     //private TextView textTest;
     private Button btnNext;
     private ImageView avatar;
@@ -63,7 +67,6 @@ public class SetOutLookActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    CCNU_API api = CCNU_Application.getApi();
                     Call<QiniuTokenData> QiniuTokenGet = api.getQiniuToken("Bearer "+User_token);
                     QiniuTokenGet.enqueue(new Callback<QiniuTokenData>() {
                         @Override
@@ -81,7 +84,30 @@ public class SetOutLookActivity extends AppCompatActivity {
                                     if(info.isOK()) {
                                         Toast.makeText(SetOutLookActivity.this,"Qiniu请求成功",Toast.LENGTH_SHORT).show();
                                         String uploadedKey = response.optString("key");
-                                        //String imageUrl = "https://your-bucket-domain/" + uploadedKey;
+                                        Call<AvatarUploadResponse> avatarUploadResponseCall = api.avatarKeyUpload("Bearer "+User_token,uploadedKey);
+                                        avatarUploadResponseCall.enqueue(new Callback<AvatarUploadResponse>() {
+                                            @Override
+                                            public void onResponse(Call<AvatarUploadResponse> call, Response<AvatarUploadResponse> response) {
+                                                AvatarUploadResponse body = response.body();
+                                                if(body == null) return;
+                                                if(!body.getSuccess()) return;
+                                                String imageUrl = "http://mini-project.muxixyz.com/" + uploadedKey;
+                                                String avatarUrl = imageUrl;
+                                                Data.setAvatarUrl(avatarUrl);
+                                                viewModel.updateData(Data);
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<AvatarUploadResponse> call, Throwable t) {
+                                                Log.i("KeyUpload","Failed");
+                                            }
+                                        });
+                                        /*
+                                        Glide.with(SetOutLookActivity.this)
+                                                .load(Data.getAvatarUrl())
+                                                .circleCrop()
+                                                .into(avatar);
+                                         */
                                         //Log.i("qiniu", "Uploaded Image URL: " + imageUrl);
                                     } else {
                                         Log.i("qiniu", "Upload Fail");
@@ -108,22 +134,27 @@ public class SetOutLookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_out_look);
+        Data = new SetOutLookActivityData();
+        btnNext = findViewById(R.id.btnNext);
+        avatar = findViewById(R.id.imageViewAvatar);
         SharedPreferences sp = getSharedPreferences("User_Details",Context.MODE_PRIVATE);
+        updateUI(Data);
+        viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
+        viewModel.getData().observe(this, newData -> {
+            // 数据发生变化，刷新界面
+            updateUI(newData);
+        });
+
         User_token = sp.getString("token","null");
         //textTest = (TextView) findViewById(R.id.textTest);
         //textTest.setText(User);
-        btnNext = findViewById(R.id.btnNext);
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = HomePage.newIntent(SetOutLookActivity.this);
             }
         });
-        avatar = findViewById(R.id.imageViewAvatar);
-        Glide.with(this)
-                .load(avatarUrl)
-                .circleCrop()
-                .into(avatar);
         avatar.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -131,5 +162,12 @@ public class SetOutLookActivity extends AppCompatActivity {
                 getContentLauncher.launch("image/*");
             }
         });
+    }
+    private void updateUI(SetOutLookActivityData newData)
+    {
+        Glide.with(this)
+                .load(newData.getAvatarUrl())
+                .circleCrop()
+                .into(avatar);
     }
 }

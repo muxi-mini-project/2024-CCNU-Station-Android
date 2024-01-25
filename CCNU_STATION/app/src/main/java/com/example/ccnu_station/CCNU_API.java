@@ -29,4 +29,6 @@ public interface CCNU_API {
             @Part("image") RequestBody image);
     @GET("qiniutoken")
     Call<QiniuTokenData> getQiniuToken(@Header("Authorization")String Token);
+    @GET("api/user/avatar")
+    Call<AvatarUploadResponse> avatarKeyUpload(@Header("Authorization")String Token,@Query("image") String key);
 }
