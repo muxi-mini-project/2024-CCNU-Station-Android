@@ -28,7 +28,7 @@ public class HomePage extends AppCompatActivity {
             "com.example.ccnu_station.HomePage.UserIdentity";
 
      */
-    public static Intent newIntent(Context packgeContext, String userIdentity)
+    public static Intent newIntent(Context packgeContext)
     {
         Intent intent = new Intent(packgeContext,HomePage.class);
         //intent.putExtra(User_Identity,userIdentity);

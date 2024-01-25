@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent = SetOutLookActivity.newIntent(MainActivity.this,strUsername);
                             }
                             else {
-                                intent = HomePage.newIntent(MainActivity.this,strUsername);
+                                intent = HomePage.newIntent(MainActivity.this);
                             }
                             startActivity(intent);
                         }
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = HomePage.newIntent(MainActivity.this,"0");
+                Intent intent = SetOutLookActivity.newIntent(MainActivity.this,"0");
                 startActivity(intent);
             }
         });

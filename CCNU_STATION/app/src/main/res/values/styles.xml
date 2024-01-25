@@ -3,4 +3,5 @@
     <style name="NoUnderlineEditText" parent="Widget.AppCompat.EditText">
         <item name="android:background">@android:color/transparent</item>
     </style>
+    <style name="NoTitleTheme" parent="@android:style/Theme.NoTitleBar"></style>
 </resources>
