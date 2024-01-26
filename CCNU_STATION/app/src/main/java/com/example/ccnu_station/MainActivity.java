@@ -89,9 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(Call<LoginData> call, Throwable t) {
                         Toast.makeText(MainActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
                     }
-
                 });
-
             }
         });
         btnYkLogin.setOnClickListener(new View.OnClickListener()

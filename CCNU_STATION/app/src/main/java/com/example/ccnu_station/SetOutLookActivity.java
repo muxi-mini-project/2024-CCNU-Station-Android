@@ -80,7 +80,7 @@ public class SetOutLookActivity extends AppCompatActivity {
                             uploadManager.put(avatarFile, null, QiniuToken, new UpCompletionHandler() {
                                 @Override
                                 public void complete(String key, ResponseInfo info, JSONObject response) {
-                                    Toast.makeText(SetOutLookActivity.this,"Qiniu请求完成",Toast.LENGTH_SHORT).show();;
+                                    Toast.makeText(SetOutLookActivity.this,"Qiniu请求完成",Toast.LENGTH_SHORT).show();
                                     if(info.isOK()) {
                                         Toast.makeText(SetOutLookActivity.this,"Qiniu请求成功",Toast.LENGTH_SHORT).show();
                                         String uploadedKey = response.optString("key");
