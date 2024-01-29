@@ -18,7 +18,7 @@ import retrofit2.http.Query;
 
 public interface CCNU_API {
     @GET("api/user/detail")
-    Call<PersonalDetailData> getPersonalDetail(@Header("Authorization") String token);
+    Call<PersonalDetailData> getPersonalDetail(@Header("Authorization") String token,@Query("userid") String ID);
     @FormUrlEncoded
     @POST("api/login")
     Call<LoginData> getLoginData(@Field("stuid") String UserID, @Field("password") String Password);

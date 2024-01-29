@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("token",body.getToken());
                             editor.apply();
                             Intent intent;
-                            if(firstCheck) {
-                                intent = SetOutLookActivity.newIntent(MainActivity.this,strUsername);
+                            if(firstCheck==firstCheck) {
+                                intent = SetOutLookActivity.newIntent(MainActivity.this);
                             }
                             else {
                                 intent = HomePage.newIntent(MainActivity.this);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = SetOutLookActivity.newIntent(MainActivity.this,"0");
+                Intent intent = HomePage.newIntent(MainActivity.this);
                 startActivity(intent);
             }
         });

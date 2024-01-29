@@ -75,7 +75,8 @@ public class HomePage extends AppCompatActivity {
         btnPersonal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //页面跳转
+                Intent intent = PersonalPage.newIntent(HomePage.this,User_token);
+                startActivity(intent);
             }
         });
     }
