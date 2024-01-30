@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CCNU_STATION"
         tools:targetApi="31">
+
         <activity android:name=".Achievement_Activity"
             android:exported="false"/>
         <activity
