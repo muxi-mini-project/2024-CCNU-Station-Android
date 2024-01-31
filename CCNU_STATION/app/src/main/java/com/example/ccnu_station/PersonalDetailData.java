@@ -6,29 +6,47 @@ import java.util.SplittableRandom;
 public class PersonalDetailData {
     private String stuid;
     private String password;
-    private String realname;
+    private String realName;
     private String nickname;
-    private String grade;
+    private boolean YNself;
+    private int grade;
     private String college;
     private String gender;
     private String headimage;
-    private String age;
+    private int age;
     private String sign;
-    private String friends_number;
-    private String followers_number;
-    private String follower_number;
-    private String post_number;
-    private String date;
-    private String stay_date;
+    private int friends_number;
+    private int followers_number;
     private boolean YNLogin;
-    private boolean YNSelf;
+    private Time date;
+    private int stay_date;
 
-    public boolean isYNLogin() {
-        return YNLogin;
+    public void setStay_date(int stay_date) {
+        this.stay_date = stay_date;
     }
 
-    public boolean isYNSelf() {
-        return YNSelf;
+    public int getStay_date() {
+        return stay_date;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getFollowers_number() {
+        return followers_number;
+    }
+
+    public int getFriends_number() {
+        return friends_number;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public String getCollege() {
+        return college;
     }
 
     public String getGender() {
@@ -47,8 +65,8 @@ public class PersonalDetailData {
         return password;
     }
 
-    public String getCollege() {
-        return college;
+    public String getRealName() {
+        return realName;
     }
 
     public String getSign() {
@@ -59,56 +77,28 @@ public class PersonalDetailData {
         return stuid;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getFollower_number() {
-        return follower_number;
-    }
-
-    public String getFollowers_number() {
-        return followers_number;
-    }
-
-    public String getFriends_number() {
-        return friends_number;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public String getPost_number() {
-        return post_number;
-    }
-
-    public String getRealname() {
-        return realname;
-    }
-
-    public String getStay_date() {
-        return stay_date;
-    }
-
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
-    }
-
-    public void setFriends_number(String friends_number) {
-        this.friends_number = friends_number;
-    }
-
-    public void setFollowers_number(String followers_number) {
-        this.followers_number = followers_number;
     }
 
     public void setCollege(String college) {
         this.college = college;
+    }
+
+    public void setFollowers_number(int followers_number) {
+        this.followers_number = followers_number;
+    }
+
+    public void setFriends_number(int friends_number) {
+        this.friends_number = friends_number;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 
     public void setHeadimage(String headimage) {
@@ -123,28 +113,12 @@ public class PersonalDetailData {
         this.password = password;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public void setSign(String sign) {
         this.sign = sign;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setStay_date(String stay_date) {
-        this.stay_date = stay_date;
-    }
-
-    public void setPost_number(String post_number) {
-        this.post_number = post_number;
     }
 
     public void setStuid(String stuid) {
@@ -155,15 +129,23 @@ public class PersonalDetailData {
         this.YNLogin = YNLogin;
     }
 
-    public void setFollower_number(String follower_number) {
-        this.follower_number = follower_number;
+    public Time getDate() {
+        return date;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setDate(Time date) {
+        this.date = date;
     }
 
-    public void setYNSelf(boolean YNSelf) {
-        this.YNSelf = YNSelf;
+    public boolean isYNLogin() {
+        return YNLogin;
+    }
+
+    public boolean isYNself() {
+        return YNself;
+    }
+
+    public void setYNself(boolean YNself) {
+        this.YNself = YNself;
     }
 }

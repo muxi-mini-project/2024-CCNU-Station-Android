@@ -2,21 +2,15 @@ package com.example.ccnu_station;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
@@ -33,35 +27,31 @@ public class PersonalPage extends AppCompatActivity {
         intent.putExtra(PersonalPage_ID,personal_ID);
         return intent;
     }
-    private CCNU_ViewModel<PersonalDetailData> viewModel;
-    private ImageView Avatar;
     private String Personal_ID;
-    private PersonalDetailData Data;
     private TextView textName;
+    private String Name;
     private TextView textID;
+    private String ID;
     private TextView textSchool;
+    private String School;
     private TextView textFriends;
+    private String Friends;
     private TextView textFollowers;
+    private String Followers;
     private TextView textStayDate;
+    private String StayDate;
     private TextView textSubmitNum;
     private String SubmitNum;
     private ImageView imageHead;
+    private String Head;
     private String User_token;
     private ConstraintLayout detailBlock;
-    private Button changeButton;
     private boolean IsSelf=false;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_page);
-        viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
-        viewModel.getData().observe(this, newData -> {
-            // 数据发生变化，刷新界面
-            updateUI(newData);
-        });
-        Data = new PersonalDetailData();
-        Avatar = findViewById(R.id.imageViewAvatar);
         textName = findViewById(R.id.textName);
         textFriends = findViewById(R.id.textfriends);
         textFollowers = findViewById(R.id.textfollowers);
@@ -73,9 +63,8 @@ public class PersonalPage extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
         User_token = sp.getString("token","null");
         Personal_ID = getIntent().getStringExtra(PersonalPage_ID);
-        changeButton = addDetailButton();
         CCNU_API api = CCNU_Application.getApi();
-        Call<PersonalDetailData> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
+        Call<PersonalDetailData> DetailGet = api.getPersonalDetail("Bearer "+User_token);
         DetailGet.enqueue(new Callback<PersonalDetailData>() {
             @Override
             public void onResponse(Call<PersonalDetailData> call, Response<PersonalDetailData> response) {
@@ -86,8 +75,8 @@ public class PersonalPage extends AppCompatActivity {
                     Toast.makeText(PersonalPage.this,"响应体为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Data = body;
-                viewModel.updateData(body);
+
+
             }
 
             @Override
@@ -95,41 +84,5 @@ public class PersonalPage extends AppCompatActivity {
                 Toast.makeText(PersonalPage.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
-        changeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = DetailChange.newIntent(PersonalPage.this);
-                startActivity(intent);
-            }
-        });
-    }
-    public void updateUI(PersonalDetailData newData)
-    {
-        Glide.with(this)
-                .load(newData.getHeadimage())
-                .circleCrop()
-                .into(Avatar);
-        textName.setText(newData.getNickname());
-        textFriends.setText(newData.getFriends_number());
-        textFollowers.setText(newData.getFollowers_number());
-        textID.setText(newData.getStuid());
-        textSchool.setText(newData.getCollege());
-        textStayDate.setText(newData.getStay_date());
-        textSubmitNum.setText(newData.getPost_number());
-    }
-    public Button addDetailButton()
-    {
-        Button newButton = new Button(this);
-        newButton.setText("修改");
-        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        params.endToEnd = R.id.DetailBlock;
-        params.topToTop = R.id.DetailBlock;
-        params.setMargins(40,200,40,40);
-        newButton.setLayoutParams(params);
-        detailBlock.addView(newButton);
-        return newButton;
     }
 }

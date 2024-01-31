@@ -35,7 +35,7 @@ public class LoginData
         this.msg = msg;
     }
 
-    public void setToken(String Token) {
+    public void setToken(String token) {
         this.token = token;
     }
 }
