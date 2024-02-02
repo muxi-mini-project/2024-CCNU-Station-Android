@@ -24,6 +24,7 @@ public class Achievement {
         return isfinished;
     }
 
+
     public void setIsfinished(boolean isfinished) {
         this.isfinished = isfinished;
     }

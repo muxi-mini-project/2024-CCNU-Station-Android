@@ -48,6 +48,7 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
         TextView achievement_title;
         CheckBox achievement_isfinished;
 
+
         public Achievement_ViewHolder(@NonNull View itemView) {
             super(itemView);
             achievement_title = itemView.findViewById(R.id.title_textview);
