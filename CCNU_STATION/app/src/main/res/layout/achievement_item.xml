@@ -22,7 +22,7 @@
     <!--        app:layout_constraintVertical_bias="0.375" />-->
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_textview"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:maxLines="2"
@@ -37,10 +37,10 @@
         android:textStyle="bold" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/isfinished_checkbox"
         android:layout_width="66dp"
         android:layout_height="66dp"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="0dp" />
 

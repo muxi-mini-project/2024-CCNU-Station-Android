@@ -6,83 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".HomePage">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="400dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageViewBackground"
+        <Button
+            android:id="@+id/btnZhaomu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="100dp"
-            android:layout_height="400dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <Button
+            android:id="@+id/btnRank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
-            <Button
-                android:id="@+id/btnZhaomu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="招募"
-                app:layout_constraintBottom_toTopOf="@+id/btnRank"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnHuaCat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
-            <Button
-                android:id="@+id/btnRank"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="排行"
-                app:layout_constraintBottom_toTopOf="@+id/btnHuaCat"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnZhaomu" />
+        <Button
+            android:id="@+id/btnHuaChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
-            <Button
-                android:id="@+id/btnHuaCat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="华猫"
-                app:layout_constraintBottom_toTopOf="@+id/btnHuaChat"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnRank" />
-
-            <Button
-                android:id="@+id/btnHuaChat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="华聊"
-                app:layout_constraintBottom_toTopOf="@+id/btnPersonal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnHuaCat" />
-
-            <Button
-                android:id="@+id/btnPersonal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="个人"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnHuaChat" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <Button
+            android:id="@+id/btnPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

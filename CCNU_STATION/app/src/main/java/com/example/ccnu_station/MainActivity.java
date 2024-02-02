@@ -1,6 +1,8 @@
 package com.example.ccnu_station;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textHint;
     boolean passwordCheck = false;
     boolean firstCheck = true;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("token",body.getToken());
                             editor.apply();
                             Intent intent;
-                            if(firstCheck==firstCheck) {
-                                intent = SetOutLookActivity.newIntent(MainActivity.this);
+                            if(firstCheck) {
+                                intent = SetOutLookActivity.newIntent(MainActivity.this,strUsername);
                             }
                             else {
                                 intent = HomePage.newIntent(MainActivity.this);
@@ -97,10 +103,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = HomePage.newIntent(MainActivity.this);
+                Intent intent = SetOutLookActivity.newIntent(MainActivity.this,"0");
                 startActivity(intent);
             }
         });
+
     }
 
 }
