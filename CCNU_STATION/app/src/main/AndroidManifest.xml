@@ -17,14 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CCNU_STATION"
         tools:targetApi="31">
-
-        <activity android:name=".Achievement_Activity"
-            android:exported="false"/>
         <activity
-            android:name=".DetailChange"
+            android:name=".Personal.DetailChange"
             android:exported="false" />
         <activity
-            android:name=".PersonalPage"
+            android:name=".Personal.PersonalPage"
             android:exported="false" />
 
         <meta-data
@@ -38,13 +35,13 @@
             android:name=".ChatPage"
             android:exported="false" />
         <activity
-            android:name=".HomePage"
+            android:name=".Home.HomePage"
             android:exported="false" />
         <activity
-            android:name=".SetOutLookActivity"
+            android:name=".OutLook.SetOutLookActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Login.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

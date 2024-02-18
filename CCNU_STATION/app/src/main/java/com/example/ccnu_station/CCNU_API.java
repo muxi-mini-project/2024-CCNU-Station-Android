@@ -1,11 +1,10 @@
 package com.example.ccnu_station;
 
-import android.icu.text.IDNA;
-
-import java.util.SplittableRandom;
+import com.example.ccnu_station.Login.LoginData;
+import com.example.ccnu_station.OutLook.QiniuTokenData;
+import com.example.ccnu_station.Personal.PersonalDetailData;
 
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -18,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface CCNU_API {
     @GET("api/user/detail")
-    Call<PersonalDetailData> getPersonalDetail(@Header("Authorization") String token,@Query("userid") String ID);
+    Call<PersonalDetailData> getPersonalDetail(@Header("Authorization") String token, @Query("userid") String ID);
     @FormUrlEncoded
     @POST("api/login")
     Call<LoginData> getLoginData(@Field("stuid") String UserID, @Field("password") String Password);
