@@ -131,7 +131,6 @@ public class SetOutLookActivity extends AppCompatActivity {
                 Data.setAvatarUrl(avatarUrl);
                 viewModel.updateData(Data);
             }
-
             @Override
             public void onFailure(Call<AvatarUploadResponse> call, Throwable t) {
                 Log.i("KeyUpload","Failed");
