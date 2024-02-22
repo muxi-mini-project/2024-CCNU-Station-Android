@@ -48,46 +48,19 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
         TextView achievement_title;
         CheckBox achievement_isfinished;
 
-
         public Achievement_ViewHolder(@NonNull View itemView) {
             super(itemView);
             achievement_title = itemView.findViewById(R.id.title_textview);
             achievement_isfinished = itemView.findViewById(R.id.isfinished_checkbox);
 
-            achievement_isfinished.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    data.get(getAdapterPosition()).setIsfinished(isChecked);
-                }
-            });
-
-////////////////////////设置监听器////////////////////////////////////////
-//            itemView.setOnClickListener(new View.OnClickListener()) {
+//            achievement_isfinished.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                @Override
-//                public void onClick(View v) {
-//                    if (mOnItemClickListener !=null){
-//                        mOnItemClickListener.onRecyclerItemClick(getAdapterPosition());
-//                    }
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    data.get(getAdapterPosition()).setIsfinished(isChecked);
 //                }
 //            });
-//        }
-//    }
-//
-//
-//
-//
-//    private OnRecyclerItemClickListener mOnItemClickListener;
-//
-//    public void setRecyclerItemClickListener(OnRecyclerItemClickListener listener){
-//        mOnItemClickListener =listener;
-//    }
-//
-//
-//
-//    public interface OnRecyclerItemClickListener{
-//        void onRecyclerItemClick(int position);
 
-////////////////////////////设置监听器///////////////////////////////////
         }
     }
+
 }
