@@ -1,7 +1,5 @@
 package com.example.ccnu_station.Login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ccnu_station.CCNU_API;
-import com.example.ccnu_station.CCNU_Application;
+import com.example.ccnu_station.Reuse.BaseActivity;
+import com.example.ccnu_station.Reuse.CCNU_API;
+import com.example.ccnu_station.Reuse.CCNU_Application;
+import com.example.ccnu_station.Reuse.Data;
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.OutLook.SetOutLookActivity;
@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private Button btnLogin;
     private Button btnYkLogin;
     private EditText editUsername;
@@ -31,11 +31,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView textHint;
     boolean passwordCheck = false;
     boolean firstCheck = true;
+    public static Intent newIntent(Context packgeContext)
+    {
+        Intent intent = new Intent(packgeContext, LoginActivity.class);
+        return intent;
+    }
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         btnLogin = (Button) findViewById(R.id.buttonLogin);
         btnYkLogin = (Button) findViewById(R.id.buttonYkLogin);
         editPassword = findViewById(R.id.EditTextKey);
@@ -50,15 +55,15 @@ public class MainActivity extends AppCompatActivity {
                 String strPassword = editPassword.getText().toString();
                 CCNU_API api = CCNU_Application.getApi();
                 //Call<Data<LoginData>> LogingCall = api.getTest();
-                Call<LoginData> LogingCall = api.getLoginData(strUsername,strPassword);
-                LogingCall.enqueue(new Callback<LoginData>() {
+                Call<Data> LogingCall = api.getLoginData(strUsername,strPassword);
+                LogingCall.enqueue(new Callback<Data>() {
                     @Override
-                    public void onResponse(Call<LoginData> call, Response<LoginData> response) {
-                        Toast.makeText(MainActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
-                        LoginData body = response.body();
+                    public void onResponse(Call<Data> call, Response<Data> response) {
+                        Toast.makeText(LoginActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                        Data body = response.body();
 
                         if(body == null) {
-                            Toast.makeText(MainActivity.this,"响应体为空",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"响应体为空",Toast.LENGTH_SHORT).show();
                             return;
                         }
                         if(body.getLogin().equals("Yes")) {
@@ -79,18 +84,18 @@ public class MainActivity extends AppCompatActivity {
                             editor.apply();
                             Intent intent;
                             if(firstCheck==firstCheck) {
-                                intent = SetOutLookActivity.newIntent(MainActivity.this);
+                                intent = SetOutLookActivity.newIntent(LoginActivity.this);
                             }
                             else {
-                                intent = HomePage.newIntent(MainActivity.this);
+                                intent = HomePage.newIntent(LoginActivity.this);
                             }
                             startActivity(intent);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<LoginData> call, Throwable t) {
-                        Toast.makeText(MainActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                    public void onFailure(Call<Data> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -100,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = SetOutLookActivity.newIntent(MainActivity.this);
+                Intent intent = SetOutLookActivity.newIntent(LoginActivity.this);
                 startActivity(intent);
             }
         });

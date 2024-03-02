@@ -17,16 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.ccnu_station.CCNU_API;
-import com.example.ccnu_station.CCNU_Application;
-import com.example.ccnu_station.CCNU_ViewModel;
+import com.example.ccnu_station.Reuse.BaseActivity;
+import com.example.ccnu_station.Reuse.CCNU_API;
+import com.example.ccnu_station.Reuse.CCNU_Application;
+import com.example.ccnu_station.Reuse.CCNU_ViewModel;
 import com.example.ccnu_station.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PersonalPage extends AppCompatActivity {
+public class PersonalPage extends BaseActivity {
     private static String PersonalPage_ID =
             "com.example.ccnu_station.PersonalPage_ID";
     public static Intent newIntent(Context packgeContext, String personal_ID)
@@ -38,7 +39,7 @@ public class PersonalPage extends AppCompatActivity {
     private CCNU_ViewModel<PersonalDetailData> viewModel;
     private ImageView Avatar;
     private String Personal_ID;
-    private PersonalDetailData Data;
+    private PersonalDetailData data;
     private TextView textName;
     private TextView textID;
     private TextView textSchool;
@@ -62,7 +63,7 @@ public class PersonalPage extends AppCompatActivity {
             // 数据发生变化，刷新界面
             updateUI(newData);
         });
-        Data = new PersonalDetailData();
+        data = new PersonalDetailData();
         Avatar = findViewById(R.id.imageViewAvatar);
         textName = findViewById(R.id.textName);
         textFriends = findViewById(R.id.textfriends);

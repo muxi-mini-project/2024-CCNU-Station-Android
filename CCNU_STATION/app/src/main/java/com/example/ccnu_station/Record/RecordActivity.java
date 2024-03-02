@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.ccnu_station.R;
 
-public class RecordPage extends AppCompatActivity {
+public class RecordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

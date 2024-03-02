@@ -1,4 +1,4 @@
-package com.example.ccnu_station;
+package com.example.ccnu_station.Chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,15 +7,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.ccnu_station.R;
+
 public class ChatPage extends AppCompatActivity {
     private String User_token;
     private int ChatRoomIdInt;
     /*private static final String User_Identity =
-            "com.example.ccnu_station.ChatPage.UserIdentity";
+            "com.example.ccnu_station.Chat.ChatPage.UserIdentity";
 
      */
     private static final String Chat_RoomID =
-            "com.example.ccnu_station.ChatPage.Chat_RoomId";
+            "com.example.ccnu_station.Chat.ChatPage.Chat_RoomId";
     public static Intent newIntent(Context packageContext,int chat_RoomID)
     {
         Intent intent = new Intent(packageContext,ChatPage.class);

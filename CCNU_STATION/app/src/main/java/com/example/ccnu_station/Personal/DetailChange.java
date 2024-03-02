@@ -18,16 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.ccnu_station.CCNU_API;
-import com.example.ccnu_station.CCNU_Application;
-import com.example.ccnu_station.CCNU_ViewModel;
+import com.example.ccnu_station.Reuse.BaseActivity;
+import com.example.ccnu_station.Reuse.CCNU_API;
+import com.example.ccnu_station.Reuse.CCNU_Application;
+import com.example.ccnu_station.Reuse.CCNU_ViewModel;
 import com.example.ccnu_station.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailChange extends AppCompatActivity {
+public class DetailChange extends BaseActivity {
     private String User_token;
     private CCNU_ViewModel<PersonalDetailData> viewModel;
     private PersonalDetailData Data;

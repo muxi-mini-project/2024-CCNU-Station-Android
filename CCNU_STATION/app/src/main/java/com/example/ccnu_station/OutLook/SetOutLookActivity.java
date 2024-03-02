@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,11 +17,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.ccnu_station.AvatarUploadResponse;
-import com.example.ccnu_station.CCNU_API;
-import com.example.ccnu_station.CCNU_Application;
-import com.example.ccnu_station.CCNU_ViewModel;
-import com.example.ccnu_station.FileUtil;
+import com.example.ccnu_station.Reuse.BaseActivity;
+import com.example.ccnu_station.Reuse.CCNU_API;
+import com.example.ccnu_station.Reuse.CCNU_Application;
+import com.example.ccnu_station.Reuse.CCNU_ViewModel;
+import com.example.ccnu_station.Reuse.FileUtil;
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
 import com.qiniu.android.http.ResponseInfo;
@@ -38,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SetOutLookActivity extends AppCompatActivity {
+public class SetOutLookActivity extends BaseActivity {
     private CCNU_API api;
     private Uri UriAvatar;
     private String QiniuToken;
@@ -49,7 +48,7 @@ public class SetOutLookActivity extends AppCompatActivity {
             "com.example.ccnu_station.OutLook.SetOutLookActivity.UserIdentity";
 
      */
-    private String User_token="null";
+    private String User_token=CCNU_Application.getUser_Token();
     //private TextView textTest;
     private Button btnNext;
     private ImageView avatar;
@@ -82,18 +81,14 @@ public class SetOutLookActivity extends AppCompatActivity {
         Data = new SetOutLookActivityData();
         btnNext = findViewById(R.id.btnNext);
         avatar = findViewById(R.id.imageViewAvatar);
-        SharedPreferences sp = getSharedPreferences("User_Details",Context.MODE_PRIVATE);
         updateUI(Data);
         viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
         viewModel.getData().observe(this, newData -> {
             // 数据发生变化，刷新界面
             updateUI(newData);
         });
-
-        User_token = sp.getString("token","null");
         //textTest = (TextView) findViewById(R.id.textTest);
         //textTest.setText(User);
-
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

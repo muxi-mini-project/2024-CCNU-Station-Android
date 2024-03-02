@@ -1,10 +1,12 @@
-package com.example.ccnu_station;
+package com.example.ccnu_station.Achivement;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ccnu_station.R;
 
 import java.util.List;
 

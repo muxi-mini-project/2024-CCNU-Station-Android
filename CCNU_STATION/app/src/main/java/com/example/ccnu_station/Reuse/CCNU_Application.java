@@ -1,24 +1,29 @@
-package com.example.ccnu_station;
+package com.example.ccnu_station.Reuse;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.example.ccnu_station.Reuse.CCNU_API;
 import com.qiniu.android.common.AutoZone;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.storage.Configuration;
-import com.qiniu.android.storage.FileRecorder;
-import com.qiniu.android.storage.KeyGenerator;
-import com.qiniu.android.storage.Recorder;
 import com.qiniu.android.storage.UploadManager;
-import java.io.IOException;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CCNU_Application extends Application {
+    private static String User_Token;
     private static CCNU_API api;
     private static UploadManager uploadManager;
     public void onCreate()
     {
         super.onCreate();
+        //获取本地存储的UserToken
+        SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
+        User_Token = sp.getString("token","null");
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.131.122.150:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -50,5 +55,8 @@ public class CCNU_Application extends Application {
 
     public static UploadManager getUploadManager() {
         return uploadManager;
+    }
+    public static String getUser_Token(){
+        return User_Token;
     }
 }

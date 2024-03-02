@@ -1,13 +1,16 @@
-package com.example.ccnu_station;
+package com.example.ccnu_station.Buidings;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
-public class SchoolDate extends AppCompatActivity {
+import com.example.ccnu_station.R;
+
+public class BuildActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_school_date);
+        setContentView(R.layout.activity_build);
     }
 }

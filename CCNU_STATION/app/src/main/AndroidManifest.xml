@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".CCNU_Application"
+        android:name=".Reuse.CCNU_Application"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,10 +18,23 @@
         android:theme="@style/Theme.CCNU_STATION"
         tools:targetApi="31">
         <activity
-            android:name=".Record.addRecordPage"
+            android:name=".Buidings.BuildActivity"
             android:exported="false" />
         <activity
-            android:name=".Record.RecordPage"
+            android:name=".Start.StartActivity"
+            android:exported="false" />
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
+        <activity
+            android:name=".Record.addRecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Record.RecordActivity"
             android:exported="false" />
         <activity
             android:name=".Personal.DetailChange"
@@ -38,7 +51,7 @@
             android:name=".SchoolDate"
             android:exported="false" />
         <activity
-            android:name=".ChatPage"
+            android:name=".Chat.ChatPage"
             android:exported="false" />
         <activity
             android:name=".Home.HomePage"
@@ -47,14 +60,8 @@
             android:name=".OutLook.SetOutLookActivity"
             android:exported="false" />
         <activity
-            android:name=".Login.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".Login.LoginActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

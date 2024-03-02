@@ -1,8 +1,5 @@
-package com.example.ccnu_station;
+package com.example.ccnu_station.Reuse;
 
-import com.example.ccnu_station.Login.LoginData;
-import com.example.ccnu_station.OutLook.QiniuTokenData;
-import com.example.ccnu_station.Personal.PersonalDetailData;
 import com.example.ccnu_station.Record.addRecordBody;
 
 import okhttp3.RequestBody;
@@ -19,17 +16,17 @@ import retrofit2.http.Query;
 
 public interface CCNU_API {
     @GET("api/user/detail")
-    Call<PersonalDetailData> getPersonalDetail(@Header("Authorization") String token, @Query("userid") String ID);
+    Call<Data> getPersonalDetail(@Header("Authorization") String token, @Query("userid") String ID);
     @FormUrlEncoded
     @POST("api/login")
-    Call<LoginData> getLoginData(@Field("stuid") String UserID, @Field("password") String Password);
+    Call<Data> getLoginData(@Field("stuid") String UserID, @Field("password") String Password);
     @Multipart
     @POST("api/image")
-    Call<ImageUrlResponse> uploadImage(
+    Call<Data> uploadImage(
             @Header("Authorization") String authorization,
             @Part("image") RequestBody image);
     @GET("api/user/avatar")
-    Call<AvatarUploadResponse> avatarKeyUpload(@Header("Authorization")String Token,@Query("image") String key);
+    Call<AvatarUploadResponse> avatarKeyUpload(@Header("Authorization")String Token, @Query("image") String key);
     @POST("api/post/postnote")
     Call<Data> addRecordsPost(
             @Header("Authorization") String token,
@@ -40,6 +37,6 @@ public interface CCNU_API {
             @Query("key5") String key5,
             @Body addRecordBody body);
     @GET("qiniutoken")
-    Call<QiniuTokenData> getQiniuToken(@Header("Authorization")String Token);
+    Call<Data> getQiniuToken(@Header("Authorization")String Token);
 
 }
