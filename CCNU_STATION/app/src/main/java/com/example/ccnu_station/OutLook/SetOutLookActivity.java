@@ -24,6 +24,9 @@ import com.example.ccnu_station.Reuse.CCNU_ViewModel;
 import com.example.ccnu_station.Reuse.FileUtil;
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Reuse.JsonRespond;
+import com.example.ccnu_station.Reuse.QnTokenJson;
+import com.example.ccnu_station.Reuse.SimpleData;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -113,21 +116,20 @@ public class SetOutLookActivity extends BaseActivity {
     }
     public void UpLoadKey(String uploadedKey)
     {
-        Call<AvatarUploadResponse> avatarUploadResponseCall = api.avatarKeyUpload("Bearer "+User_token,uploadedKey);
-        avatarUploadResponseCall.enqueue(new Callback<AvatarUploadResponse>() {
+        Call<JsonRespond<SimpleData>> avatarUploadResponseCall = api.avatarKeyUpload("Bearer "+User_token,uploadedKey);
+        avatarUploadResponseCall.enqueue(new Callback<JsonRespond<SimpleData>>() {
             @Override
-            public void onResponse(Call<AvatarUploadResponse> call, Response<AvatarUploadResponse> response) {
+            public void onResponse(Call<JsonRespond<SimpleData>> call, Response<JsonRespond<SimpleData>> response) {
                 Toast.makeText(SetOutLookActivity.this,"上传Key成功",Toast.LENGTH_SHORT).show();
-                AvatarUploadResponse body = response.body();
+                JsonRespond body = response.body();
                 if(body == null) return;
-                if(!body.getSuccess()) return;
                 String imageUrl = "http://mini-project.muxixyz.com/" + uploadedKey;
                 String avatarUrl = imageUrl;
                 Data.setAvatarUrl(avatarUrl);
                 viewModel.updateData(Data);
             }
             @Override
-            public void onFailure(Call<AvatarUploadResponse> call, Throwable t) {
+            public void onFailure(Call<JsonRespond<SimpleData>> call, Throwable t) {
                 Log.i("KeyUpload","Failed");
             }
         });
@@ -145,7 +147,7 @@ public class SetOutLookActivity extends BaseActivity {
                     UpLoadKey(uploadedKey);
                                         /*
                                         Glide.with(SetOutLookActivity.this)
-                                                .load(Data.getAvatarUrl())
+                                                .load(JsonRespond.getAvatarUrl())
                                                 .circleCrop()
                                                 .into(avatar);
                                          */
@@ -161,12 +163,12 @@ public class SetOutLookActivity extends BaseActivity {
     }
     public void GetQiniuToken(File avatarFile)
     {
-        Call<QiniuTokenData> QiniuTokenGet = api.getQiniuToken("Bearer "+User_token);
-        QiniuTokenGet.enqueue(new Callback<QiniuTokenData>() {
+        Call<QnTokenJson> QiniuTokenGet = api.getQiniuToken("Bearer "+User_token);
+        QiniuTokenGet.enqueue(new Callback<QnTokenJson>() {
             @Override
-            public void onResponse(Call<QiniuTokenData> call, Response<QiniuTokenData> response) {
+            public void onResponse(Call<QnTokenJson> call, Response<QnTokenJson> response) {
                 Toast.makeText(SetOutLookActivity.this,"Token请求成功",Toast.LENGTH_SHORT).show();
-                QiniuTokenData body = response.body();
+                QnTokenJson body = response.body();
                 if(body==null) return;
                 QiniuToken = body.getQnToken();
                 Toast.makeText(SetOutLookActivity.this,QiniuToken,Toast.LENGTH_SHORT).show();
@@ -174,7 +176,7 @@ public class SetOutLookActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<QiniuTokenData> call, Throwable t) {
+            public void onFailure(Call<QnTokenJson> call, Throwable t) {
                 Toast.makeText(SetOutLookActivity.this,"Token请求失败",Toast.LENGTH_SHORT).show();
             }
         });

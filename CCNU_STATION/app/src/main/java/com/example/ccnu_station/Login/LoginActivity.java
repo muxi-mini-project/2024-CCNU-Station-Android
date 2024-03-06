@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
-import com.example.ccnu_station.Reuse.Data;
+import com.example.ccnu_station.Reuse.JsonRespond;
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.OutLook.SetOutLookActivity;
@@ -54,23 +54,23 @@ public class LoginActivity extends BaseActivity {
                 String strUsername = editUsername.getText().toString();
                 String strPassword = editPassword.getText().toString();
                 CCNU_API api = CCNU_Application.getApi();
-                //Call<Data<LoginData>> LogingCall = api.getTest();
-                Call<Data> LogingCall = api.getLoginData(strUsername,strPassword);
-                LogingCall.enqueue(new Callback<Data>() {
+                //Call<JsonRespond<LoginData>> LogingCall = api.getTest();
+                Call<JsonRespond<LoginData>> LogingCall = api.getLoginData(strUsername,strPassword);
+                LogingCall.enqueue(new Callback<JsonRespond<LoginData>>() {
                     @Override
-                    public void onResponse(Call<Data> call, Response<Data> response) {
+                    public void onResponse(Call<JsonRespond<LoginData>> call, Response<JsonRespond<LoginData>> response) {
                         Toast.makeText(LoginActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
-                        Data body = response.body();
-
-                        if(body == null) {
+                        JsonRespond<LoginData> Respond = response.body();
+                        if(Respond == null) {
                             Toast.makeText(LoginActivity.this,"响应体为空",Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        if(body.getLogin().equals("Yes")) {
+                        LoginData body = Respond.getData();
+                        if(!body.getToken().equals("")) {
                             passwordCheck = true;
                         }
                         else passwordCheck = false;
-                        if(body.getFirst().equals("Yes")) {
+                        if(body.isFirst()) {
                             firstCheck = true;
                         }
                         else firstCheck = false;
@@ -94,7 +94,7 @@ public class LoginActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Data> call, Throwable t) {
+                    public void onFailure(Call<JsonRespond<LoginData>> call, Throwable t) {
                         Toast.makeText(LoginActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
                     }
                 });

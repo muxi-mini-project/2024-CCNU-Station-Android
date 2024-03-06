@@ -23,6 +23,8 @@ import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
 import com.example.ccnu_station.Reuse.CCNU_ViewModel;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Reuse.JsonRespond;
+import com.qiniu.android.utils.Json;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,26 +65,26 @@ public class DetailChange extends BaseActivity {
         viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
         viewModel.getData().observe(this, newData -> {
             // 数据发生变化，刷新界面
-            updateUI(newData);
+            //updateUI(newData);
         });
         SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
         User_token = sp.getString("token","null");
         api = CCNU_Application.getApi();
-        Call<PersonalDetailData> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
-        DetailGet.enqueue(new Callback<PersonalDetailData>() {
+        Call<JsonRespond> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
+        DetailGet.enqueue(new Callback<JsonRespond>() {
             @Override
-            public void onResponse(Call<PersonalDetailData> call, Response<PersonalDetailData> response) {
+            public void onResponse(Call<JsonRespond> call, Response<JsonRespond> response) {
                 Toast.makeText(DetailChange.this, "请求成功", Toast.LENGTH_SHORT).show();
-                PersonalDetailData body = response.body();
+                JsonRespond body = response.body();
                 if (body == null) {
                     Toast.makeText(DetailChange.this, "响应体为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Data = body;
-                viewModel.updateData(body);
+                //Data = body;
+                //viewModel.updateData(body);
             }
             @Override
-            public void onFailure(Call<PersonalDetailData> call, Throwable t) {
+            public void onFailure(Call<JsonRespond> call, Throwable t) {
                 Toast.makeText(DetailChange.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
@@ -155,6 +157,7 @@ public class DetailChange extends BaseActivity {
         });
 
     }
+    /*
     private void updateUI(PersonalDetailData newData)
     {
         textStayDate.setText(newData.getStay_date());
@@ -181,4 +184,6 @@ public class DetailChange extends BaseActivity {
         layout.addView(newButton);
         return newButton;
     }
+
+     */
 }

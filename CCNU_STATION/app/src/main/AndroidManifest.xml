@@ -21,16 +21,6 @@
             android:name=".Buidings.BuildActivity"
             android:exported="false" />
         <activity
-            android:name=".Start.StartActivity"
-            android:exported="false" />
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
-        <activity
             android:name=".Record.addRecordActivity"
             android:exported="false" />
         <activity
@@ -46,10 +36,6 @@
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
-
-        <activity
-            android:name=".SchoolDate"
-            android:exported="false" />
         <activity
             android:name=".Chat.ChatPage"
             android:exported="false" />
@@ -61,7 +47,16 @@
             android:exported="false" />
         <activity
             android:name=".Login.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="false"/>
+        <activity
+            android:name=".Start.StartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

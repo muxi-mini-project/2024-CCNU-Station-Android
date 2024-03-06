@@ -22,10 +22,13 @@ public class CCNU_Application extends Application {
         super.onCreate();
         //获取本地存储的UserToken
         SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edt = sp.edit();
+        edt.putString("token","null");
+        edt.commit();
         User_Token = sp.getString("token","null");
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.131.122.150:8080/")
+                .baseUrl("http://47.92.102.209:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(CCNU_API.class);
@@ -57,6 +60,6 @@ public class CCNU_Application extends Application {
         return uploadManager;
     }
     public static String getUser_Token(){
-        return User_Token;
+        return "null";
     }
 }

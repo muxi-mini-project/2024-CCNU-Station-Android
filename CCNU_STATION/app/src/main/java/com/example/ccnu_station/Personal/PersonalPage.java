@@ -22,6 +22,7 @@ import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
 import com.example.ccnu_station.Reuse.CCNU_ViewModel;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Reuse.JsonRespond;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +40,7 @@ public class PersonalPage extends BaseActivity {
     private CCNU_ViewModel<PersonalDetailData> viewModel;
     private ImageView Avatar;
     private String Personal_ID;
-    private PersonalDetailData data;
+    //private PersonalDetailData data;
     private TextView textName;
     private TextView textID;
     private TextView textSchool;
@@ -61,9 +62,9 @@ public class PersonalPage extends BaseActivity {
         viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
         viewModel.getData().observe(this, newData -> {
             // 数据发生变化，刷新界面
-            updateUI(newData);
+            //updateUI(newData);
         });
-        data = new PersonalDetailData();
+        //data = new PersonalDetailData();
         Avatar = findViewById(R.id.imageViewAvatar);
         textName = findViewById(R.id.textName);
         textFriends = findViewById(R.id.textfriends);
@@ -76,25 +77,24 @@ public class PersonalPage extends BaseActivity {
         SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
         User_token = sp.getString("token","null");
         Personal_ID = getIntent().getStringExtra(PersonalPage_ID);
-        changeButton = addDetailButton();
+        //changeButton = addDetailButton();
         CCNU_API api = CCNU_Application.getApi();
-        Call<PersonalDetailData> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
-        DetailGet.enqueue(new Callback<PersonalDetailData>() {
+        Call<JsonRespond> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
+        DetailGet.enqueue(new Callback<JsonRespond>() {
             @Override
-            public void onResponse(Call<PersonalDetailData> call, Response<PersonalDetailData> response) {
+            public void onResponse(Call<JsonRespond> call, Response<JsonRespond> response) {
                 Toast.makeText(PersonalPage.this,"请求成功",Toast.LENGTH_SHORT).show();
-                PersonalDetailData body = response.body();
+                JsonRespond body = response.body();
                 if(body==null)
                 {
                     Toast.makeText(PersonalPage.this,"响应体为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Data = body;
-                viewModel.updateData(body);
+                //viewModel.updateData(body);
             }
 
             @Override
-            public void onFailure(Call<PersonalDetailData> call, Throwable t) {
+            public void onFailure(Call<JsonRespond> call, Throwable t) {
                 Toast.makeText(PersonalPage.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
@@ -106,6 +106,7 @@ public class PersonalPage extends BaseActivity {
             }
         });
     }
+    /*
     public void updateUI(PersonalDetailData newData)
     {
         Glide.with(this)
@@ -135,4 +136,6 @@ public class PersonalPage extends BaseActivity {
         detailBlock.addView(newButton);
         return newButton;
     }
+
+     */
 }

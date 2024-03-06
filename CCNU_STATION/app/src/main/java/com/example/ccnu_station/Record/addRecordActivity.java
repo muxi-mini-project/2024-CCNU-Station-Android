@@ -2,7 +2,6 @@ package com.example.ccnu_station.Record;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.ccnu_station.OutLook.QnToken;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
-import com.example.ccnu_station.Reuse.Data;
+import com.example.ccnu_station.Reuse.JsonRespond;
 import com.example.ccnu_station.Reuse.FileUtil;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Reuse.QnTokenJson;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -63,6 +64,7 @@ public class addRecordActivity extends BaseActivity {
     //上传图片并返回key
     public void UploadToQiniu(File avatarFile,String QiniuToken)
     {
+        keydata.addKeyNum();
         UploadManager uploadManager = CCNU_Application.getUploadManager();
         uploadManager.put(avatarFile, null, QiniuToken, new UpCompletionHandler() {
             @Override
@@ -71,7 +73,7 @@ public class addRecordActivity extends BaseActivity {
                 if(info.isOK()) {
                     Toast.makeText(addRecordActivity.this,"Qiniu请求成功",Toast.LENGTH_SHORT).show();
                     String uploadedKey = response.optString("key");
-                    keydata.setKey(uploadedKey);
+                    keydata.addKey(uploadedKey);
                 } else {
                     Log.i("qiniu", "Upload Fail");
                     Toast.makeText(addRecordActivity.this,info.toString(),Toast.LENGTH_SHORT).show();
@@ -83,19 +85,19 @@ public class addRecordActivity extends BaseActivity {
     }
     public void GetQiniuToken(File avatarFile)
     {
-        Call<Data> QiniuTokenGet = api.getQiniuToken("Bearer "+User_token);
-        QiniuTokenGet.enqueue(new Callback<Data>() {
+        Call<QnTokenJson> QiniuTokenGet = api.getQiniuToken("Bearer "+User_token);
+        QiniuTokenGet.enqueue(new Callback<QnTokenJson>() {
             @Override
-            public void onResponse(Call<Data> call, Response<Data> response) {
+            public void onResponse(Call<QnTokenJson> call, Response<QnTokenJson> response) {
                 Toast.makeText(addRecordActivity.this,"Token请求成功",Toast.LENGTH_SHORT).show();
-                Data body = response.body();
+                QnTokenJson body = response.body();
                 if(body==null) return;
                 String QiniuToken = body.getQnToken();
                 Toast.makeText(addRecordActivity.this,QiniuToken,Toast.LENGTH_SHORT).show();
                 UploadToQiniu(avatarFile,QiniuToken);
             }
             @Override
-            public void onFailure(Call<Data> call, Throwable t) {
+            public void onFailure(Call<QnTokenJson> call, Throwable t) {
                 Toast.makeText(addRecordActivity.this,"Token请求失败",Toast.LENGTH_SHORT).show();
             }
         });
