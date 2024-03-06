@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".CCNU_Application"
+        android:name=".Reuse.CCNU_Application"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,30 +18,41 @@
         android:theme="@style/Theme.CCNU_STATION"
         tools:targetApi="31">
         <activity
-            android:name=".DetailChange"
+            android:name=".Buidings.BuildActivity"
             android:exported="false" />
         <activity
-            android:name=".PersonalPage"
+            android:name=".Record.addRecordActivity"
             android:exported="false" />
+        <activity
+            android:name=".Record.RecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Personal.DetailChange"
+            android:exported="false" />
+        <activity
+            android:name=".Personal.PersonalPage"
+            android:exported="false" />
+
+        <activity android:name=".Achivement.Achievement_Activity"
+            android:exported="false"/>
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
-
         <activity
-            android:name=".SchoolDate"
+            android:name=".Chat.ChatPage"
             android:exported="false" />
         <activity
-            android:name=".ChatPage"
+            android:name=".Home.HomePage"
             android:exported="false" />
         <activity
-            android:name=".HomePage"
+            android:name=".OutLook.SetOutLookActivity"
             android:exported="false" />
         <activity
-            android:name=".SetOutLookActivity"
-            android:exported="false" />
+            android:name=".Login.LoginActivity"
+            android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".Start.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
