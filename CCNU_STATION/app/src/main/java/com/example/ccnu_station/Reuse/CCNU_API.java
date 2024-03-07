@@ -1,6 +1,7 @@
 package com.example.ccnu_station.Reuse;
 
-
+import com.example.ccnu_station.Achivement.AchievementClickResponse;
+import com.example.ccnu_station.Achivement.AchievementTotalFinishedResponse;
 import com.example.ccnu_station.Login.LoginData;
 import com.example.ccnu_station.OutLook.QnToken;
 import com.example.ccnu_station.Record.addRecordBody;
@@ -42,5 +43,9 @@ public interface CCNU_API {
     @GET("qiniutoken")
     Call<QnTokenJson> getQiniuToken(@Header("Authorization")String Token);
 
+    @GET("api/user/achievement/get")
+    Call<AchievementTotalFinishedResponse> getAchievementTotalFinished(@Query("stuid") String UserID);
+    @GET("api/user/achievement/update")
+    Call<AchievementClickResponse> getAchievementClickResponse(@Query("stuid") String UserID, @Query("achid") String AchID);
 
 }
