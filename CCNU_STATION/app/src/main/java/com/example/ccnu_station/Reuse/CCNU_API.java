@@ -1,5 +1,6 @@
 package com.example.ccnu_station.Reuse;
 
+
 import com.example.ccnu_station.Login.LoginData;
 import com.example.ccnu_station.OutLook.QnToken;
 import com.example.ccnu_station.Record.addRecordBody;
@@ -40,5 +41,6 @@ public interface CCNU_API {
             @Body addRecordBody body);
     @GET("qiniutoken")
     Call<QnTokenJson> getQiniuToken(@Header("Authorization")String Token);
+
 
 }

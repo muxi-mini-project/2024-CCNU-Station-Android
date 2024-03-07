@@ -2,6 +2,7 @@ package com.example.ccnu_station.Achivement;
 
 import android.os.Bundle;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,11 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ccnu_station.R;
 
 import java.util.List;
-
-public class Achievement_Activity extends AppCompatActivity {
-    ////成就模块
-    private List<Achievement> data;
-    ////成就模块
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -32,5 +28,4 @@ public class Achievement_Activity extends AppCompatActivity {
         recyclerView.setAdapter(achievementAdapter);
 
         /////成就模块
-    }
-}
+
