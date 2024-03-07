@@ -33,6 +33,8 @@
             android:name=".Personal.PersonalPage"
             android:exported="false" />
 
+        <activity android:name=".Achivement.Achievement_Activity"
+            android:exported="false"/>
 
         <meta-data
             android:name="com.google.android.actions"
