@@ -1,7 +1,6 @@
 package com.example.ccnu_station.Reuse;
 
 import com.example.ccnu_station.Login.LoginData;
-import com.example.ccnu_station.OutLook.QnToken;
 import com.example.ccnu_station.Record.addRecordBody;
 
 import okhttp3.RequestBody;

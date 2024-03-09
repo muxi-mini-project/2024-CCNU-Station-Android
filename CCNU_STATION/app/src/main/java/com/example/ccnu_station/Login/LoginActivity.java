@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity {
-    private Button btnLogin;
-    private Button btnYkLogin;
+    private ImageButton btnLogin;
+    private ImageButton btnYkLogin;
     private EditText editUsername;
     private EditText editPassword;
     private TextView textHint;
@@ -41,8 +42,8 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnLogin = (Button) findViewById(R.id.buttonLogin);
-        btnYkLogin = (Button) findViewById(R.id.buttonYkLogin);
+        btnLogin = (ImageButton) findViewById(R.id.buttonLogin);
+        btnYkLogin =  findViewById(R.id.buttonYkLogin);
         editPassword = findViewById(R.id.EditTextKey);
         editUsername = findViewById(R.id.EditTextUsername);
         textHint = findViewById(R.id.textHint);
@@ -105,7 +106,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = SetOutLookActivity.newIntent(LoginActivity.this);
+                Intent intent = HomePage.newIntent(LoginActivity.this);
                 startActivity(intent);
             }
         });

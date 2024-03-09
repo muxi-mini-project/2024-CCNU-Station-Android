@@ -10,11 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.ccnu_station.OutLook.QnToken;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
-import com.example.ccnu_station.Reuse.JsonRespond;
 import com.example.ccnu_station.Reuse.FileUtil;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Reuse.QnTokenJson;
