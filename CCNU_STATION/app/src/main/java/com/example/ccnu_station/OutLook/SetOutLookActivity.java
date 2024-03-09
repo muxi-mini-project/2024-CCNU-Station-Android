@@ -13,10 +13,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -53,7 +55,7 @@ public class SetOutLookActivity extends BaseActivity {
      */
     private String User_token=CCNU_Application.getUser_Token();
     //private TextView textTest;
-    private Button btnNext;
+    private ImageButton btnNext;
     private ImageView avatar;
     public static Intent newIntent(Context packgeContext)
     {
@@ -80,6 +82,9 @@ public class SetOutLookActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_out_look);
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(android.R.color.white) // 使用系统的白色作为占位符
+                .error(android.R.color.white); // 在加载出错时同样使用白色
         api = CCNU_Application.getApi();
         Data = new SetOutLookActivityData();
         btnNext = findViewById(R.id.btnNext);
@@ -121,7 +126,7 @@ public class SetOutLookActivity extends BaseActivity {
             @Override
             public void onResponse(Call<JsonRespond<SimpleData>> call, Response<JsonRespond<SimpleData>> response) {
                 Toast.makeText(SetOutLookActivity.this,"上传Key成功",Toast.LENGTH_SHORT).show();
-                JsonRespond body = response.body();
+                JsonRespond<SimpleData> body = response.body();
                 if(body == null) return;
                 String imageUrl = "http://mini-project.muxixyz.com/" + uploadedKey;
                 String avatarUrl = imageUrl;

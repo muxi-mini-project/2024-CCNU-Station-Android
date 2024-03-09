@@ -1,7 +1,7 @@
 package com.example.ccnu_station.OutLook;
 
 public class SetOutLookActivityData {
-    private String avatarUrl = "https://pic.imgdb.cn/item/65b06ff9871b83018aff45e6.png";
+    private String avatarUrl = "https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
     private String outLookUrl = "null";
 
     public String getAvatarUrl() {
