@@ -40,7 +40,7 @@ public class PersonalPage extends BaseActivity {
     private CCNU_ViewModel<PersonalDetailData> viewModel;
     private ImageView Avatar;
     private String Personal_ID;
-    //private PersonalDetailData data;
+    private PersonalDetailData data;
     private TextView textName;
     private TextView textID;
     private TextView textSchool;
@@ -48,9 +48,7 @@ public class PersonalPage extends BaseActivity {
     private TextView textFollowers;
     private TextView textStayDate;
     private TextView textSubmitNum;
-    private String SubmitNum;
-    private ImageView imageHead;
-    private String User_token;
+    private String User_token=CCNU_Application.getUser_Token();
     private ConstraintLayout detailBlock;
     private Button changeButton;
     private boolean IsSelf=false;
@@ -59,13 +57,8 @@ public class PersonalPage extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_page);
-        viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
-        viewModel.getData().observe(this, newData -> {
-            // 数据发生变化，刷新界面
-            //updateUI(newData);
-        });
-        //data = new PersonalDetailData();
-        Avatar = findViewById(R.id.imageViewAvatar);
+        data = new PersonalDetailData();
+        Avatar = findViewById(R.id.imageHead);
         textName = findViewById(R.id.textName);
         textFriends = findViewById(R.id.textfriends);
         textFollowers = findViewById(R.id.textfollowers);
@@ -74,27 +67,33 @@ public class PersonalPage extends BaseActivity {
         textStayDate = findViewById(R.id.textStayDate);
         textSubmitNum = findViewById(R.id.textSubmitNum);
         detailBlock = findViewById(R.id.DetailBlock);
+        viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
+        viewModel.getData().observe(this, newData -> {
+            // 数据发生变化，刷新界面
+            updateUI(newData);
+        });
         SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
         User_token = sp.getString("token","null");
         Personal_ID = getIntent().getStringExtra(PersonalPage_ID);
-        //changeButton = addDetailButton();
+        changeButton = addDetailButton();
         CCNU_API api = CCNU_Application.getApi();
-        Call<JsonRespond> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
-        DetailGet.enqueue(new Callback<JsonRespond>() {
+        Call<JsonRespond<PersonalDetailData>> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
+        DetailGet.enqueue(new Callback<JsonRespond<PersonalDetailData>>() {
             @Override
-            public void onResponse(Call<JsonRespond> call, Response<JsonRespond> response) {
+            public void onResponse(Call<JsonRespond<PersonalDetailData>> call, Response<JsonRespond<PersonalDetailData>> response) {
                 Toast.makeText(PersonalPage.this,"请求成功",Toast.LENGTH_SHORT).show();
-                JsonRespond body = response.body();
+                JsonRespond<PersonalDetailData> body = response.body();
                 if(body==null)
                 {
                     Toast.makeText(PersonalPage.this,"响应体为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //viewModel.updateData(body);
+                PersonalDetailData newData = body.getData();
+                viewModel.updateData(newData);
             }
 
             @Override
-            public void onFailure(Call<JsonRespond> call, Throwable t) {
+            public void onFailure(Call<JsonRespond<PersonalDetailData>> call, Throwable t) {
                 Toast.makeText(PersonalPage.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
@@ -106,20 +105,21 @@ public class PersonalPage extends BaseActivity {
             }
         });
     }
-    /*
     public void updateUI(PersonalDetailData newData)
     {
+        String imageurl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
+        if(newData.getHeadimage()!="") imageurl=newData.getHeadimage();
         Glide.with(this)
-                .load(newData.getHeadimage())
+                .load(imageurl)
                 .circleCrop()
                 .into(Avatar);
         textName.setText(newData.getNickname());
-        textFriends.setText(newData.getFriends_number());
-        textFollowers.setText(newData.getFollowers_number());
+        textFriends.setText(newData.getFriendsNumber().toString());
+        textFollowers.setText(newData.getFollowerNumber().toString());
         textID.setText(newData.getStuid());
         textSchool.setText(newData.getCollege());
-        textStayDate.setText(newData.getStay_date());
-        textSubmitNum.setText(newData.getPost_number());
+        textStayDate.setText(newData.getStayDate().toString());
+        textSubmitNum.setText(newData.getPostNumber().toString());
     }
     public Button addDetailButton()
     {
@@ -136,6 +136,4 @@ public class PersonalPage extends BaseActivity {
         detailBlock.addView(newButton);
         return newButton;
     }
-
-     */
 }

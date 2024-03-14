@@ -62,4 +62,5 @@ public class CCNU_Application extends Application {
     public static String getUser_Token(){
         return "null";
     }
+
 }
