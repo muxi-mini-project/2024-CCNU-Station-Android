@@ -54,20 +54,14 @@
                     android:gravity="center"
                     android:text="昵称" />
 
-                <TextView
+                <EditText
                     android:id="@+id/textNickName"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
-
-                <ImageButton
-                    android:id="@+id/btnNickName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
+                    android:text="TextView"
+                    android:background="@android:color/transparent"/>
 
             </LinearLayout>
 
@@ -84,20 +78,15 @@
                     android:gravity="center"
                     android:text="学号" />
 
-                <TextView
+                <EditText
                     android:id="@+id/textID"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:background="@android:color/transparent"/>
 
-                <ImageButton
-                    android:id="@+id/btnID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
             </LinearLayout>
 
             <LinearLayout
@@ -113,20 +102,15 @@
                     android:gravity="center"
                     android:text="学院" />
 
-                <TextView
+                <EditText
                     android:id="@+id/textCollege"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:background="@android:color/transparent"/>
 
-                <ImageButton
-                    android:id="@+id/btnCollege"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
             </LinearLayout>
 
             <LinearLayout
@@ -142,20 +126,29 @@
                     android:gravity="center"
                     android:text="性别" />
 
-                <TextView
-                    android:id="@+id/textSex"
+                <RadioGroup
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="TextView" />
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/btnSex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
+                    <RadioButton
+                        android:id="@+id/radioButtonMale"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="男" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonFemale"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="女" />
+                </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -171,20 +164,15 @@
                     android:gravity="center"
                     android:text="MBTI" />
 
-                <TextView
+                <EditText
                     android:id="@+id/textMBTI"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:background="@android:color/transparent"/>
 
-                <ImageButton
-                    android:id="@+id/btnMBTI"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
             </LinearLayout>
 
             <LinearLayout
@@ -200,20 +188,15 @@
                     android:gravity="center"
                     android:text="标签" />
 
-                <TextView
+                <EditText
                     android:id="@+id/textSign"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:background="@android:color/transparent"/>
 
-                <ImageButton
-                    android:id="@+id/btnSign"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
             </LinearLayout>
 
             <LinearLayout
@@ -229,20 +212,13 @@
                     android:gravity="center"
                     android:text="签名" />
 
-                <TextView
-                    android:id="@+id/textNote"
+                <Spinner
+                    android:id="@+id/spinner"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="TextView" />
+                    android:layout_weight="1" />
 
-                <ImageButton
-                    android:id="@+id/btnNote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -256,7 +232,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="入学时长" />
+                    android:text="入学时间" />
 
                 <TextView
                     android:id="@+id/textStay_Date"
@@ -266,12 +242,6 @@
                     android:gravity="center"
                     android:text="TextView" />
 
-                <ImageButton
-                    android:id="@+id/btnStayDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/btn_star" />
             </LinearLayout>
         </LinearLayout>
 
@@ -280,11 +250,23 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnLogOut"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="退出登录"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.941" />
+
+            <Button
+                android:id="@+id/btncheck"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="保存修改"
+                app:layout_constraintBottom_toTopOf="@+id/btnLogOut"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

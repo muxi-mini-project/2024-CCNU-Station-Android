@@ -8,10 +8,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.example.ccnu_station.Buidings.BuildActivity;
 import com.example.ccnu_station.Chat.ChatPage;
+import com.example.ccnu_station.OutLook.SetOutLookActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Record.RecordActivity;
+import com.example.ccnu_station.Reuse.CCNU_Application;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +28,14 @@ public class HomePage extends AppCompatActivity {
         put("HuaChat",0);
         //此处省略一堆建筑
     }};
+    private ImageButton imgbtnbuild1;
+    private ImageButton imgbtnbuild7;
+    private ImageButton imgbtnbuildqyc;
+    private ImageButton imgbtnbuildxy;
+    private ImageButton imgbtnbuildsouthhall;
+    private ImageButton imgbtnbuildgym;
+    private ImageButton imgbtnbuildsouth;
+    private ImageButton imgbtnbuildxz;
     private Button btnZhaomu;
     private Button btnHuaCat;
     private Button btnHuaChat;
@@ -43,9 +57,16 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        SharedPreferences sp = getSharedPreferences("User_Details",Context.MODE_PRIVATE);
-        User_token = sp.getString("token","null");
+        User_token = CCNU_Application.getUser_Token();
         btnZhaomu = findViewById(R.id.btnZhaomu);
+        imgbtnbuild7 = findViewById(R.id.imgbtnbuild7);
+        imgbtnbuild1 = findViewById(R.id.imgbtnbuild1);
+        imgbtnbuildgym = findViewById(R.id.imgbtnbuildgym);
+        imgbtnbuildsouth = findViewById(R.id.imgbtnbuildsouth);
+        imgbtnbuildqyc = findViewById(R.id.imgbtnbuildqyc);
+        imgbtnbuildsouthhall = findViewById(R.id.imgbtnbuildsouthhall);
+        imgbtnbuildxy = findViewById(R.id.imgbtnbuildxy);
+        imgbtnbuildxz = findViewById(R.id.imgbtnbuildxz);
         btnZhaomu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +100,68 @@ public class HomePage extends AppCompatActivity {
         btnPersonal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = PersonalPage.newIntent(HomePage.this,User_token);
+                if(!User_token.equals("null")) {
+                    Intent intent = PersonalPage.newIntent(HomePage.this, User_token);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(HomePage.this,"请登录",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        imgbtnbuild7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,1);
+                startActivity(intent);
+            }
+        });
+        imgbtnbuild1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,2);
+                startActivity(intent);
+            }
+        });
+        imgbtnbuildgym.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,3);
+                startActivity(intent);
+            }
+        });
+        imgbtnbuildsouth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,4);
+                startActivity(intent);
+            }
+        });
+        imgbtnbuildqyc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,5);
+                startActivity(intent);
+            }
+        });
+        imgbtnbuildsouthhall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,6);
+                startActivity(intent);
+            }
+        });
+        imgbtnbuildxy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,7);
+                startActivity(intent);
+            }
+        });
+        imgbtnbuildxz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = BuildActivity.newIntent(HomePage.this,8);
                 startActivity(intent);
             }
         });

@@ -3,6 +3,8 @@ package com.example.ccnu_station.Reuse;
 import com.example.ccnu_station.Achivement.AchievementClickResponse;
 import com.example.ccnu_station.Achivement.AchievementTotalFinishedResponse;
 import com.example.ccnu_station.Login.LoginData;
+import com.example.ccnu_station.Personal.PersonalDetailData;
+import com.example.ccnu_station.Record.RecordResponseData;
 import com.example.ccnu_station.Record.addRecordBody;
 
 import okhttp3.RequestBody;
@@ -18,8 +20,10 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface CCNU_API {
+    @GET("api/getactivity/allpostnote")
+    Call<JsonRespond<RecordResponseData>> getAllRecords(@Query("where") String ID);
     @GET("api/user/detail")
-    Call<JsonRespond> getPersonalDetail(@Header("Authorization") String token, @Query("userid") String ID);
+    Call<JsonRespond<PersonalDetailData>> getPersonalDetail(@Header("Authorization") String token, @Query("userid") String ID);
     @FormUrlEncoded
     @POST("api/login")
     Call<JsonRespond<LoginData>> getLoginData(@Field("stuid") String UserID, @Field("password") String Password);

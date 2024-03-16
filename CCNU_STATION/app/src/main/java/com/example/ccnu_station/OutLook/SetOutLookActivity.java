@@ -51,8 +51,7 @@ public class SetOutLookActivity extends BaseActivity {
     /*
     private static final String User_Identity =
             "com.example.ccnu_station.OutLook.SetOutLookActivity.UserIdentity";
-
-     */
+    */
     private String User_token=CCNU_Application.getUser_Token();
     //private TextView textTest;
     private ImageButton btnNext;
@@ -179,7 +178,6 @@ public class SetOutLookActivity extends BaseActivity {
                 Toast.makeText(SetOutLookActivity.this,QiniuToken,Toast.LENGTH_SHORT).show();
                 UploadToQiniu(avatarFile);
             }
-
             @Override
             public void onFailure(Call<QnTokenJson> call, Throwable t) {
                 Toast.makeText(SetOutLookActivity.this,"Token请求失败",Toast.LENGTH_SHORT).show();
