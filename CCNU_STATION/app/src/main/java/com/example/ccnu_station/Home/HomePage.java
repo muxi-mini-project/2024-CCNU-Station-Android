@@ -9,12 +9,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.ccnu_station.Buidings.BuildActivity;
 import com.example.ccnu_station.Chat.ChatPage;
+import com.example.ccnu_station.OutLook.SetOutLookActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.RecordActivity;
+import com.example.ccnu_station.Reuse.CCNU_Application;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,8 +57,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        SharedPreferences sp = getSharedPreferences("User_Details",Context.MODE_PRIVATE);
-        User_token = sp.getString("token","null");
+        User_token = CCNU_Application.getUser_Token();
         btnZhaomu = findViewById(R.id.btnZhaomu);
         imgbtnbuild7 = findViewById(R.id.imgbtnbuild7);
         imgbtnbuild1 = findViewById(R.id.imgbtnbuild1);
@@ -98,8 +100,13 @@ public class HomePage extends AppCompatActivity {
         btnPersonal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = PersonalPage.newIntent(HomePage.this,User_token);
-                startActivity(intent);
+                if(!User_token.equals("null")) {
+                    Intent intent = PersonalPage.newIntent(HomePage.this, User_token);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(HomePage.this,"请登录",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         imgbtnbuild7.setOnClickListener(new View.OnClickListener() {

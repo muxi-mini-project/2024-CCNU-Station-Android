@@ -27,7 +27,7 @@ public class StartActivity extends BaseActivity {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         // 延迟执行跳转到主页的操作
         executor.schedule(() -> {
-            if(User_Token=="null"){
+            if(User_Token.equals("null")){
                 Intent intent = LoginActivity.newIntent(this);
                 startActivity(intent);
             }

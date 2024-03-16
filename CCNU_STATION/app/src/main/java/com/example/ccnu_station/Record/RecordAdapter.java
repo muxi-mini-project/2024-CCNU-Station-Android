@@ -32,8 +32,10 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         holder.textTitle.setText(item.getTitle());
         holder.textContent.setText(item.getText());
         holder.time.setText(item.getTime());
+        String avatarUrl = item.getAvatar();
+        if(avatarUrl==null) avatarUrl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
         Glide.with(holder.itemView.getContext())
-                .load(item.getAvatar())
+                .load(avatarUrl)
                 .circleCrop()
                 .into(holder.avatar);
         Glide.with(holder.itemView.getContext())

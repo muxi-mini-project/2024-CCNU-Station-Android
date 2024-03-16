@@ -19,7 +19,7 @@ import retrofit2.http.Query;
 
 public interface CCNU_API {
     @GET("api/getactivity/allpostnote")
-    Call<JsonRespond<RecordResponseData>> getAllRecords(@Query("buildID") int ID);
+    Call<JsonRespond<RecordResponseData>> getAllRecords(@Query("where") String ID);
     @GET("api/user/detail")
     Call<JsonRespond<PersonalDetailData>> getPersonalDetail(@Header("Authorization") String token, @Query("userid") String ID);
     @FormUrlEncoded

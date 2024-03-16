@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
@@ -25,7 +26,8 @@ public class RecordActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecordAdapter adapter;
     private ArrayList<Item> itemList;
-    private int buildID;
+    private CCNU_API api;
+    private String buildID;
     private static String Building_ID =
             "com.example.ccnu_station.RecordActivity.Building_ID";
     public static Intent newIntent(Context packgeContext,int buildingID)
@@ -38,10 +40,11 @@ public class RecordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_page);
-        buildID = getIntent().getIntExtra(Building_ID,-1);
+        api = CCNU_Application.getApi();
+        buildID = ""+getIntent().getIntExtra(Building_ID,-1);
         recyclerView = findViewById(R.id.recordrecyclerview);
-        //generateItemList(buildID); // Create a list of MyItem objects
         itemList = testList();
+        generateItemList(buildID); // Create a list of MyItem objects
         adapter = new RecordAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -57,8 +60,7 @@ public class RecordActivity extends AppCompatActivity {
         for(int i = 0;i<10;i++) List.add(item);
         return List;
     }
-    private void generateItemList(int buildID){
-        CCNU_API api = CCNU_Application.getApi();
+    private void generateItemList(String buildID){
         Call<JsonRespond<RecordResponseData>> Datacall = api.getAllRecords(buildID);
         Datacall.enqueue(new Callback<JsonRespond<RecordResponseData>>() {
             @Override
@@ -76,7 +78,7 @@ public class RecordActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<JsonRespond<RecordResponseData>> call, Throwable t) {
-
+                Log.i("RecordGet","Failed");
             }
         });
     }

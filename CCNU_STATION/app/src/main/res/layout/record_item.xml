@@ -18,6 +18,7 @@
         android:layout_width="350dp"
         android:layout_height="match_parent"
         android:background="@drawable/whiteblock1"
+        android:scaleType="fitXY"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="0dp">

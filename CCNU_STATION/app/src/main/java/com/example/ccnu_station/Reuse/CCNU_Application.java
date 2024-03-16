@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.ccnu_station.Reuse.CCNU_API;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.qiniu.android.common.AutoZone;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.storage.Configuration;
@@ -17,22 +19,21 @@ public class CCNU_Application extends Application {
     private static String User_Token;
     private static CCNU_API api;
     private static UploadManager uploadManager;
+    private static SharedPreferences sp;
     public void onCreate()
     {
         super.onCreate();
         //获取本地存储的UserToken
-        SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edt = sp.edit();
-        edt.putString("token","null");
-        edt.commit();
+        sp = getApplicationContext().getSharedPreferences("User_Details", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("token","null");
+        editor.apply();
         User_Token = sp.getString("token","null");
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://47.92.102.209:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(CCNU_API.class);
-
         // AutoZone：自动根据 bucket 去查询相应 Zone，Zone 信息会被缓存
         Zone zone = new AutoZone();
         // 根据区域 ID 创建 Zone，无需查询，强烈推荐使用 AutoZone
@@ -55,12 +56,12 @@ public class CCNU_Application extends Application {
     {
         return api;
     }
-
     public static UploadManager getUploadManager() {
         return uploadManager;
     }
     public static String getUser_Token(){
-        return "null";
+        User_Token = sp.getString("token","null");
+        return User_Token;
     }
 
 }

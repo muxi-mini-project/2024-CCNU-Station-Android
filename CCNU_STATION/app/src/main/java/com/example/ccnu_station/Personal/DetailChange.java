@@ -43,14 +43,6 @@ public class DetailChange extends BaseActivity {
     private TextView textNote;
     private TextView textMBTI;
     private TextView textStayDate;
-    private ImageButton btnNickName;
-    private ImageButton btnID;
-    private ImageButton btnCollege;
-    private ImageButton btnSign;
-    private ImageButton btnNote;
-    private ImageButton btnStayDate;
-    private ImageButton btnMBTI;
-    private ImageButton btnSex;
     private ImageView avatar;
     public static Intent newIntent(Context packgeContext)
     {
@@ -66,8 +58,7 @@ public class DetailChange extends BaseActivity {
             // 数据发生变化，刷新界面
             updateUI(newData);
         });
-        SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
-        User_token = sp.getString("token","null");
+        User_token = CCNU_Application.getUser_Token();
         api = CCNU_Application.getApi();
         Call<JsonRespond<PersonalDetailData>> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
         DetailGet.enqueue(new Callback<JsonRespond<PersonalDetailData>>() {
@@ -87,71 +78,13 @@ public class DetailChange extends BaseActivity {
                 Toast.makeText(DetailChange.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
-        btnCollege = findViewById(R.id.btnCollege);
-        btnNote = findViewById(R.id.btnNote);
-        btnMBTI = findViewById(R.id.btnMBTI);
-        btnID = findViewById(R.id.btnID);
-        btnSex = findViewById(R.id.btnSex);
-        btnSign = findViewById(R.id.btnSign);
-        btnNickName = findViewById(R.id.btnNickName);
-        btnStayDate = findViewById(R.id.btnStayDate);
         textCollege =findViewById(R.id.textCollege);
-        textNote = findViewById(R.id.textNote);
         textNickName = findViewById(R.id.textNickName);
         textID = findViewById(R.id.textID);
-        textSex = findViewById(R.id.textSex);
         textSign = findViewById(R.id.textSign);
         textStayDate = findViewById(R.id.textStay_Date);
         textMBTI = findViewById(R.id.textMBTI);
         avatar = findViewById(R.id.imageviewAvatar);
-
-        btnNickName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-        btnSign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btnID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btnSex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btnMBTI.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btnCollege.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btnStayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btnNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
     private void updateUI(PersonalDetailData newData)
     {
