@@ -81,7 +81,8 @@ public class LoginActivity extends BaseActivity {
                             //用SharedPreferences存储token避免页面间多次传输;
                             SharedPreferences sharedPrefer = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPrefer.edit();
-                            editor.putString("token",body.getToken());
+                            editor.putString(CCNU_Application.TOKEN,body.getToken());
+                            editor.putString(CCNU_Application.USERID,strUsername);
                             editor.apply();
                             Intent intent;
                             if(firstCheck==firstCheck) {

@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
@@ -26,6 +28,7 @@ public class RecordActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecordAdapter adapter;
     private ArrayList<Item> itemList;
+    private ImageButton addButton;
     private CCNU_API api;
     private String buildID;
     private static String Building_ID =
@@ -48,6 +51,14 @@ public class RecordActivity extends AppCompatActivity {
         adapter = new RecordAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        addButton = findViewById(R.id.addRecords);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = addRecordActivity.newIntent(RecordActivity.this,buildID);
+                startActivity(intent);
+            }
+        });
     }
     private ArrayList<Item> testList(){
         ArrayList<Item> List = new ArrayList<>();

@@ -20,6 +20,15 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface CCNU_API {
+    @FormUrlEncoded
+    @POST("api/post/postnote")
+    Call<JsonRespond<SimpleData>> postRecord(
+            @Header("Authorization")String Token,
+            @Query("where")String BuildID,
+            @Query("key1")String imagekey,
+            @Field("text")String content,
+            @Field("title")String title
+    );
     @GET("api/getactivity/allpostnote")
     Call<JsonRespond<RecordResponseData>> getAllRecords(@Query("where") String ID);
     @GET("api/user/detail")
@@ -34,15 +43,6 @@ public interface CCNU_API {
             @Part("image") RequestBody image);
     @GET("api/user/avatar")
     Call<JsonRespond<SimpleData>> avatarKeyUpload(@Header("Authorization")String Token, @Query("image") String key);
-    @POST("api/post/postnote")
-    Call<JsonRespond> addRecordsPost(
-            @Header("Authorization") String token,
-            @Query("key1") String key1,
-            @Query("key2") String key2,
-            @Query("key3") String key3,
-            @Query("key4") String key4,
-            @Query("key5") String key5,
-            @Body addRecordBody body);
     @GET("qiniutoken")
     Call<QnTokenJson> getQiniuToken(@Header("Authorization")String Token);
 

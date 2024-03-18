@@ -2,7 +2,7 @@ package com.example.ccnu_station.Record;
 
 public class Item {
     private String title;
-    private String avatar;
+    private String headimage;
     /**
      * 图片1URL
      */
@@ -29,11 +29,11 @@ public class Item {
     private String time;
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        this.headimage = avatar;
     }
 
     public String getAvatar() {
-        return avatar;
+        return headimage;
     }
 
     public void setTitle(String title) {
