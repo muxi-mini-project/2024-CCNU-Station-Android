@@ -1,5 +1,6 @@
 package com.example.ccnu_station.Record;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,17 +26,21 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_item, parent, false);
         return new RecordViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(RecordViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.textTitle.setText(item.getTitle());
         holder.textContent.setText(item.getText());
         holder.time.setText(item.getTime());
-        String avatarUrl = item.getAvatar();
-        if(avatarUrl==null) avatarUrl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
+        if(!item.getAvatar().equals("")&&!item.getAvatar().substring(0,7).equals("http://")) {
+            item.setAvatar("http://"+item.getImage1());
+        }
+        if(!item.getImage1().equals("")&&!item.getImage1().substring(0,7).equals("http://")) {
+            item.setImage1("http://"+item.getImage1());
+        }
+        Log.i("AVATAR",item.getAvatar());
         Glide.with(holder.itemView.getContext())
-                .load(avatarUrl)
+                .load(item.getAvatar())
                 .circleCrop()
                 .into(holder.avatar);
         Glide.with(holder.itemView.getContext())

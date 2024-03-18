@@ -16,7 +16,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CCNU_Application extends Application {
+    public static final String USERDETAILS = "User_Details";
+    public static final String TOKEN="token";
+    public static final String USERID="UserID";
     private static String User_Token;
+    private static String UserID;
     private static CCNU_API api;
     private static UploadManager uploadManager;
     private static SharedPreferences sp;
@@ -24,11 +28,11 @@ public class CCNU_Application extends Application {
     {
         super.onCreate();
         //获取本地存储的UserToken
-        sp = getApplicationContext().getSharedPreferences("User_Details", Context.MODE_PRIVATE);
+        sp = getApplicationContext().getSharedPreferences(USERDETAILS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("token","null");
+        editor.putString(TOKEN,"null");
         editor.apply();
-        User_Token = sp.getString("token","null");
+        User_Token = sp.getString(TOKEN,"null");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://47.92.102.209:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -60,8 +64,12 @@ public class CCNU_Application extends Application {
         return uploadManager;
     }
     public static String getUser_Token(){
-        User_Token = sp.getString("token","null");
+        User_Token = sp.getString(TOKEN,"null");
         return User_Token;
+    }
+    public static String getUserID(){
+        UserID = sp.getString(USERID,"null");
+        return UserID;
     }
 
 }
