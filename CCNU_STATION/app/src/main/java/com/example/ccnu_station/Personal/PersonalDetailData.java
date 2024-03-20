@@ -1,169 +1,76 @@
 package com.example.ccnu_station.Personal;
 
-import java.sql.Time;
-import java.util.SplittableRandom;
-
 public class PersonalDetailData {
-    private String stuid;
-    private String password;
-    private String realname;
-    private String nickname;
-    private String grade;
+    private Long age = 0l;
     private String college;
-    private String gender;
-    private String headimage;
-    private String age;
-    private String sign;
-    private String friends_number;
-    private String followers_number;
-    private String follower_number;
-    private String post_number;
     private String date;
-    private String stay_date;
-    private boolean YNLogin;
-    private boolean YNSelf;
+    private Long fanNumber = 0l;
+    private Long followerNumber = 0l;
+    private Long friendsNumber = 0l;
+    private String gender;
+    private String grade;
+    private String headimage;
+    private String mbti;
+    private String nickname;
+    private Long postNumber = 0l;
+    private String realName;
+    private String sign;
+    private Long stayDate = 0l;
+    private String stuid;
+    private Boolean ynLogin;
+    private Boolean ynSelf;
 
-    public boolean isYNLogin() {
-        return YNLogin;
-    }
+    public Long getAge() { return age; }
+    public void setAge(Long value) { this.age = value; }
 
-    public boolean isYNSelf() {
-        return YNSelf;
-    }
+    public String getCollege() { return college; }
+    public void setCollege(String value) { this.college = value; }
 
-    public String getGender() {
-        return gender;
-    }
+    public String getDate() { return date; }
+    public void setDate(String value) { this.date = value; }
 
-    public String getHeadimage() {
-        return headimage;
-    }
+    public Long getFanNumber() { return fanNumber; }
+    public void setFanNumber(Long value) { this.fanNumber = value; }
 
-    public String getNickname() {
-        return nickname;
-    }
+    public Long getFollowerNumber() { return followerNumber; }
+    public void setFollowerNumber(Long value) { this.followerNumber = value; }
 
-    public String getPassword() {
-        return password;
-    }
+    public Long getFriendsNumber() { return friendsNumber; }
+    public void setFriendsNumber(Long value) { this.friendsNumber = value; }
 
-    public String getCollege() {
-        return college;
-    }
+    public String getGender() { return gender; }
+    public void setGender(String value) { this.gender = value; }
 
-    public String getSign() {
-        return sign;
-    }
+    public String getGrade() { return grade; }
+    public void setGrade(String value) { this.grade = value; }
 
-    public String getStuid() {
-        return stuid;
-    }
+    public String getHeadimage() { return headimage; }
+    public void setHeadimage(String value) { this.headimage = value; }
 
-    public String getAge() {
-        return age;
-    }
+    public String getMbti() { return mbti; }
+    public void setMbti(String value) { this.mbti = value; }
 
-    public String getDate() {
-        return date;
-    }
+    public String getNickname() { return nickname; }
+    public void setNickname(String value) { this.nickname = value; }
 
-    public String getFollower_number() {
-        return follower_number;
-    }
+    public Long getPostNumber() { return postNumber; }
+    public void setPostNumber(Long value) { this.postNumber = value; }
 
-    public String getFollowers_number() {
-        return followers_number;
-    }
+    public String getRealName() { return realName; }
+    public void setRealName(String value) { this.realName = value; }
 
-    public String getFriends_number() {
-        return friends_number;
-    }
+    public String getSign() { return sign; }
+    public void setSign(String value) { this.sign = value; }
 
-    public String getGrade() {
-        return grade;
-    }
+    public Long getStayDate() { return stayDate; }
+    public void setStayDate(Long value) { this.stayDate = value; }
 
-    public String getPost_number() {
-        return post_number;
-    }
+    public String getStuid() { return stuid; }
+    public void setStuid(String value) { this.stuid = value; }
 
-    public String getRealname() {
-        return realname;
-    }
+    public Boolean getYnLogin() { return ynLogin; }
+    public void setYnLogin(Boolean value) { this.ynLogin = value; }
 
-    public String getStay_date() {
-        return stay_date;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public void setFriends_number(String friends_number) {
-        this.friends_number = friends_number;
-    }
-
-    public void setFollowers_number(String followers_number) {
-        this.followers_number = followers_number;
-    }
-
-    public void setCollege(String college) {
-        this.college = college;
-    }
-
-    public void setHeadimage(String headimage) {
-        this.headimage = headimage;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setStay_date(String stay_date) {
-        this.stay_date = stay_date;
-    }
-
-    public void setPost_number(String post_number) {
-        this.post_number = post_number;
-    }
-
-    public void setStuid(String stuid) {
-        this.stuid = stuid;
-    }
-
-    public void setYNLogin(boolean YNLogin) {
-        this.YNLogin = YNLogin;
-    }
-
-    public void setFollower_number(String follower_number) {
-        this.follower_number = follower_number;
-    }
-
-    public void setRealname(String realname) {
-        this.realname = realname;
-    }
-
-    public void setYNSelf(boolean YNSelf) {
-        this.YNSelf = YNSelf;
-    }
+    public Boolean getYnSelf() { return ynSelf; }
+    public void setYnSelf(Boolean value) { this.ynSelf = value; }
 }

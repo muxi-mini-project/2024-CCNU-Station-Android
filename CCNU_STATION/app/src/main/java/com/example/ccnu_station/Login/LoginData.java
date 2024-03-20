@@ -2,40 +2,21 @@ package com.example.ccnu_station.Login;
 
 public class LoginData
 {
-    private String Login;
-    private String First;
-    private String msg;
+    private boolean first;
     private String token;
-
-    public String getLogin() {
-        return Login;
-    }
-
-    public String getFirst() {
-        return First;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
 
     public String getToken() {
         return token;
     }
 
-    public void setFirst(String first) {
-        First = first;
-    }
-
-    public void setLogin(String login) {
-        Login = login;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public void setToken(String Token) {
+    public void setToken(String token) {
         this.token = token;
+    }
+
+    public void setFirst(boolean first) {
+        this.first = first;
+    }
+    public boolean isFirst() {
+        return first;
     }
 }

@@ -17,16 +17,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.ccnu_station.CCNU_API;
-import com.example.ccnu_station.CCNU_Application;
-import com.example.ccnu_station.CCNU_ViewModel;
+import com.example.ccnu_station.Reuse.BaseActivity;
+import com.example.ccnu_station.Reuse.CCNU_API;
+import com.example.ccnu_station.Reuse.CCNU_Application;
+import com.example.ccnu_station.Reuse.CCNU_ViewModel;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Reuse.JsonRespond;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PersonalPage extends AppCompatActivity {
+public class PersonalPage extends BaseActivity {
     private static String PersonalPage_ID =
             "com.example.ccnu_station.PersonalPage_ID";
     public static Intent newIntent(Context packgeContext, String personal_ID)
@@ -38,7 +40,7 @@ public class PersonalPage extends AppCompatActivity {
     private CCNU_ViewModel<PersonalDetailData> viewModel;
     private ImageView Avatar;
     private String Personal_ID;
-    private PersonalDetailData Data;
+    private PersonalDetailData data;
     private TextView textName;
     private TextView textID;
     private TextView textSchool;
@@ -46,9 +48,7 @@ public class PersonalPage extends AppCompatActivity {
     private TextView textFollowers;
     private TextView textStayDate;
     private TextView textSubmitNum;
-    private String SubmitNum;
-    private ImageView imageHead;
-    private String User_token;
+    private String User_token=CCNU_Application.getUser_Token();
     private ConstraintLayout detailBlock;
     private Button changeButton;
     private boolean IsSelf=false;
@@ -57,13 +57,8 @@ public class PersonalPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_page);
-        viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
-        viewModel.getData().observe(this, newData -> {
-            // 数据发生变化，刷新界面
-            updateUI(newData);
-        });
-        Data = new PersonalDetailData();
-        Avatar = findViewById(R.id.imageViewAvatar);
+        data = new PersonalDetailData();
+        Avatar = findViewById(R.id.imageHead);
         textName = findViewById(R.id.textName);
         textFriends = findViewById(R.id.textfriends);
         textFollowers = findViewById(R.id.textfollowers);
@@ -72,28 +67,33 @@ public class PersonalPage extends AppCompatActivity {
         textStayDate = findViewById(R.id.textStayDate);
         textSubmitNum = findViewById(R.id.textSubmitNum);
         detailBlock = findViewById(R.id.DetailBlock);
+        viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
+        viewModel.getData().observe(this, newData -> {
+            // 数据发生变化，刷新界面
+            updateUI(newData);
+        });
         SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
         User_token = sp.getString("token","null");
         Personal_ID = getIntent().getStringExtra(PersonalPage_ID);
         changeButton = addDetailButton();
         CCNU_API api = CCNU_Application.getApi();
-        Call<PersonalDetailData> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
-        DetailGet.enqueue(new Callback<PersonalDetailData>() {
+        Call<JsonRespond<PersonalDetailData>> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
+        DetailGet.enqueue(new Callback<JsonRespond<PersonalDetailData>>() {
             @Override
-            public void onResponse(Call<PersonalDetailData> call, Response<PersonalDetailData> response) {
+            public void onResponse(Call<JsonRespond<PersonalDetailData>> call, Response<JsonRespond<PersonalDetailData>> response) {
                 Toast.makeText(PersonalPage.this,"请求成功",Toast.LENGTH_SHORT).show();
-                PersonalDetailData body = response.body();
+                JsonRespond<PersonalDetailData> body = response.body();
                 if(body==null)
                 {
                     Toast.makeText(PersonalPage.this,"响应体为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Data = body;
-                viewModel.updateData(body);
+                PersonalDetailData newData = body.getData();
+                viewModel.updateData(newData);
             }
 
             @Override
-            public void onFailure(Call<PersonalDetailData> call, Throwable t) {
+            public void onFailure(Call<JsonRespond<PersonalDetailData>> call, Throwable t) {
                 Toast.makeText(PersonalPage.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,17 +107,19 @@ public class PersonalPage extends AppCompatActivity {
     }
     public void updateUI(PersonalDetailData newData)
     {
+        String imageurl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
+        if(newData.getHeadimage()!="") imageurl=newData.getHeadimage();
         Glide.with(this)
-                .load(newData.getHeadimage())
+                .load(imageurl)
                 .circleCrop()
                 .into(Avatar);
         textName.setText(newData.getNickname());
-        textFriends.setText(newData.getFriends_number());
-        textFollowers.setText(newData.getFollowers_number());
+        textFriends.setText(newData.getFriendsNumber().toString());
+        textFollowers.setText(newData.getFollowerNumber().toString());
         textID.setText(newData.getStuid());
         textSchool.setText(newData.getCollege());
-        textStayDate.setText(newData.getStay_date());
-        textSubmitNum.setText(newData.getPost_number());
+        textStayDate.setText(newData.getStayDate().toString());
+        textSubmitNum.setText(newData.getPostNumber().toString());
     }
     public Button addDetailButton()
     {
