@@ -18,7 +18,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class StartActivity extends BaseActivity {
-    private static final int SPLASH_TIME_OUT=2000;
+    private static final int SPLASH_TIME_OUT=1500;
     private String User_Token = CCNU_Application.getUser_Token();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

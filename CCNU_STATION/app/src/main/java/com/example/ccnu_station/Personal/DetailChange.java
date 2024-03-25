@@ -97,7 +97,7 @@ public class DetailChange extends BaseActivity {
         String imageurl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
         if(newData.getHeadimage()!="") imageurl=newData.getHeadimage();
         Glide.with(this)
-                .load(imageurl)
+                .load("http://"+imageurl)
                 .circleCrop()
                 .into(avatar);
     }
