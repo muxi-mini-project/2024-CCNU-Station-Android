@@ -17,12 +17,13 @@ import com.example.ccnu_station.OutLook.SetOutLookActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.RecordActivity;
+import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_Application;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends BaseActivity {
     public Map<String,Integer> ChatRoomMap = new HashMap<String,Integer>()
     {{
         put("HuaChat",0);

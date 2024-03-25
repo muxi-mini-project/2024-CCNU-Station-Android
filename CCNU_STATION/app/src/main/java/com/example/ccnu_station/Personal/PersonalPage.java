@@ -110,29 +110,30 @@ public class PersonalPage extends BaseActivity {
         String imageurl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
         if(newData.getHeadimage()!="") imageurl=newData.getHeadimage();
         Glide.with(this)
-                .load(imageurl)
+                .load("http://"+imageurl)
                 .circleCrop()
                 .into(Avatar);
         textName.setText(newData.getNickname());
-        textFriends.setText(newData.getFriendsNumber().toString());
-        textFollowers.setText(newData.getFollowerNumber().toString());
+        textFriends.setText("关注 "+newData.getFriendsNumber().toString());
+        textFollowers.setText("粉丝 "+newData.getFollowerNumber().toString());
         textID.setText(newData.getStuid());
         textSchool.setText(newData.getCollege());
-        textStayDate.setText(newData.getStayDate().toString());
-        textSubmitNum.setText(newData.getPostNumber().toString());
+        textStayDate.setText("在校 "+newData.getStayDate().toString()+"天");
+        textSubmitNum.setText("发布 "+newData.getPostNumber().toString());
     }
     public Button addDetailButton()
     {
         Button newButton = new Button(this);
-        newButton.setText("修改");
+        newButton.setText("设置");
         ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
         params.endToEnd = R.id.DetailBlock;
         params.topToTop = R.id.DetailBlock;
-        params.setMargins(40,200,40,40);
+        params.setMargins(40,200,130,40);
         newButton.setLayoutParams(params);
+        newButton.setBackgroundColor(getResources().getColor(R.color.yellow));
         detailBlock.addView(newButton);
         return newButton;
     }

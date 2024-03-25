@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ccnu_station.Finder.FinderActivity;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.RecordActivity;
+import com.example.ccnu_station.Reuse.BaseActivity;
 
-public class BuildActivity extends AppCompatActivity {
+public class BuildActivity extends BaseActivity {
     private Button btnRecord;
     private Button btnChat;
     private Button btnFind;
@@ -40,6 +42,13 @@ public class BuildActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = RecordActivity.newIntent(BuildActivity.this,buildID);
+                startActivity(intent);
+            }
+        });
+        btnFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = FinderActivity.newIntent(BuildActivity.this,buildID);
                 startActivity(intent);
             }
         });
