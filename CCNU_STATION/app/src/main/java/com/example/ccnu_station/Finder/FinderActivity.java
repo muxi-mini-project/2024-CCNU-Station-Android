@@ -8,11 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.Item;
+import com.example.ccnu_station.Record.RecordActivity;
 import com.example.ccnu_station.Record.addRecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
@@ -54,6 +56,18 @@ public class FinderActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         addButton = findViewById(R.id.addFinds);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(user_token.equals("null")) {
+                    Toast.makeText(FinderActivity.this,"请登录",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = AddFindActivity.newIntent(FinderActivity.this, buildID);
+                    startActivity(intent);
+                }
+            }
+        });
     }
     private ArrayList<FindItem> testList(){
         ArrayList<FindItem> List = new ArrayList<>();

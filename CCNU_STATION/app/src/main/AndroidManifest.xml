@@ -19,6 +19,12 @@
         android:theme="@style/Theme.CCNU_STATION"
         tools:targetApi="31">
         <activity
+            android:name=".Call.AddCallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Call.CallActivity"
+            android:exported="false" />
+        <activity
             android:name=".Finder.AddFindActivity"
             android:exported="false" />
         <activity

@@ -52,7 +52,7 @@ public class RecordActivity extends BaseActivity {
         adapter = new RecordAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        addButton = findViewById(R.id.addFinds);
+        addButton = findViewById(R.id.addRecord);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

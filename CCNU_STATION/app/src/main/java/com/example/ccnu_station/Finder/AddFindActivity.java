@@ -64,13 +64,13 @@ public class AddFindActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_find);
         BuildID = getIntent().getStringExtra(BUILDID);
-        title.findViewById(R.id.edittextFindTitle);
-        clue.findViewById(R.id.edtClue);
-        thing.findViewById(R.id.edittextFindthing);
-        ddl.findViewById(R.id.edtDDL);
-        image.findViewById(R.id.imgbtnImage);
-        checkbtn.findViewById(R.id.buttonCheck);
-        cancelbtn.findViewById(R.id.buttonCancel);
+        title = findViewById(R.id.edittextFindTitle);
+        clue = findViewById(R.id.edtClue);
+        thing = findViewById(R.id.edittextFindthing);
+        ddl = findViewById(R.id.edtDDL);
+        image = findViewById(R.id.imgbtnImage);
+        checkbtn = findViewById(R.id.buttonCheck);
+        cancelbtn = findViewById(R.id.buttonCancel);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
