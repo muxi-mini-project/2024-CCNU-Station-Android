@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.ccnu_station.Buidings.BuildActivity;
+import com.example.ccnu_station.Call.CallActivity;
 import com.example.ccnu_station.Chat.ChatPage;
 import com.example.ccnu_station.OutLook.SetOutLookActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
@@ -71,7 +72,8 @@ public class HomePage extends BaseActivity {
         btnZhaomu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //页面跳转；
+                Intent intent = CallActivity.newIntent(HomePage.this);
+                startActivity(intent);
             }
         });
         btnHuaCat = findViewById(R.id.btnHuaCat);

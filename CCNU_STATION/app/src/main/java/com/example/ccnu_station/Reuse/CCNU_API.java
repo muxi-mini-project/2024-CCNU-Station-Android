@@ -18,6 +18,11 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface CCNU_API {
+    /*
+    @FormUrlEncoded
+    @POST("api/post/post_recruit_activity")
+    Call<JsonRespond<SimpleData>> postCall
+     */
     @FormUrlEncoded
     @POST("api/post/post_treasure_hunting")
     Call<JsonRespond<SimpleData>> postFinder(
@@ -47,11 +52,6 @@ public interface CCNU_API {
     Call<JsonRespond<RecordResponseData>> getAllRecords(@Query("where") String ID);
     @GET("api/user/detail")
     Call<JsonRespond<PersonalDetailData>> getPersonalDetail(@Header("Authorization") String token, @Query("userid") String ID);
-    @Multipart
-    @POST("api/image")
-    Call<JsonRespond> uploadImage(
-            @Header("Authorization") String authorization,
-            @Part("image") RequestBody image);
     @GET("api/user/avatar")
     Call<JsonRespond<SimpleData>> avatarKeyUpload(@Header("Authorization")String Token, @Query("image") String key);
     @GET("qiniutoken")

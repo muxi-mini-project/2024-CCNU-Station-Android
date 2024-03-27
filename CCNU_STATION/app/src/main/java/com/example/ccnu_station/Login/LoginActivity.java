@@ -85,7 +85,7 @@ public class LoginActivity extends BaseActivity {
                             editor.putString(CCNU_Application.USERID,strUsername);
                             editor.apply();
                             Intent intent;
-                            if(firstCheck==firstCheck) {
+                            if(firstCheck==true) {
                                 intent = SetOutLookActivity.newIntent(LoginActivity.this);
                             }
                             else {

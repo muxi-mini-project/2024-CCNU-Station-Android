@@ -32,12 +32,6 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         holder.textTitle.setText(item.getTitle());
         holder.textContent.setText(item.getText());
         holder.time.setText(item.getTime());
-        if(!item.getAvatar().equals("")&&!item.getAvatar().substring(0,7).equals("http://")) {
-            item.setAvatar("http://"+item.getImage1());
-        }
-        if(!item.getImage1().equals("")&&!item.getImage1().substring(0,7).equals("http://")) {
-            item.setImage1("http://"+item.getImage1());
-        }
         Log.i("AVATAR",item.getAvatar());
         Glide.with(holder.itemView.getContext())
                 .load(item.getAvatar())
