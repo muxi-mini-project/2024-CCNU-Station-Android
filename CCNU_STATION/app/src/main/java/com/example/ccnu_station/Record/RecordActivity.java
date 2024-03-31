@@ -10,8 +10,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ccnu_station.Buidings.BuildActivity;
+import com.example.ccnu_station.Call.CallActivity;
+import com.example.ccnu_station.Finder.FinderActivity;
+import com.example.ccnu_station.Home.HomePage;
+import com.example.ccnu_station.Login.LoginActivity;
+import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
@@ -24,13 +31,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecordActivity extends BaseActivity {
+public class RecordActivity extends BaseActivity implements RecordAdapter.OnItemClickListener{
     private RecyclerView recyclerView;
     private RecordAdapter adapter;
     private ArrayList<Item> itemList;
     private ImageButton addButton;
     private CCNU_API api;
     private String buildID;
+    private ImageView background;
     private String user_token = CCNU_Application.getUser_Token();
     private static String Building_ID =
             "com.example.ccnu_station.RecordActivity.Building_ID";
@@ -46,10 +54,12 @@ public class RecordActivity extends BaseActivity {
         setContentView(R.layout.activity_record_page);
         api = CCNU_Application.getApi();
         buildID = ""+getIntent().getIntExtra(Building_ID,-1);
+        background = findViewById(R.id.background);
+        background.setImageResource(CCNU_Application.buildBackGround[buildID.toCharArray()[0]-'0'-1]);
         recyclerView = findViewById(R.id.Recordrecyclerview);
         itemList = testList();
         generateItemList(buildID); // Create a list of MyItem objects
-        adapter = new RecordAdapter(itemList);
+        adapter = new RecordAdapter(itemList,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         addButton = findViewById(R.id.addRecord);
@@ -57,14 +67,26 @@ public class RecordActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(user_token.equals("null")) {
-                    Toast.makeText(RecordActivity.this,"请登录",Toast.LENGTH_SHORT).show();
+                    Intent intent = LoginActivity.newIntent(RecordActivity.this);
+                    startActivity(intent);
+                    finish();
                 }
                 else {
                     Intent intent = addRecordActivity.newIntent(RecordActivity.this, buildID);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
+    }
+    public void onBackPressed(){
+        Intent intent = BuildActivity.newIntent(RecordActivity.this,buildID.toCharArray()[0]-'0');
+        startActivity(intent);
+        finish();
+    }
+    public void onAvatarClick(String Personal_ID){
+        Intent intent = PersonalPage.newIntent(RecordActivity.this,Personal_ID);
+        startActivity(intent);
     }
     private ArrayList<Item> testList(){
         ArrayList<Item> List = new ArrayList<>();

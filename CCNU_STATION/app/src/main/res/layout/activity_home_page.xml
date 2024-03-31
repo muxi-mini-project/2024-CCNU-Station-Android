@@ -26,61 +26,61 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="100dp"
-            android:layout_height="400dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnZhaomu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="招募"
-                app:layout_constraintBottom_toTopOf="@+id/btnRank"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:backgroundTint="#00000000"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dk" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnRank"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="排行"
-                app:layout_constraintBottom_toTopOf="@+id/btnHuaCat"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnZhaomu" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/none"
+                android:scaleType="fitCenter"
+                android:src="@drawable/zm" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnHuaCat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="华猫"
-                app:layout_constraintBottom_toTopOf="@+id/btnHuaChat"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnRank" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/none"
+                android:scaleType="fitCenter"
+                android:src="@drawable/huacat" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnHuaChat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="华聊"
-                app:layout_constraintBottom_toTopOf="@+id/btnPersonal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnHuaCat" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/none"
+                android:scaleType="fitCenter"
+                android:src="@drawable/huachat" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnPersonal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="个人"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnHuaChat" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/none"
+                android:scaleType="fitCenter"
+                android:src="@drawable/xzzx" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -150,8 +150,8 @@
             android:id="@+id/imgbtnbuildsouth"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginStart="204dp"
-            android:layout_marginTop="528dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="548dp"
             android:backgroundTint="#00000000"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,8 +162,8 @@
             android:id="@+id/imgbtnbuildsouthhall"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginStart="188dp"
-            android:layout_marginTop="344dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="340dp"
             android:backgroundTint="#00000000"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"

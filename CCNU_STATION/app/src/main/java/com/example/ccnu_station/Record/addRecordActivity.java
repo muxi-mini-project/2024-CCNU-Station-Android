@@ -12,9 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ccnu_station.Call.CallActivity;
+import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -44,6 +47,7 @@ public class addRecordActivity extends BaseActivity {
     private static final String BUILDID =
             "com.example.ccnu_station.addRecordActivity.Building_ID";
     private String imageKey;
+    private ImageView background;
     private String UserID = CCNU_Application.getUserID();
     private Button btnCheck;
     private Button btnCancel;
@@ -56,6 +60,8 @@ public class addRecordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record_page);
         BuildID = getIntent().getStringExtra(BUILDID);
+        background = findViewById(R.id.background);
+        background.setImageResource(CCNU_Application.buildBackGround[BuildID.toCharArray()[0]-'0'-1]);
         btnCheck = findViewById(R.id.buttonCheck);
         btnCancel = findViewById(R.id.buttonCancel);
         btnimage = findViewById(R.id.imgbtnImage);
@@ -75,6 +81,11 @@ public class addRecordActivity extends BaseActivity {
                 UploadNewRecord(rdtitle,rdcontent,imageKey,User_token,BuildID);
             }
         });
+    }
+    public void onBackPressed(){
+        Intent intent = RecordActivity.newIntent(addRecordActivity.this,BuildID.toCharArray()[0]-'0');
+        startActivity(intent);
+        finish();
     }
     public static Intent newIntent(Context packgeContext,String buildID)
     {
@@ -110,7 +121,7 @@ public class addRecordActivity extends BaseActivity {
                     String uploadedKey = response.optString("key");
                     imageKey=uploadedKey;
                     Glide.with(addRecordActivity.this)
-                            .load(avatarFile)
+                            .load("http://mini-project.muxixyz.com/"+imageKey)
                             .into(btnimage);
                 } else {
                     Log.i("qiniu", "Upload Fail");

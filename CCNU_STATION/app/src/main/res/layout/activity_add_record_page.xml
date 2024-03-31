@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Record.addRecordActivity">
-
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="300dp"
         android:layout_height="600dp"
@@ -29,6 +36,7 @@
             android:id="@+id/edittextContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="32dp"
@@ -85,6 +93,7 @@
             android:id="@+id/edittextTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="32dp"
