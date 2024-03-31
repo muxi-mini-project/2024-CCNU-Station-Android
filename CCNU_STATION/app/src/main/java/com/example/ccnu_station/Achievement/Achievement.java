@@ -12,6 +12,7 @@ public class Achievement {
 
 
     public Achievement(int achievementId, String title, boolean isfinished) {
+        this.achievementId=achievementId;
         this.title = title;
         this.isfinished = isfinished;
     }
@@ -28,7 +29,7 @@ public class Achievement {
     }
 
 
-    public void setIsfinished(boolean isfinished) {
+    public  void setIsfinished(boolean isfinished) {
         this.isfinished = isfinished;
     }
 
@@ -135,10 +136,6 @@ public class Achievement {
         AchivementList.add(new Achievement(97,"  98.和室友一起在宿舍看恐怖片",false));
         AchivementList.add(new Achievement(98,"  99.拍下朋友的照片做成表情包",false));
         AchivementList.add(new Achievement(99,"  100.相信并且爱自己",false));
-
-
-
-        // ... 添加其他任务
 
         return AchivementList;
     }

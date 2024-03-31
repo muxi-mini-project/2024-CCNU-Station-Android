@@ -1,5 +1,6 @@
 package com.example.ccnu_station.Reuse;
 
+import com.example.ccnu_station.Achievement.AchievementClickResponse;
 import com.example.ccnu_station.Achievement.AchievementTotalFinishedResponse;
 import com.example.ccnu_station.Login.LoginData;
 import com.example.ccnu_station.Personal.PersonalDetailData;
@@ -47,6 +48,9 @@ public interface CCNU_API {
 
     @GET("api/user/achievement/get")
     Call<AchievementTotalFinishedResponse> getAchievementTotalFinished(@Query("stuid") String UserID);
+
+    @GET("api/user/achievement/update")
+    Call<AchievementClickResponse> getAchievementReusult(@Query("stuid") String UserID,@Query("achid") String AchiID);
 
 
 }

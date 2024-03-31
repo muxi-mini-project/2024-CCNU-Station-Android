@@ -1,11 +1,16 @@
 package com.example.ccnu_station.Achievement;
 
+import com.example.ccnu_station.Reuse.CCNU_API;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +38,7 @@ public class Achievement_Activity extends AppCompatActivity {
     }
     ////成就模块
     private List<Achievement> data;
+    CCNU_API api = CCNU_Application.getApi();
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -53,7 +59,6 @@ public class Achievement_Activity extends AppCompatActivity {
         /////成就模块
 
         ////API
-        CCNU_API api = CCNU_Application.getApi();
 
                                                                                  ///传入stuid
         Call<AchievementTotalFinishedResponse> AchievementCall = api.getAchievementTotalFinished("2023214438");
@@ -61,27 +66,55 @@ public class Achievement_Activity extends AppCompatActivity {
         AchievementCall.enqueue(new Callback<AchievementTotalFinishedResponse>() {
             @Override
             public void onResponse(Call<AchievementTotalFinishedResponse> call, Response<AchievementTotalFinishedResponse> response) {
-                Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
-                AchievementTotalFinishedResponse body =response.body();
+                Toast.makeText(Achievement_Activity.this, "请求成功", Toast.LENGTH_SHORT).show();
+                AchievementTotalFinishedResponse body = response.body();
 
-                if(body == null) {
-                    Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
+                if (body == null) {
+                    Toast.makeText(Achievement_Activity.this, "响应体为空", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
-                    String finishedData =body.getData().toString();
+                } else {
+                    String finishedData = body.getData().toString();
                     // 设置已完成和未完成数量
                     update_FinsihedTextview(finishedData);
                 }
             }
 
+
             @Override
             public void onFailure(Call<AchievementTotalFinishedResponse> call, Throwable t) {
-                Toast.makeText(Achievement_Activity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Achievement_Activity.this, "请求失败", Toast.LENGTH_SHORT).show();
             }
         });
 
+
         ////API
 
+
+    }
+    public void UpdatefinsishedCheck(String UserId,String achievement_ID){
+        Call<AchievementClickResponse> AchievementClickResponseCall = api.getAchievementReusult("2023214438", "1");
+        AchievementClickResponseCall.enqueue(new Callback<AchievementClickResponse>()
+
+        {
+            @Override
+            public void onResponse(Call<AchievementClickResponse> call, Response<AchievementClickResponse> response) {
+                Toast.makeText(Achievement_Activity.this, "请求成功", Toast.LENGTH_SHORT).show();
+                AchievementClickResponse body = response.body();
+                if (body == null) {
+                    Toast.makeText(Achievement_Activity.this, "响应体为空", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    String newfinishedString = body.getFisinishedString().toString();
+                    // 设置已完成和未完成数量
+                    update_FinsihedTextview(newfinishedString);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AchievementClickResponse> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -100,7 +133,6 @@ public class Achievement_Activity extends AppCompatActivity {
 
         finished_textview.setText(String.format("已完成：%d",finished_num));
         unfinished_textview.setText(String.format("未完成：%d",100-finished_num));
-
     }
 }
 

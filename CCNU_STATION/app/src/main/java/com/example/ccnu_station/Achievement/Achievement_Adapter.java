@@ -53,14 +53,15 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
             achievement_title = itemView.findViewById(R.id.title_textview);
             achievement_isfinished = itemView.findViewById(R.id.isfinished_checkbox);
 
-//            achievement_isfinished.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    data.get(getAdapterPosition()).setIsfinished(isChecked);
-//                }
-//            });
+            achievement_isfinished.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
         }
     }
+
 
 }
