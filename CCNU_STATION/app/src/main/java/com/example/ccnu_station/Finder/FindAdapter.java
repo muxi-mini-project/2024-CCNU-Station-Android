@@ -8,13 +8,19 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
+import com.example.ccnu_station.Call.CallAdapter;
 import com.example.ccnu_station.R;
 import java.util.ArrayList;
 public class FindAdapter extends RecyclerView.Adapter<FindAdapter.FindViewHolder>{
     private ArrayList<FindItem> itemList;
+    private OnItemClickListener mListener;
+    public interface OnItemClickListener {
+        void onAvatarClick(String personal_id);
+    }
 
-    public FindAdapter(ArrayList<FindItem> itemList) {
+    public FindAdapter(ArrayList<FindItem> itemList,OnItemClickListener listener) {
         this.itemList = itemList;
+        mListener = listener;
     }
     @Override
     public FindAdapter.FindViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,6 +42,12 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.FindViewHolder
         holder.clue.setText(item.getClue());
         holder.ddl.setText(item.getDeadline());
         holder.thing.setText(item.getThing());
+        holder.avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onAvatarClick(itemList.get(holder.getAdapterPosition()).getPoster());
+            }
+        });
     }
 
 

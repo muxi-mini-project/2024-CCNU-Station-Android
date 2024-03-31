@@ -13,10 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ccnu_station.Call.CallActivity;
+import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Record.RecordActivity;
 import com.example.ccnu_station.Record.addRecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
@@ -48,6 +52,7 @@ public class AddFindActivity extends BaseActivity {
     private EditText ddl;
     private String imageKey;
     private String BuildID;
+    private ImageView background;
     private ImageButton image;
     private Button checkbtn;
     private Button cancelbtn;
@@ -64,6 +69,8 @@ public class AddFindActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_find);
         BuildID = getIntent().getStringExtra(BUILDID);
+        background = findViewById(R.id.background);
+        background.setImageResource(CCNU_Application.buildBackGround[BuildID.toCharArray()[0]-'0'-1]);
         title = findViewById(R.id.edittextFindTitle);
         clue = findViewById(R.id.edtClue);
         thing = findViewById(R.id.edittextFindthing);
@@ -87,6 +94,11 @@ public class AddFindActivity extends BaseActivity {
                 UploadNewFind(Title,Clue,Thing,DDL,imageKey,User_token,BuildID);
             }
         });
+    }
+    public void onBackPressed(){
+        Intent intent = FinderActivity.newIntent(AddFindActivity.this,BuildID.toCharArray()[0]-'0');
+        startActivity(intent);
+        finish();
     }
     private ActivityResultLauncher<String> getContentLauncher = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
@@ -116,7 +128,7 @@ public class AddFindActivity extends BaseActivity {
                     String uploadedKey = response.optString("key");
                     imageKey=uploadedKey;
                     Glide.with(AddFindActivity.this)
-                            .load(avatarFile)
+                            .load("http://mini-project.muxixyz.com/"+imageKey)
                             .into(image);
                 } else {
                     Log.i("qiniu", "Upload Fail");

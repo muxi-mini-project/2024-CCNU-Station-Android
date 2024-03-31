@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.ccnu_station.R;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,6 +17,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CCNU_Application extends Application {
+    public static final int[] buildBackGround = {
+            R.drawable.build01bg,
+            R.drawable.build02bg,
+            R.drawable.build03bg,
+            R.drawable.build04bg,
+            R.drawable.build05bg,
+            R.drawable.build06bg,
+            R.drawable.build07bg,
+            R.drawable.build08bg
+    };
     public static final String USERDETAILS = "User_Details";
     public static final String TOKEN="token";
     public static final String USERID="UserID";
@@ -29,9 +40,6 @@ public class CCNU_Application extends Application {
         super.onCreate();
         //获取本地存储的UserToken
         sp = getApplicationContext().getSharedPreferences(USERDETAILS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(TOKEN,"null");
-        editor.apply();
         User_Token = sp.getString(TOKEN,"null");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://47.92.102.209:8080/")
@@ -71,5 +79,9 @@ public class CCNU_Application extends Application {
         UserID = sp.getString(USERID,"null");
         return UserID;
     }
-
+    public static void TokensignOut(){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(TOKEN,"null");
+        editor.apply();
+    }
 }

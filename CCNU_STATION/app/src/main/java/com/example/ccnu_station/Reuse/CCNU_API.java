@@ -1,7 +1,7 @@
 package com.example.ccnu_station.Reuse;
-
 import com.example.ccnu_station.Achivement.AchievementClickResponse;
 import com.example.ccnu_station.Achivement.AchievementTotalFinishedResponse;
+import com.example.ccnu_station.Call.CallResponseData;
 import com.example.ccnu_station.Finder.FinderResponseData;
 import com.example.ccnu_station.Login.LoginData;
 import com.example.ccnu_station.Personal.PersonalDetailData;
@@ -18,11 +18,15 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface CCNU_API {
-    /*
     @FormUrlEncoded
     @POST("api/post/post_recruit_activity")
-    Call<JsonRespond<SimpleData>> postCall
-     */
+    Call<JsonRespond<SimpleData>> postCall(
+            @Header("Authorization")String Token,
+            @Field("where")String BuildID,
+            @Field("request")String request,
+            @Field("title")String title,
+            @Field("time") String time
+    );
     @FormUrlEncoded
     @POST("api/post/post_treasure_hunting")
     Call<JsonRespond<SimpleData>> postFinder(
@@ -46,6 +50,10 @@ public interface CCNU_API {
             @Field("text")String content,
             @Field("title")String title
     );
+    @GET("api/user/achievement/get")
+    Call<AchievementTotalFinishedResponse> getAchievementTotalFinished(@Query("stuid") String UserID);
+    @GET("api/getactivity/allrecruit")
+    Call<JsonRespond<CallResponseData>> getAllCalls();
     @GET("api/getactivity/alltreasurehunting")
     Call<JsonRespond<FinderResponseData>> getAllFindings(@Query("where") String ID);
     @GET("api/getactivity/allpostnote")

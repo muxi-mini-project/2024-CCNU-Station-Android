@@ -10,8 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ccnu_station.Buidings.BuildActivity;
+import com.example.ccnu_station.Call.CallActivity;
+import com.example.ccnu_station.Home.HomePage;
+import com.example.ccnu_station.Login.LoginActivity;
+import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.Item;
 import com.example.ccnu_station.Record.RecordActivity;
@@ -27,13 +33,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FinderActivity extends BaseActivity {
+public class FinderActivity extends BaseActivity implements FindAdapter.OnItemClickListener{
     private RecyclerView recyclerView;
     private FindAdapter adapter;
     private ArrayList<FindItem> itemList;
     private ImageButton addButton;
     private CCNU_API api;
     private String buildID;
+    private ImageView background;
     private String user_token = CCNU_Application.getUser_Token();
     private static String Building_ID =
             "com.example.ccnu_station.FinderActivity.Building_ID";
@@ -49,10 +56,12 @@ public class FinderActivity extends BaseActivity {
         setContentView(R.layout.activity_finder);
         api = CCNU_Application.getApi();
         buildID = ""+getIntent().getIntExtra(Building_ID,-1);
+        background = findViewById(R.id.background);
+        background.setImageResource(CCNU_Application.buildBackGround[buildID.toCharArray()[0]-'0'-1]);
         recyclerView = findViewById(R.id.finderrecyclerview);
         itemList = testList();
         generateItemList(buildID); // Create a list of MyItem objects
-        adapter = new FindAdapter(itemList);
+        adapter = new FindAdapter(itemList,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         addButton = findViewById(R.id.addFinds);
@@ -60,14 +69,26 @@ public class FinderActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(user_token.equals("null")) {
-                    Toast.makeText(FinderActivity.this,"请登录",Toast.LENGTH_SHORT).show();
+                    Intent intent = LoginActivity.newIntent(FinderActivity.this);
+                    startActivity(intent);
+                    finish();
                 }
                 else {
                     Intent intent = AddFindActivity.newIntent(FinderActivity.this, buildID);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
+    }
+    public void onBackPressed(){
+        Intent intent = BuildActivity.newIntent(FinderActivity.this,buildID.toCharArray()[0]-'0');
+        startActivity(intent);
+        finish();
+    }
+    public void onAvatarClick(String Personal_ID){
+        Intent intent = PersonalPage.newIntent(FinderActivity.this,Personal_ID);
+        startActivity(intent);
     }
     private ArrayList<FindItem> testList(){
         ArrayList<FindItem> List = new ArrayList<>();

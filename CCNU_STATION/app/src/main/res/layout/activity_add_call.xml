@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Call.AddCallActivity">
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="300dp"
         android:layout_height="600dp"
@@ -34,9 +42,11 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="32dp"
+
             android:background="@android:color/transparent"
             android:maxLength="104"
             android:text="活动时间"
+            android:textColor="@color/black"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -80,6 +90,8 @@
             android:maxLength="20"
             android:textSize="18dp"
             android:text="活动名称"
+
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
@@ -94,6 +106,7 @@
             android:textSize="18dp"
             android:background="@android:color/transparent"
             android:text="活动地点"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,6 +120,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="32dp"
             android:textSize="18dp"
+            android:textColor="@color/black"
             android:background="@android:color/transparent"
             android:text="活动要求"
             app:layout_constraintEnd_toEndOf="parent"

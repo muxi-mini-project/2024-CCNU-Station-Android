@@ -24,6 +24,7 @@ import com.example.ccnu_station.Reuse.CCNU_Application;
 import com.example.ccnu_station.Reuse.CCNU_ViewModel;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Reuse.JsonRespond;
+import com.example.ccnu_station.Start.StartActivity;
 import com.qiniu.android.utils.Json;
 
 import retrofit2.Call;
@@ -35,6 +36,7 @@ public class DetailChange extends BaseActivity {
     private CCNU_ViewModel<PersonalDetailData> viewModel;
     private PersonalDetailData Data;
     private CCNU_API api;
+    private Button SignOutBtn;
     private TextView textNickName;
     private TextView textID;
     private TextView textCollege;
@@ -53,6 +55,14 @@ public class DetailChange extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_change);
+        //        textCollege =findViewById(R.id.textCollege);
+//        textNickName = findViewById(R.id.textNickName);
+//        textID = findViewById(R.id.textID);
+//        textSign = findViewById(R.id.textSign);
+//        textStayDate = findViewById(R.id.textStay_Date);
+//        textMBTI = findViewById(R.id.textMBTI);
+        avatar = findViewById(R.id.imageviewAvatar);
+        SignOutBtn = findViewById(R.id.btnLogOut);
         viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
         viewModel.getData().observe(this, newData -> {
             // 数据发生变化，刷新界面
@@ -78,26 +88,29 @@ public class DetailChange extends BaseActivity {
                 Toast.makeText(DetailChange.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
-        textCollege =findViewById(R.id.textCollege);
-        textNickName = findViewById(R.id.textNickName);
-        textID = findViewById(R.id.textID);
-        textSign = findViewById(R.id.textSign);
-        textStayDate = findViewById(R.id.textStay_Date);
-        textMBTI = findViewById(R.id.textMBTI);
-        avatar = findViewById(R.id.imageviewAvatar);
+        SignOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CCNU_Application.TokensignOut();
+                Intent intent = StartActivity.newIntent(DetailChange.this);
+                startActivity(intent);
+                finishAffinity();
+            }
+        });
+
     }
     private void updateUI(PersonalDetailData newData)
     {
-        textStayDate.setText(newData.getStayDate().toString());
-        textSign.setText(newData.getSign());
-        textCollege.setText(newData.getCollege());
-        textNickName.setText(newData.getNickname());
-        textID.setText(newData.getStuid());
-        textSex.setText(newData.getGender());
+//        textStayDate.setText(newData.getStayDate().toString());
+//        textSign.setText(newData.getSign());
+//        textCollege.setText(newData.getCollege());
+//        textNickName.setText(newData.getNickname());
+//        textID.setText(newData.getStuid());
+//        textSex.setText(newData.getGender());
         String imageurl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
         if(newData.getHeadimage()!="") imageurl=newData.getHeadimage();
         Glide.with(this)
-                .load("http://"+imageurl)
+                .load(imageurl)
                 .circleCrop()
                 .into(avatar);
     }

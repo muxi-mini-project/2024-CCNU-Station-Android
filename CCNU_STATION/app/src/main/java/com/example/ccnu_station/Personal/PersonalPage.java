@@ -17,6 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ccnu_station.Home.HomePage;
+import com.example.ccnu_station.Login.LoginActivity;
+import com.example.ccnu_station.Record.RecordActivity;
+import com.example.ccnu_station.Record.addRecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -51,6 +55,7 @@ public class PersonalPage extends BaseActivity {
     private String User_token=CCNU_Application.getUser_Token();
     private ConstraintLayout detailBlock;
     private Button changeButton;
+    private String userID;
     private boolean IsSelf=false;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,9 +80,10 @@ public class PersonalPage extends BaseActivity {
         SharedPreferences sp = getSharedPreferences("User_Details", Context.MODE_PRIVATE);
         User_token = sp.getString("token","null");
         Personal_ID = getIntent().getStringExtra(PersonalPage_ID);
-        changeButton = addDetailButton();
+        userID = CCNU_Application.getUserID();
+        if(userID.equals(Personal_ID)) changeButton = addDetailButton();
         CCNU_API api = CCNU_Application.getApi();
-        Call<JsonRespond<PersonalDetailData>> DetailGet = api.getPersonalDetail("Bearer "+User_token,"2023214442");
+        Call<JsonRespond<PersonalDetailData>> DetailGet = api.getPersonalDetail("Bearer "+User_token,Personal_ID);
         DetailGet.enqueue(new Callback<JsonRespond<PersonalDetailData>>() {
             @Override
             public void onResponse(Call<JsonRespond<PersonalDetailData>> call, Response<JsonRespond<PersonalDetailData>> response) {
@@ -88,6 +94,11 @@ public class PersonalPage extends BaseActivity {
                     Toast.makeText(PersonalPage.this,"响应体为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(body.getCode()==2005){
+                    Intent intent = LoginActivity.newIntent(PersonalPage.this);
+                    startActivity(intent);
+                    finishAffinity();
+                }
                 PersonalDetailData newData = body.getData();
                 viewModel.updateData(newData);
             }
@@ -97,20 +108,33 @@ public class PersonalPage extends BaseActivity {
                 Toast.makeText(PersonalPage.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
-        changeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = DetailChange.newIntent(PersonalPage.this);
-                startActivity(intent);
-            }
-        });
+        if(userID.equals(Personal_ID)){
+            changeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = DetailChange.newIntent(PersonalPage.this);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+    }
+    public void onBackPressed(){
+        if(userID.equals(Personal_ID)) {
+            Intent intent = HomePage.newIntent(PersonalPage.this);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            super.onBackPressed();
+        }
     }
     public void updateUI(PersonalDetailData newData)
     {
         String imageurl="https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg";
         if(newData.getHeadimage()!="") imageurl=newData.getHeadimage();
         Glide.with(this)
-                .load("http://"+imageurl)
+                .load(imageurl)
                 .circleCrop()
                 .into(Avatar);
         textName.setText(newData.getNickname());

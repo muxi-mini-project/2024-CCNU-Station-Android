@@ -92,6 +92,7 @@ public class LoginActivity extends BaseActivity {
                                 intent = HomePage.newIntent(LoginActivity.this);
                             }
                             startActivity(intent);
+                            finish();
                         }
                     }
 
@@ -109,6 +110,7 @@ public class LoginActivity extends BaseActivity {
             {
                 Intent intent = HomePage.newIntent(LoginActivity.this);
                 startActivity(intent);
+                finish();
             }
         });
     }

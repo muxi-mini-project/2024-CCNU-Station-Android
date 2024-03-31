@@ -17,9 +17,14 @@ import java.util.List;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder>{
     private ArrayList<Item> itemList;
+    private OnItemClickListener mListener;
+    public interface OnItemClickListener {
+        void onAvatarClick(String personal_id);
+    }
 
-    public RecordAdapter(ArrayList<Item> itemList) {
+    public RecordAdapter(ArrayList<Item> itemList,OnItemClickListener listener) {
         this.itemList = itemList;
+        mListener = listener;
     }
     @Override
     public RecordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,6 +45,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         Glide.with(holder.itemView.getContext())
                 .load(item.getImage1())
                 .into(holder.picture);
+        holder.avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onAvatarClick(itemList.get(holder.getAdapterPosition()).getPoster());
+            }
+        });
     }
 
     @Override
