@@ -17,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ccnu_station.Call.AddCallActivity;
 import com.example.ccnu_station.Call.CallActivity;
 import com.example.ccnu_station.Home.HomePage;
+import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.RecordActivity;
 import com.example.ccnu_station.Record.addRecordActivity;
@@ -176,6 +178,11 @@ public class AddFindActivity extends BaseActivity {
                 JsonRespond<SimpleData> body = response.body();
                 if(body.getCode()==1000){
                     Toast.makeText(AddFindActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
+                }
+                if(body.getCode()==2005){
+                    Intent intent = LoginActivity.newIntent(AddFindActivity.this);
+                    startActivity(intent);
+                    finishAffinity();
                 }
                 else{
                     Toast.makeText(AddFindActivity.this,"发布失败",Toast.LENGTH_SHORT).show();

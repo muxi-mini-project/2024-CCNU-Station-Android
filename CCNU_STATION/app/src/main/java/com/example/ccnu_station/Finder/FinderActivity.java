@@ -113,6 +113,11 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
                 if(body==null) return;
                 if(body.getCode()!=1000) return;
                 FindItem[] items = body.getData().getTreasurehuntings();
+                if(body.getCode()==2005){
+                    Intent intent = LoginActivity.newIntent(FinderActivity.this);
+                    startActivity(intent);
+                    finishAffinity();
+                }
                 itemList= new ArrayList<>();
                 for(int i = 0;i<items.length;i++){
                     itemList.add(items[i]);

@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ccnu_station.Call.CallActivity;
+import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Reuse.CCNU_API;
@@ -33,6 +35,12 @@ public class Achievement_Activity extends AppCompatActivity {
     }
     ////成就模块
     private List<Achievement> data;
+    @Override
+    public void onBackPressed(){
+        Intent intent = HomePage.newIntent(Achievement_Activity.this);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -56,7 +64,7 @@ public class Achievement_Activity extends AppCompatActivity {
         CCNU_API api = CCNU_Application.getApi();
 
                                                                                  ///传入stuid
-        Call<AchievementTotalFinishedResponse> AchievementCall = api.getAchievementTotalFinished("2023214438");
+        Call<AchievementTotalFinishedResponse> AchievementCall = api.getAchievementTotalFinished(CCNU_Application.getUserID());
                                                                                 ///
         AchievementCall.enqueue(new Callback<AchievementTotalFinishedResponse>() {
             @Override

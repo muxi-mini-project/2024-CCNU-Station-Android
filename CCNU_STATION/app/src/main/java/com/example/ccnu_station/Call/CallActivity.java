@@ -105,6 +105,11 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
                 if(body.getCode()!=1000) return;
                 CallItem[] items = body.getData().getRecruits();
                 itemList= new ArrayList<>();
+                if(body.getCode()==2005){
+                    Intent intent = LoginActivity.newIntent(CallActivity.this);
+                    startActivity(intent);
+                    finishAffinity();
+                }
                 for(int i = 0;i<items.length;i++){
                     itemList.add(items[i]);
                 }

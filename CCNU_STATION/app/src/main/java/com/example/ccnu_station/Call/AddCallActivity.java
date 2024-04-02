@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ccnu_station.Finder.AddFindActivity;
+import com.example.ccnu_station.Finder.FinderActivity;
 import com.example.ccnu_station.Home.HomePage;
+import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.RecordActivity;
 import com.example.ccnu_station.Record.addRecordActivity;
@@ -81,6 +83,11 @@ public class AddCallActivity extends BaseActivity {
                 JsonRespond<SimpleData> body = response.body();
                 if(body.getCode()==1000){
                     Toast.makeText(AddCallActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
+                }
+                if(body.getCode()==2005){
+                    Intent intent = LoginActivity.newIntent(AddCallActivity.this);
+                    startActivity(intent);
+                    finishAffinity();
                 }
                 else{
                     Toast.makeText(AddCallActivity.this,"发布失败",Toast.LENGTH_SHORT).show();

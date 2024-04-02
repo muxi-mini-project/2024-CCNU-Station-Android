@@ -90,6 +90,7 @@ public class LoginActivity extends BaseActivity {
                             }
                             else {
                                 intent = HomePage.newIntent(LoginActivity.this);
+
                             }
                             startActivity(intent);
                             finish();
@@ -109,7 +110,9 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view)
             {
                 Intent intent = HomePage.newIntent(LoginActivity.this);
+                CCNU_Application.TokensignOut();
                 startActivity(intent);
+
                 finish();
             }
         });

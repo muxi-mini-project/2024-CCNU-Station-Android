@@ -1,6 +1,6 @@
 package com.example.ccnu_station.Reuse;
-import com.example.ccnu_station.Achivement.AchievementClickResponse;
-import com.example.ccnu_station.Achivement.AchievementTotalFinishedResponse;
+
+import com.example.ccnu_station.Achievement.AchievementTotalFinishedResponse;
 import com.example.ccnu_station.Call.CallResponseData;
 import com.example.ccnu_station.Finder.FinderResponseData;
 import com.example.ccnu_station.Login.LoginData;
@@ -50,6 +50,16 @@ public interface CCNU_API {
             @Field("text")String content,
             @Field("title")String title
     );
+    @FormUrlEncoded
+    @POST("api/user/update")
+    Call<JsonRespond<SimpleData>> postDetail(
+            @Header("Authorization")String Token,
+            @Field("nickname")String nickname,
+            @Field("age")String age,
+            @Field("date") String date,
+            @Field("sign") String note,
+            @Field("mbti") String mbti
+    );
     @GET("api/user/achievement/get")
     Call<AchievementTotalFinishedResponse> getAchievementTotalFinished(@Query("stuid") String UserID);
     @GET("api/getactivity/allrecruit")
@@ -64,10 +74,5 @@ public interface CCNU_API {
     Call<JsonRespond<SimpleData>> avatarKeyUpload(@Header("Authorization")String Token, @Query("image") String key);
     @GET("qiniutoken")
     Call<QnTokenJson> getQiniuToken(@Header("Authorization")String Token);
-
-    @GET("api/user/achievement/get")
-    Call<AchievementTotalFinishedResponse> getAchievementTotalFinished(@Query("stuid") String UserID);
-    @GET("api/user/achievement/update")
-    Call<AchievementClickResponse> getAchievementClickResponse(@Query("stuid") String UserID, @Query("achid") String AchID);
 
 }
