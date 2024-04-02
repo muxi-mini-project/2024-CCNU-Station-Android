@@ -10,16 +10,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Record.Item;
+import com.example.ccnu_station.Record.RecordAdapter;
+import com.example.ccnu_station.Reuse.CCNU_Application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapter.Achievement_ViewHolder> {
 
+    private OnItemClickListener mListener;
     private List<Achievement> data;
 
-    public Achievement_Adapter(List<Achievement> data) {
+    public interface OnItemClickListener {
+        void onAchieveClick(String personal_id ,Integer achID);
+    }
+///////
+    public Achievement_Adapter(List<Achievement> data ,OnItemClickListener listener) {
+        mListener =listener;
         this.data = data;
     }
+//////
 
     @NonNull
     @Override
@@ -37,6 +48,13 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
         holder.achievement_title.setText(achievement.getTitle());
         holder.achievement_isfinished.setChecked(achievement.isIsfinished());
 
+        holder.achievement_isfinished.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onAchieveClick(CCNU_Application.getUserID(),data.get(holder.getAdapterPosition()).getAchievementId());
+            }
+        });
+
     }
 
     @Override
@@ -53,15 +71,8 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
             achievement_title = itemView.findViewById(R.id.title_textview);
             achievement_isfinished = itemView.findViewById(R.id.isfinished_checkbox);
 
-            achievement_isfinished.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
 
         }
     }
-
 
 }

@@ -101,6 +101,7 @@ public class SetOutLookActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = HomePage.newIntent(SetOutLookActivity.this);
                 startActivity(intent);
+                finish();
             }
         });
         avatar.setOnClickListener(new View.OnClickListener() {

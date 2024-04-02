@@ -13,17 +13,21 @@ import android.widget.Toast;
 
 import com.example.ccnu_station.Achievement.Achievement_Activity;
 import com.example.ccnu_station.Buidings.BuildActivity;
+import com.example.ccnu_station.Call.CallActivity;
 import com.example.ccnu_station.Chat.ChatPage;
+import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.OutLook.SetOutLookActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Record.RecordActivity;
+import com.example.ccnu_station.Reuse.BaseActivity;
+import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends BaseActivity {
     public Map<String,Integer> ChatRoomMap = new HashMap<String,Integer>()
     {{
         put("HuaChat",0);
@@ -37,11 +41,11 @@ public class HomePage extends AppCompatActivity {
     private ImageButton imgbtnbuildgym;
     private ImageButton imgbtnbuildsouth;
     private ImageButton imgbtnbuildxz;
-    private Button btnZhaomu;
-    private Button btnHuaCat;
-    private Button btnHuaChat;
-    private Button btnRank;
-    private Button btnPersonal;
+    private ImageButton btnZhaomu;
+    private ImageButton btnHuaCat;
+    private ImageButton btnHuaChat;
+    private ImageButton btnRank;
+    private ImageButton btnPersonal;
     private String User_token;
     /*private static final String User_Identity =
             "com.example.ccnu_station.Home.HomePage.UserIdentity";
@@ -68,13 +72,15 @@ public class HomePage extends AppCompatActivity {
         imgbtnbuildsouthhall = findViewById(R.id.imgbtnbuildsouthhall);
         imgbtnbuildxy = findViewById(R.id.imgbtnbuildxy);
         imgbtnbuildxz = findViewById(R.id.imgbtnbuildxz);
+        btnHuaCat = findViewById(R.id.btnHuaCat);
         btnZhaomu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //页面跳转；
+                Intent intent = Achievement_Activity.newIntent(HomePage.this, CCNU_Application.getUserID());
+                startActivity(intent);
+                finish();
             }
         });
-        btnHuaCat = findViewById(R.id.btnHuaCat);
         btnHuaCat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,20 +94,16 @@ public class HomePage extends AppCompatActivity {
                 //页面跳转
                 Intent intent = ChatPage.newIntent(HomePage.this,ChatRoomMap.get("HuaChat"));
                 startActivity(intent);
+                finish();
             }
         });
         btnRank = findViewById(R.id.btnRank);
         btnRank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!User_token.equals("null")) {
-                    Intent intent = Achievement_Activity.newIntent(HomePage.this,User_token);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(HomePage.this,"请登录",Toast.LENGTH_SHORT).show();
-                }
-                //页面跳转
+                Intent intent = CallActivity.newIntent(HomePage.this);
+                startActivity(intent);
+                finish();
             }
         });
         btnPersonal = findViewById(R.id.btnPersonal);
@@ -109,11 +111,14 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!User_token.equals("null")) {
-                    Intent intent = PersonalPage.newIntent(HomePage.this, User_token);
+                    Intent intent = PersonalPage.newIntent(HomePage.this, CCNU_Application.getUserID());
                     startActivity(intent);
+                    finish();
                 }
                 else{
-                    Toast.makeText(HomePage.this,"请登录",Toast.LENGTH_SHORT).show();
+                    Intent intent = LoginActivity.newIntent(HomePage.this);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -122,6 +127,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,1);
                 startActivity(intent);
+                finish();
             }
         });
         imgbtnbuild1.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +135,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,2);
                 startActivity(intent);
+                finish();
             }
         });
         imgbtnbuildgym.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +143,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,3);
                 startActivity(intent);
+                finish();
             }
         });
         imgbtnbuildsouth.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +151,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,4);
                 startActivity(intent);
+                finish();
             }
         });
         imgbtnbuildqyc.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +159,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,5);
                 startActivity(intent);
+                finish();
             }
         });
         imgbtnbuildsouthhall.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +167,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,6);
                 startActivity(intent);
+                finish();
             }
         });
         imgbtnbuildxy.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +175,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,7);
                 startActivity(intent);
+                finish();
             }
         });
         imgbtnbuildxz.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +183,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = BuildActivity.newIntent(HomePage.this,8);
                 startActivity(intent);
+                finish();
             }
         });
     }

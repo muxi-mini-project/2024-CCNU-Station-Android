@@ -4,7 +4,6 @@ public class AchievementClickResponse {
     public String getFisinishedString() {
         return fisinishedString;
     }
-
     private String fisinishedString;
 
 }

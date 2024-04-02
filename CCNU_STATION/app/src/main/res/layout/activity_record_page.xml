@@ -5,11 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Record.RecordActivity">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recordrecyclerview"
+    <ImageView
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recordrecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,11 +37,11 @@
         app:layout_constraintVertical_bias="1.0">
 
         <ImageButton
-            android:id="@+id/addRecords"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTintMode="screen"
-            android:scaleType="fitCenter"
+            android:id="@+id/addRecord"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:backgroundTint="#00000000"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

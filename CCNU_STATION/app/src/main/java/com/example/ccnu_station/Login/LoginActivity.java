@@ -85,13 +85,15 @@ public class LoginActivity extends BaseActivity {
                             editor.putString(CCNU_Application.USERID,strUsername);
                             editor.apply();
                             Intent intent;
-                            if(firstCheck==firstCheck) {
+                            if(firstCheck==true) {
                                 intent = SetOutLookActivity.newIntent(LoginActivity.this);
                             }
                             else {
                                 intent = HomePage.newIntent(LoginActivity.this);
+
                             }
                             startActivity(intent);
+                            finish();
                         }
                     }
 
@@ -108,7 +110,10 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view)
             {
                 Intent intent = HomePage.newIntent(LoginActivity.this);
+                CCNU_Application.TokensignOut();
                 startActivity(intent);
+
+                finish();
             }
         });
     }
