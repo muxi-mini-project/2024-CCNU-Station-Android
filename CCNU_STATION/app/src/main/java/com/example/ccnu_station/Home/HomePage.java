@@ -1,27 +1,23 @@
 package com.example.ccnu_station.Home;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.example.ccnu_station.Achievement.Achievement_Activity;
+import com.example.ccnu_station.Achievements.Achievement_Activity;
+
 import com.example.ccnu_station.Buidings.BuildActivity;
 import com.example.ccnu_station.Call.CallActivity;
 import com.example.ccnu_station.Chat.ChatPage;
 import com.example.ccnu_station.Login.LoginActivity;
-import com.example.ccnu_station.OutLook.SetOutLookActivity;
+
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.RecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
-import com.example.ccnu_station.Reuse.CCNU_API;
+
 import com.example.ccnu_station.Reuse.CCNU_Application;
 
 import java.util.HashMap;
