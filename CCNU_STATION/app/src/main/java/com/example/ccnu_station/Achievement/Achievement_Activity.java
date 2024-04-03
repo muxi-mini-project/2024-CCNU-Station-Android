@@ -37,6 +37,8 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
     private TextView finished_textview;
     private TextView unfinished_textview;
     private String User_token = CCNU_Application.getUser_Token();
+    private Achievement_Adapter achievementAdapter;
+
     public static Intent newIntent(Context packgeContext, String personal_ID)
     {
         Intent intent = new Intent(packgeContext, Achievement_Activity.class);
@@ -61,12 +63,13 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         // 设置RecyclerView的适配器
-        Achievement_Adapter achievementAdapter = new Achievement_Adapter(data,Achievement_Activity.this);
+        achievementAdapter = new Achievement_Adapter(data,Achievement_Activity.this);
         recyclerView.setAdapter(achievementAdapter);
         finished_textview = (TextView) findViewById(R.id.finished_tv);
         unfinished_textview = (TextView) findViewById(R.id.unfinished_tv);
         api = CCNU_Application.getApi();
         setItemList();
+
 
     }
 
@@ -128,6 +131,9 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
                     } else {
                         String setdata = body.getData().getFinished();
                         update_FinsihedTextview(setdata);
+                        for(int i = 1 ; i < 9; i++){
+                            achievementAdapter.notifyItemChanged(i);
+                        }
                     }
 
                 }
