@@ -61,10 +61,12 @@ public interface CCNU_API {
             @Field("sign") String note,
             @Field("mbti") String mbti
     );
+    //更改单个成就状态
     @GET("api/user/achievement/update")
     Call<JsonRespond<SimpleData>> getAchievementReusult(@Header("Authorization")String Token,@Query("stuid") String UserID, @Query("achid") String AchiID);
+    //设置所有的成就状况
     @GET("api/user/achievement/get")
-    Call<JsonRespond<SimpleData>> getAchievementTotalFinished(@Header("Authorization")String Token,@Query("stuid") String UserID);
+    Call<JsonRespond<AchievementTotalFinishedResponse>> getAchievementTotalFinished(@Header("Authorization")String Token,@Query("stuid") String UserID);
     @GET("api/getactivity/allrecruit")
     Call<JsonRespond<CallResponseData>> getAllCalls();
     @GET("api/getactivity/alltreasurehunting")

@@ -3,6 +3,7 @@ package com.example.ccnu_station.Achievement;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
+import com.example.ccnu_station.Record.Item;
+import com.example.ccnu_station.Record.RecordResponseData;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
 import com.example.ccnu_station.Reuse.JsonRespond;
 import com.example.ccnu_station.Reuse.SimpleData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -61,9 +65,12 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         recyclerView.setAdapter(achievementAdapter);
         finished_textview = (TextView) findViewById(R.id.finished_tv);
         unfinished_textview = (TextView) findViewById(R.id.unfinished_tv);
+        api = CCNU_Application.getApi();
+        setItemList();
+
 
         ////API
-        api = CCNU_Application.getApi();
+
 
         ////API
 
@@ -102,7 +109,11 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
                 }
                 if(body.getCode()==1000){
                     Toast.makeText(Achievement_Activity.this,"更改成功",Toast.LENGTH_SHORT).show();
+                    String newdata=body.getData().toString();
+                    update_FinsihedTextview(newdata);
+
                 }
+
             }
 
             @Override
@@ -112,37 +123,37 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         });
     }
 
-    ////?计划是实现当从home跳转的到成就界面时根据用户的Id设置对应的成就列表的完成情况?
 
-    private void setAchievementList() {
-        Call<JsonRespond<SimpleData>> AchievementCall = api.getAchievementTotalFinished("Bearer "+User_token,CCNU_Application.getUserID());
-        ///
-        AchievementCall.enqueue(new Callback<JsonRespond<SimpleData>>() {
-            @Override
-            public void onResponse(Call<JsonRespond<SimpleData>> call, Response<JsonRespond<SimpleData>> response) {
-                Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
-                JsonRespond<SimpleData> body =response.body();
-                if(body == null) {
-                    Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
-                    return;
-                }else{
-                    String finishedData =body.getData().toString();
-                    // 设置已完成和未完成数量
-                    update_FinsihedTextview(finishedData);
+    private  void setItemList(){
+        ////?计划是实现当从home跳转的到成就界面时根据用户的Id设置对应的成就列表的完成情况?
+        Call<JsonRespond<AchievementTotalFinishedResponse>> AchievementCall = api.getAchievementTotalFinished("Bearer "+User_token,CCNU_Application.getUserID());
+            ///
+        AchievementCall.enqueue(new Callback<JsonRespond<AchievementTotalFinishedResponse>>() {
+                @Override
+                public void onResponse(Call<JsonRespond<AchievementTotalFinishedResponse>> call, Response<JsonRespond<AchievementTotalFinishedResponse>> response) {
+                    Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                    JsonRespond<AchievementTotalFinishedResponse> body =response.body();
+                    if(body == null) {
+                        Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        String setdata = body.getData().toString();
+                        update_FinsihedTextview(setdata);
+                    }
+
                 }
-            }
 
-            @Override
-            public void onFailure(Call<JsonRespond<SimpleData>> call, Throwable t) {
-                Toast.makeText(Achievement_Activity.this,"请求失败",Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<JsonRespond<AchievementTotalFinishedResponse>> call, Throwable t) {
+                    Toast.makeText(Achievement_Activity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                }
+            });
+
     }
 
-    // 设置已完成和未完成数量
     public void update_FinsihedTextview (String finishedString){
         int finished_num = 0;
-        for (int i = 0;i < finishedString.length() ; i++){
+        for (int i = 0;i < finishedString.length(); i++){
             char ch =finishedString.charAt(i);
             if (ch == '1'){
                 finished_num+=1;
@@ -150,7 +161,28 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         }
         finished_textview.setText(String.format("已完成：%d",finished_num));
         unfinished_textview.setText(String.format("未完成：%d",100-finished_num));
-
     }
+//    private void generateItemList(String buildID){
+//        Call<JsonRespond<RecordResponseData>> Datacall = api.getAllRecords(buildID);
+//        Datacall.enqueue(new Callback<JsonRespond<RecordResponseData>>() {
+//            @Override
+//            public void onResponse(Call<JsonRespond<RecordResponseData>> call, Response<JsonRespond<RecordResponseData>> response) {
+//                JsonRespond<RecordResponseData> body = response.body();
+//                if(body==null) return;
+//                if(body.getCode()!=1000) return;
+//                Item[] items = body.getData().getNotes();
+//                itemList= new ArrayList<>();
+//                for(int i = 0;i<items.length;i++){
+//                    itemList.add(items[i]);
+//                }
+//                adapter.setItemList(itemList);
+//                adapter.notifyDataSetChanged();
+//            }
+//            @Override
+//            public void onFailure(Call<JsonRespond<RecordResponseData>> call, Throwable t) {
+//                Log.i("RecordGet","Failed");
+//            }
+//        });
+//    }
 }
 
