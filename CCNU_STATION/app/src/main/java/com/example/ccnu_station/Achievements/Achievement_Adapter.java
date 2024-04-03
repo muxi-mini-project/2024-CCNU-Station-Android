@@ -1,4 +1,4 @@
-package com.example.ccnu_station.Achievement;
+package com.example.ccnu_station.Achievements;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.Item;
-import com.example.ccnu_station.Record.RecordAdapter;
 import com.example.ccnu_station.Reuse.CCNU_Application;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapter.Achievement_ViewHolder> {

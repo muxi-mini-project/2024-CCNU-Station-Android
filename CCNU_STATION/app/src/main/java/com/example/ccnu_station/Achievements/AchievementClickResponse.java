@@ -1,4 +1,4 @@
-package com.example.ccnu_station.Achievement;
+package com.example.ccnu_station.Achievements;
 
 public class AchievementClickResponse {
 

@@ -1,9 +1,8 @@
-package com.example.ccnu_station.Achievement;
+package com.example.ccnu_station.Achievements;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,14 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.Item;
-import com.example.ccnu_station.Record.RecordResponseData;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
 import com.example.ccnu_station.Reuse.JsonRespond;
-import com.example.ccnu_station.Reuse.SimpleData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
