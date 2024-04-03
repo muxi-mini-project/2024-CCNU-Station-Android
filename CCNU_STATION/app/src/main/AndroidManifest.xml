@@ -43,7 +43,9 @@
             android:name=".Personal.DetailChange"
             android:exported="false" />
         <activity
+
             android:name=".Achievements.Achievement_Activity"
+
             android:exported="false"/>
         <activity
             android:name=".Personal.PersonalPage"

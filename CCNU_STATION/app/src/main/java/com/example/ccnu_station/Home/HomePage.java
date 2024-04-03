@@ -1,5 +1,6 @@
 package com.example.ccnu_station.Home;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,13 +8,16 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.ccnu_station.Achievements.Achievement_Activity;
+
 import com.example.ccnu_station.Buidings.BuildActivity;
 import com.example.ccnu_station.Call.CallActivity;
 import com.example.ccnu_station.Chat.ChatPage;
 import com.example.ccnu_station.Login.LoginActivity;
+
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
 import com.example.ccnu_station.Reuse.BaseActivity;
+
 import com.example.ccnu_station.Reuse.CCNU_Application;
 
 import java.util.HashMap;
