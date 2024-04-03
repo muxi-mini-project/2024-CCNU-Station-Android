@@ -23,7 +23,7 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
     private List<Achievement> data;
 
     public interface OnItemClickListener {
-        void onAchieveClick(String personal_id ,Integer achID);
+        void onAchieveClick(String personal_id ,int achID);
     }
 ///////
     public Achievement_Adapter(List<Achievement> data ,OnItemClickListener listener) {

@@ -68,17 +68,10 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         api = CCNU_Application.getApi();
         setItemList();
 
-
-        ////API
-
-
-        ////API
-
-
     }
 
     @Override
-    public void onAchieveClick(String personal_id, Integer achID) {
+    public void onAchieveClick(String personal_id, int achID) {
         clickcheckbox(achID);
         if (achID >= 0 && achID < data.size()) {
             // 获取指定索引的成就对象
@@ -89,19 +82,15 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         }
     }
 
-//                    data.get(achID).getAchievementId(),
-//                data.get(achID).getTitle(),
-//                data.get(achID).setIsfinished(data.get(achID).isIsfinished()==false)
-
     //////?计划实现当点击checkbox后 根据achID将完成状况改变 获得一串“1”“0”组成的长度为100的字符串用以更新成就完成状况?
     private void clickcheckbox(int achID){
-        Call<JsonRespond<SimpleData>> clickCheckboxCall = api.getAchievementReusult("Bearer "+User_token,CCNU_Application.getUserID(),Integer.toString(achID));
+        Call<AchievementClickResponse> clickCheckboxCall = api.getAchievementReusult("Bearer "+User_token,CCNU_Application.getUserID(),""+achID);
 
-        clickCheckboxCall.enqueue(new Callback<JsonRespond<SimpleData>>() {
+        clickCheckboxCall.enqueue(new Callback<AchievementClickResponse>() {
             @Override
-            public void onResponse(Call<JsonRespond<SimpleData>> call, Response<JsonRespond<SimpleData>> response) {
+            public void onResponse(Call<AchievementClickResponse> call, Response<AchievementClickResponse> response) {
                 Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
-                JsonRespond<SimpleData> body =response.body();
+                AchievementClickResponse body =response.body();
 
                 if(body == null) {
                     Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
@@ -109,7 +98,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
                 }
                 if(body.getCode()==1000){
                     Toast.makeText(Achievement_Activity.this,"更改成功",Toast.LENGTH_SHORT).show();
-                    String newdata=body.getData().toString();
+                    String newdata=body.getData();
                     update_FinsihedTextview(newdata);
 
                 }
@@ -117,7 +106,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
             }
 
             @Override
-            public void onFailure(Call<JsonRespond<SimpleData>> call, Throwable t) {
+            public void onFailure(Call<AchievementClickResponse> call, Throwable t) {
 
             }
         });
@@ -137,7 +126,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
                         Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
                         return;
                     } else {
-                        String setdata = body.getData().toString();
+                        String setdata = body.getData().getFinished();
                         update_FinsihedTextview(setdata);
                     }
 
@@ -157,32 +146,12 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
             char ch =finishedString.charAt(i);
             if (ch == '1'){
                 finished_num+=1;
+                data.get(i).setIsfinished(true);
             }
         }
         finished_textview.setText(String.format("已完成：%d",finished_num));
         unfinished_textview.setText(String.format("未完成：%d",100-finished_num));
     }
-//    private void generateItemList(String buildID){
-//        Call<JsonRespond<RecordResponseData>> Datacall = api.getAllRecords(buildID);
-//        Datacall.enqueue(new Callback<JsonRespond<RecordResponseData>>() {
-//            @Override
-//            public void onResponse(Call<JsonRespond<RecordResponseData>> call, Response<JsonRespond<RecordResponseData>> response) {
-//                JsonRespond<RecordResponseData> body = response.body();
-//                if(body==null) return;
-//                if(body.getCode()!=1000) return;
-//                Item[] items = body.getData().getNotes();
-//                itemList= new ArrayList<>();
-//                for(int i = 0;i<items.length;i++){
-//                    itemList.add(items[i]);
-//                }
-//                adapter.setItemList(itemList);
-//                adapter.notifyDataSetChanged();
-//            }
-//            @Override
-//            public void onFailure(Call<JsonRespond<RecordResponseData>> call, Throwable t) {
-//                Log.i("RecordGet","Failed");
-//            }
-//        });
-//    }
+
 }
 

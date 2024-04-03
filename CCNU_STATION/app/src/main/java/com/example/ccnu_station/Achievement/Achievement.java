@@ -12,12 +12,13 @@ public class Achievement {
 
 
     public Achievement(int achievementId, String title, boolean isfinished) {
+        this.achievementId = achievementId;
         this.title = title;
         this.isfinished = isfinished;
     }
 
     public int getAchievementId() {
-        return achievementId;
+        return achievementId+1;
     }
     public String getTitle() {
         return title;

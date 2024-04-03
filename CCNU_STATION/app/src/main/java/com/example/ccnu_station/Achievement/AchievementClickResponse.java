@@ -2,11 +2,11 @@ package com.example.ccnu_station.Achievement;
 
 public class AchievementClickResponse {
 
-    private  String code;
+    private  int code;
     private  String msg;
     private String data;
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
@@ -14,7 +14,7 @@ public class AchievementClickResponse {
         return msg;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

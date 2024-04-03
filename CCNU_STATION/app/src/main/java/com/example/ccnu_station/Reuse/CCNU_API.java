@@ -63,7 +63,7 @@ public interface CCNU_API {
     );
     //更改单个成就状态
     @GET("api/user/achievement/update")
-    Call<JsonRespond<SimpleData>> getAchievementReusult(@Header("Authorization")String Token,@Query("stuid") String UserID, @Query("achid") String AchiID);
+    Call<AchievementClickResponse> getAchievementReusult(@Header("Authorization")String Token,@Query("stuid") String UserID, @Query("achid") String AchiID);
     //设置所有的成就状况
     @GET("api/user/achievement/get")
     Call<JsonRespond<AchievementTotalFinishedResponse>> getAchievementTotalFinished(@Header("Authorization")String Token,@Query("stuid") String UserID);
