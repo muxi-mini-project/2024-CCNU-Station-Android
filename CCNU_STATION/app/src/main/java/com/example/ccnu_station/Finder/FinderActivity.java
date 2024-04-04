@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccnu_station.Buidings.BuildActivity;
@@ -41,6 +42,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     private CCNU_API api;
     private String buildID;
     private ImageView background;
+    private TextView buildName;
     private String user_token = CCNU_Application.getUser_Token();
     private static String Building_ID =
             "com.example.ccnu_station.FinderActivity.Building_ID";
@@ -57,6 +59,8 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
         api = CCNU_Application.getApi();
         buildID = ""+getIntent().getIntExtra(Building_ID,-1);
         background = findViewById(R.id.background);
+        buildName = findViewById(R.id.textBuildName);
+        buildName.setText(CCNU_Application.buildName[buildID.toCharArray()[0]-'0'-1]);
         background.setImageResource(CCNU_Application.buildBackGround[buildID.toCharArray()[0]-'0'-1]);
         recyclerView = findViewById(R.id.finderrecyclerview);
         itemList = testList();
@@ -92,15 +96,15 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     }
     private ArrayList<FindItem> testList(){
         ArrayList<FindItem> List = new ArrayList<>();
-        FindItem item = new FindItem();
-        item.setHeadImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setClue("测试测试测试测试");
-        item.setImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setTime("2024:03:14:20:10");
-        item.setTitle("这是一个标题");
-        item.setDeadline("2024:03:14:20:10");
-        item.setThing("圣遗物");
-        for(int i = 0;i<10;i++) List.add(item);
+//        FindItem item = new FindItem();
+//        item.setHeadImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setClue("测试测试测试测试");
+//        item.setImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setTime("2024:03:14:20:10");
+//        item.setTitle("这是一个标题");
+//        item.setDeadline("2024:03:14:20:10");
+//        item.setThing("圣遗物");
+//        for(int i = 0;i<10;i++) List.add(item);
         return List;
     }
     private void generateItemList(String buildID){
@@ -108,7 +112,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
         getFinds.enqueue(new Callback<JsonRespond<FinderResponseData>>() {
             @Override
             public void onResponse(Call<JsonRespond<FinderResponseData>> call, Response<JsonRespond<FinderResponseData>> response) {
-                Toast.makeText(FinderActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FinderActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
                 JsonRespond<FinderResponseData> body = response.body();
                 if(body==null) return;
                 if(body.getCode()!=1000) return;
@@ -129,7 +133,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
             @Override
             public void onFailure(Call<JsonRespond<FinderResponseData>> call, Throwable t) {
                 Log.i("FindGet","Failed");
-                Toast.makeText(FinderActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FinderActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
     }

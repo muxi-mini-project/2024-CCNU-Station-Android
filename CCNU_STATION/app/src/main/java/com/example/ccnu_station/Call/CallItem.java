@@ -1,9 +1,12 @@
 package com.example.ccnu_station.Call;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CallItem {
     /**
      * 活动时间
      */
+    @SerializedName("activity_time")
     private String activityTime;
     /**
      * 发布人的头像
@@ -12,6 +15,7 @@ public class CallItem {
     /**
      * 发布时间
      */
+    @SerializedName("post_time")
     private String postTime;
     /**
      * 发布人的ID

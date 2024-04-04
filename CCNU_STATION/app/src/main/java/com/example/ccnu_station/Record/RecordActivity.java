@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ccnu_station.Buidings.BuildActivity;
@@ -39,6 +40,7 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
     private CCNU_API api;
     private String buildID;
     private ImageView background;
+    private TextView buildName;
     private String user_token = CCNU_Application.getUser_Token();
     private static String Building_ID =
             "com.example.ccnu_station.RecordActivity.Building_ID";
@@ -56,6 +58,8 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
         buildID = ""+getIntent().getIntExtra(Building_ID,-1);
         background = findViewById(R.id.background);
         background.setImageResource(CCNU_Application.buildBackGround[buildID.toCharArray()[0]-'0'-1]);
+        buildName = findViewById(R.id.textBuildName);
+        buildName.setText(CCNU_Application.buildName[buildID.toCharArray()[0]-'0'-1]);
         recyclerView = findViewById(R.id.Recordrecyclerview);
         itemList = testList();
         generateItemList(buildID); // Create a list of MyItem objects
@@ -90,13 +94,13 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
     }
     private ArrayList<Item> testList(){
         ArrayList<Item> List = new ArrayList<>();
-        Item item = new Item();
-        item.setAvatar("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setText("测试测试测试测试");
-        item.setImage1("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setTime("2024:03:14:20:10");
-        item.setTitle("这是一个标题");
-        for(int i = 0;i<10;i++) List.add(item);
+//        Item item = new Item();
+//        item.setAvatar("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setText("测试测试测试测试");
+//        item.setImage1("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setTime("2024:03:14:20:10");
+//        item.setTitle("这是一个标题");
+//        for(int i = 0;i<10;i++) List.add(item);
         return List;
     }
     private void generateItemList(String buildID){

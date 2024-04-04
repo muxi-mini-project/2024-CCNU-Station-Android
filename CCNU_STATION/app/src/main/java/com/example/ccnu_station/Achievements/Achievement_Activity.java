@@ -24,9 +24,6 @@ import retrofit2.Response;
 
 public class Achievement_Activity extends AppCompatActivity implements Achievement_Adapter.OnItemClickListener{
 
-    public static Intent newIntent;
-    private static String Achievement_ID =
-            "com.example.ccnu_station.Achievement_ID";
     private CCNU_API api;
     private RecyclerView recyclerView;
     private TextView finished_textview;
@@ -34,10 +31,9 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
     private String User_token = CCNU_Application.getUser_Token();
     private Achievement_Adapter achievementAdapter;
 
-    public static Intent newIntent(Context packgeContext, String personal_ID)
+    public static Intent newIntent(Context packgeContext)
     {
         Intent intent = new Intent(packgeContext, Achievement_Activity.class);
-        intent.putExtra(Achievement_ID,personal_ID);
         return intent;
     }
     private List<Achievement> data;
@@ -64,8 +60,6 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         unfinished_textview = (TextView) findViewById(R.id.unfinished_tv);
         api = CCNU_Application.getApi();
         setItemList();
-
-
     }
 
     @Override
@@ -74,7 +68,6 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         if (achID >= 0 && achID < data.size()) {
             // 获取指定索引的成就对象
             Achievement achievementToChange = data.get(achID);
-
             // 修改成就的完成状态为true
             achievementToChange.setIsfinished(!data.get(achID).isIsfinished());
         }
@@ -87,15 +80,15 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         clickCheckboxCall.enqueue(new Callback<AchievementClickResponse>() {
             @Override
             public void onResponse(Call<AchievementClickResponse> call, Response<AchievementClickResponse> response) {
-                Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
                 AchievementClickResponse body =response.body();
 
                 if(body == null) {
-                    Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(body.getCode()==1000){
-                    Toast.makeText(Achievement_Activity.this,"更改成功",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Achievement_Activity.this,"更改成功",Toast.LENGTH_SHORT).show();
                     String newdata=body.getData();
                     update_FinsihedTextview(newdata);
 
@@ -118,15 +111,15 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         AchievementCall.enqueue(new Callback<JsonRespond<AchievementTotalFinishedResponse>>() {
                 @Override
                 public void onResponse(Call<JsonRespond<AchievementTotalFinishedResponse>> call, Response<JsonRespond<AchievementTotalFinishedResponse>> response) {
-                    Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Achievement_Activity.this,"请求成功",Toast.LENGTH_SHORT).show();
                     JsonRespond<AchievementTotalFinishedResponse> body =response.body();
                     if(body == null) {
-                        Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Achievement_Activity.this,"响应体为空",Toast.LENGTH_SHORT).show();
                         return;
                     } else {
                         String setdata = body.getData().getFinished();
                         update_FinsihedTextview(setdata);
-                        for(int i = 1 ; i < 9; i++){
+                        for(int i = 0 ; i < 9; i++){
                             achievementAdapter.notifyItemChanged(i);
                         }
                     }
@@ -135,7 +128,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
 
                 @Override
                 public void onFailure(Call<JsonRespond<AchievementTotalFinishedResponse>> call, Throwable t) {
-                    Toast.makeText(Achievement_Activity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Achievement_Activity.this,"请求失败",Toast.LENGTH_SHORT).show();
                 }
             });
 

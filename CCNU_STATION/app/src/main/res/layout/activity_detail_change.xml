@@ -27,14 +27,25 @@
             android:layout_height="150dp">
 
             <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/avatarsample"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
                 android:id="@+id/imageviewAvatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -203,7 +214,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="100dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -215,14 +226,79 @@
                     android:gravity="center"
                     android:text="入学时间" />
 
-                <TextView
-                    android:id="@+id/textStay_Date"
+                <LinearLayout
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="年"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="月"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"></TextView>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="日"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <NumberPicker
+                            android:id="@+id/yearnumberroll"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:layout_weight="1"></NumberPicker>
+
+                        <NumberPicker
+                            android:id="@+id/monthnnumberroll"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:layout_weight="1"></NumberPicker>
+
+                        <NumberPicker
+                            android:id="@+id/daynumberroll"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:layout_weight="1"></NumberPicker>
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
