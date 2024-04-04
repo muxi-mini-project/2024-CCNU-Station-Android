@@ -46,6 +46,8 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     private String user_token = CCNU_Application.getUser_Token();
     private static String Building_ID =
             "com.example.ccnu_station.FinderActivity.Building_ID";
+    private ImageButton backButton;
+
     public static Intent newIntent(Context packgeContext, int buildingID)
     {
         Intent intent = new Intent(packgeContext, FinderActivity.class);
@@ -69,6 +71,14 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         addButton = findViewById(R.id.addFinds);
+        backButton = findViewById(R.id.backbtn);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +95,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
             }
         });
     }
+    @Override
     public void onBackPressed(){
         Intent intent = BuildActivity.newIntent(FinderActivity.this,buildID.toCharArray()[0]-'0');
         startActivity(intent);
@@ -137,4 +148,5 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
             }
         });
     }
+
 }
