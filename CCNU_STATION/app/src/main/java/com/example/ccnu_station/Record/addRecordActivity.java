@@ -81,6 +81,14 @@ public class addRecordActivity extends BaseActivity {
                 UploadNewRecord(rdtitle,rdcontent,imageKey,User_token,BuildID);
             }
         });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = RecordActivity.newIntent(addRecordActivity.this,BuildID.toCharArray()[0]-'0');
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     public void onBackPressed(){
         Intent intent = RecordActivity.newIntent(addRecordActivity.this,BuildID.toCharArray()[0]-'0');
@@ -115,9 +123,9 @@ public class addRecordActivity extends BaseActivity {
         uploadManager.put(avatarFile, null, QiniuToken, new UpCompletionHandler() {
             @Override
             public void complete(String key, ResponseInfo info, JSONObject response) {
-                Toast.makeText(addRecordActivity.this,"Qiniu请求完成",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(addRecordActivity.this,"Qiniu请求完成",Toast.LENGTH_SHORT).show();
                 if(info.isOK()) {
-                    Toast.makeText(addRecordActivity.this,"Qiniu请求成功",Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(addRecordActivity.this,"Qiniu请求成功",Toast.LENGTH_SHORT).show();
                     String uploadedKey = response.optString("key");
                     imageKey=uploadedKey;
                     Glide.with(addRecordActivity.this)
@@ -125,7 +133,7 @@ public class addRecordActivity extends BaseActivity {
                             .into(btnimage);
                 } else {
                     Log.i("qiniu", "Upload Fail");
-                    Toast.makeText(addRecordActivity.this,info.toString(),Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(addRecordActivity.this,info.toString(),Toast.LENGTH_SHORT).show();
                     //如果失败，这里可以把 info 信息上报自己的服务器，便于后面分析上传错误原因
                 }
                 //Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
@@ -138,16 +146,16 @@ public class addRecordActivity extends BaseActivity {
         QiniuTokenGet.enqueue(new Callback<QnTokenJson>() {
             @Override
             public void onResponse(Call<QnTokenJson> call, Response<QnTokenJson> response) {
-                Toast.makeText(addRecordActivity.this,"Token请求成功",Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(addRecordActivity.this,"Token请求成功",Toast.LENGTH_SHORT).show();
                 QnTokenJson body = response.body();
                 if(body==null) return;
                 String QiniuToken = body.getQnToken();
-                Toast.makeText(addRecordActivity.this,QiniuToken,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(addRecordActivity.this,QiniuToken,Toast.LENGTH_SHORT).show();
                 UploadToQiniu(avatarFile,QiniuToken);
             }
             @Override
             public void onFailure(Call<QnTokenJson> call, Throwable t) {
-                Toast.makeText(addRecordActivity.this,"Token请求失败",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(addRecordActivity.this,"Token请求失败",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -163,10 +171,10 @@ public class addRecordActivity extends BaseActivity {
         recordPoster.enqueue(new Callback<JsonRespond<SimpleData>>() {
             @Override
             public void onResponse(Call<JsonRespond<SimpleData>> call, Response<JsonRespond<SimpleData>> response) {
-                Toast.makeText(addRecordActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(addRecordActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
                 JsonRespond<SimpleData> body = response.body();
                 if(body.getCode()==1000){
-                    Toast.makeText(addRecordActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(addRecordActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(addRecordActivity.this,"发布失败",Toast.LENGTH_SHORT).show();

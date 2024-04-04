@@ -43,10 +43,8 @@
             android:name=".Personal.DetailChange"
             android:exported="false" />
         <activity
-
             android:name=".Achievements.Achievement_Activity"
-
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Personal.PersonalPage"
             android:exported="false" />

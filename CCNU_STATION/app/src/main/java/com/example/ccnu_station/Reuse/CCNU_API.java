@@ -1,25 +1,21 @@
 package com.example.ccnu_station.Reuse;
 
-
 import com.example.ccnu_station.Achievements.AchievementClickResponse;
 import com.example.ccnu_station.Achievements.AchievementTotalFinishedResponse;
-
 import com.example.ccnu_station.Call.CallResponseData;
 import com.example.ccnu_station.Finder.FinderResponseData;
 import com.example.ccnu_station.Login.LoginData;
 import com.example.ccnu_station.Personal.PersonalDetailData;
 import com.example.ccnu_station.Record.RecordResponseData;
-
 import okhttp3.RequestBody;
-
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface CCNU_API {
@@ -65,14 +61,11 @@ public interface CCNU_API {
             @Field("sign") String note,
             @Field("mbti") String mbti
     );
-
-    //更改单个成就状态
     @GET("api/user/achievement/update")
-    Call<AchievementClickResponse> getAchievementReusult(@Header("Authorization")String Token,@Query("stuid") String UserID, @Query("achid") String AchiID);
+    Call<AchievementClickResponse> getAchievementReusult(@Header("Authorization")String Token, @Query("stuid") String UserID, @Query("achid") String AchiID);
     //设置所有的成就状况
     @GET("api/user/achievement/get")
-    Call<JsonRespond<AchievementTotalFinishedResponse>> getAchievementTotalFinished(@Header("Authorization")String Token,@Query("stuid") String UserID);
-
+    Call<JsonRespond<AchievementTotalFinishedResponse>> getAchievementTotalFinished(@Header("Authorization")String Token, @Query("stuid") String UserID);
     @GET("api/getactivity/allrecruit")
     Call<JsonRespond<CallResponseData>> getAllCalls();
     @GET("api/getactivity/alltreasurehunting")
@@ -85,5 +78,6 @@ public interface CCNU_API {
     Call<JsonRespond<SimpleData>> avatarKeyUpload(@Header("Authorization")String Token, @Query("image") String key);
     @GET("qiniutoken")
     Call<QnTokenJson> getQiniuToken(@Header("Authorization")String Token);
-
+    @GET("api/user//update_staydate")
+    Call<JsonRespond<SimpleData>> updateStayDate(@Header("Authorization")String Token,@Query("stuid")String personID);
 }

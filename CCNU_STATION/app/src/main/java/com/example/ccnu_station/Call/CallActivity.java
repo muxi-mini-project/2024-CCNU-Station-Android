@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ccnu_station.Finder.AddFindActivity;
 import com.example.ccnu_station.Finder.FindItem;
 import com.example.ccnu_station.Finder.FinderActivity;
 import com.example.ccnu_station.Finder.FinderResponseData;
@@ -37,6 +39,7 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     private ArrayList<CallItem> itemList;
     private ImageButton addButton;
     private CCNU_API api;
+
     private String user_token = CCNU_Application.getUser_Token();
     public static Intent newIntent(Context packgeContext)
     {
@@ -84,14 +87,14 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     }
     private ArrayList<CallItem> testList(){
         ArrayList<CallItem> List = new ArrayList<>();
-        CallItem item = new CallItem();
-        item.setHeadimage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setTitle("标题测试");
-        item.setPostTime("2024:03:14:20:10");
-        item.setActivityTime("地点测试");
-        item.setWhere("测试地点");
-        item.setRequest("要求测试");
-        for(int i = 0;i<10;i++) List.add(item);
+//        CallItem item = new CallItem();
+//        item.setHeadimage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setTitle("标题测试");
+//        item.setPostTime("2024:03:14:20:10");
+//        item.setActivityTime("地点测试");
+//        item.setWhere("测试地点");
+//        item.setRequest("要求测试");
+//        for(int i = 0;i<10;i++) List.add(item);
         return List;
     }
     private void generateItemList(){
@@ -99,7 +102,7 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
         getCalls.enqueue(new Callback<JsonRespond<CallResponseData>>() {
             @Override
             public void onResponse(Call<JsonRespond<CallResponseData>> call, Response<JsonRespond<CallResponseData>> response) {
-                Toast.makeText(CallActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CallActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
                 JsonRespond<CallResponseData> body = response.body();
                 if(body==null) return;
                 if(body.getCode()!=1000) return;
@@ -120,8 +123,9 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
             @Override
             public void onFailure(Call<JsonRespond<CallResponseData>> call, Throwable t) {
                 Log.i("FindGet","Failed");
-                Toast.makeText(CallActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CallActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

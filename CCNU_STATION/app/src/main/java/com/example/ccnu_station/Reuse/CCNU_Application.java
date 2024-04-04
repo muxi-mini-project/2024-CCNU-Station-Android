@@ -27,6 +27,16 @@ public class CCNU_Application extends Application {
             R.drawable.build07bg,
             R.drawable.build08bg
     };
+    public static final String[] buildName = {
+            "七号楼",
+            "东一食堂",
+            "佑铭体育馆",
+            "南湖综合楼",
+            "桂香园",
+            "南湖食堂",
+            "八号楼",
+            "学子餐厅"
+    };
     public static final String USERDETAILS = "User_Details";
     public static final String TOKEN="token";
     public static final String USERID="UserID";

@@ -31,7 +31,7 @@ public class LoginActivity extends BaseActivity {
     private EditText editPassword;
     private TextView textHint;
     boolean passwordCheck = false;
-    boolean firstCheck = true;
+    boolean firstCheck = false;
     public static Intent newIntent(Context packgeContext)
     {
         Intent intent = new Intent(packgeContext, LoginActivity.class);
@@ -60,10 +60,10 @@ public class LoginActivity extends BaseActivity {
                 LogingCall.enqueue(new Callback<JsonRespond<LoginData>>() {
                     @Override
                     public void onResponse(Call<JsonRespond<LoginData>> call, Response<JsonRespond<LoginData>> response) {
-                        Toast.makeText(LoginActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
                         JsonRespond<LoginData> Respond = response.body();
                         if(Respond == null) {
-                            Toast.makeText(LoginActivity.this,"响应体为空",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this,"响应体为空",Toast.LENGTH_SHORT).show();
                             return;
                         }
                         LoginData body = Respond.getData();
@@ -90,7 +90,6 @@ public class LoginActivity extends BaseActivity {
                             }
                             else {
                                 intent = HomePage.newIntent(LoginActivity.this);
-
                             }
                             startActivity(intent);
                             finish();
@@ -99,7 +98,7 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call<JsonRespond<LoginData>> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -112,7 +111,6 @@ public class LoginActivity extends BaseActivity {
                 Intent intent = HomePage.newIntent(LoginActivity.this);
                 CCNU_Application.TokensignOut();
                 startActivity(intent);
-
                 finish();
             }
         });
