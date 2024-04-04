@@ -41,6 +41,8 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     private CCNU_API api;
 
     private String user_token = CCNU_Application.getUser_Token();
+    private ImageButton backButton;
+
     public static Intent newIntent(Context packgeContext)
     {
         Intent intent = new Intent(packgeContext, CallActivity.class);
@@ -58,6 +60,13 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         addButton = findViewById(R.id.addCall);
+        backButton = findViewById(R.id.backbtn);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
