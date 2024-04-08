@@ -79,6 +79,9 @@ public class addRecordActivity extends BaseActivity {
                 String rdtitle = editTitle.getText().toString();
                 String rdcontent = editContent.getText().toString();
                 UploadNewRecord(rdtitle,rdcontent,imageKey,User_token,BuildID);
+                Intent intent = RecordActivity.newIntent(addRecordActivity.this,BuildID.toCharArray()[0]-'0');
+                startActivity(intent);
+                finish();
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {

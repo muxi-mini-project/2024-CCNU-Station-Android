@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Reuse.CCNU_Application;
 
 import java.util.List;
 
@@ -19,15 +18,10 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
     private OnItemClickListener mListener;
     private List<Achievement> data;
 
-    public interface OnItemClickListener {
-        void onAchieveClick(String personal_id ,int achID);
-    }
-///////
     public Achievement_Adapter(List<Achievement> data ,OnItemClickListener listener) {
         mListener =listener;
         this.data = data;
     }
-//////
 
     @NonNull
     @Override
@@ -45,15 +39,33 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
         holder.achievement_title.setText(achievement.getTitle());
         holder.achievement_isfinished.setChecked(achievement.isIsfinished());
 
+
         holder.achievement_isfinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onAchieveClick(CCNU_Application.getUserID(),data.get(holder.getAdapterPosition()).getAchievementId());
+                mListener.onAchieveClick(data.get(holder.getAdapterPosition()).getAchievementId());
+                ////
+//                int position = holder.getAdapterPosition();
+//                setcheckboxbackgruond(holder,position);
+                ////
+
+                //
             }
         });
 
     }
+    public interface OnItemClickListener {
+        void onAchieveClick(int achID);
+    }
 
+    //////
+    private OnItemClickListener listener;
+
+    // 提供一个公共方法来设置监听器
+    public void setOnItemCheckChangeListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+    /////
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();
@@ -67,9 +79,20 @@ public class Achievement_Adapter extends RecyclerView.Adapter<Achievement_Adapte
             super(itemView);
             achievement_title = itemView.findViewById(R.id.title_textview);
             achievement_isfinished = itemView.findViewById(R.id.isfinished_checkbox);
-
-
         }
     }
+
+//    private void setcheckboxbackgruond(@NonNull Achievement_ViewHolder holder, int position){
+//        if (Listener != null && position != RecyclerView.NO_POSITION) {
+//            Achievement clickedItem = data.get(position);
+//            Listener.onAchieveClick(clickedItem.getAchievementId());
+//            // 切换CheckBox的图片
+//            if (clickedItem.isIsfinished()) {
+//                holder.achievement_isfinished.setButtonDrawable(R.drawable.achicheckboxfininished);
+//            } else {
+//                holder.achievement_isfinished.setButtonDrawable(R.drawable.achecheckboxunfinished);
+//            }
+//        }
+//    }
 
 }

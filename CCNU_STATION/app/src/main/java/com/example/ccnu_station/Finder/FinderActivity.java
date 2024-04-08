@@ -1,6 +1,5 @@
 package com.example.ccnu_station.Finder;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,17 +11,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ccnu_station.Buidings.BuildActivity;
-import com.example.ccnu_station.Call.CallActivity;
-import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.Item;
-import com.example.ccnu_station.Record.RecordActivity;
-import com.example.ccnu_station.Record.addRecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -97,6 +90,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     }
     @Override
     public void onBackPressed(){
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         Intent intent = BuildActivity.newIntent(FinderActivity.this,buildID.toCharArray()[0]-'0');
         startActivity(intent);
         finish();

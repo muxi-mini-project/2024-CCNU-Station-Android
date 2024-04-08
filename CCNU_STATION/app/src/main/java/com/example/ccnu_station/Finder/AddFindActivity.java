@@ -2,7 +2,6 @@ package com.example.ccnu_station.Finder;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,13 +16,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.ccnu_station.Call.AddCallActivity;
-import com.example.ccnu_station.Call.CallActivity;
-import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.RecordActivity;
-import com.example.ccnu_station.Record.addRecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -94,6 +88,9 @@ public class AddFindActivity extends BaseActivity {
                 String DDL = ddl.getText().toString();
                 String Thing = thing.getText().toString();
                 UploadNewFind(Title,Clue,Thing,DDL,imageKey,User_token,BuildID);
+                Intent intent = FinderActivity.newIntent(AddFindActivity.this,BuildID.toCharArray()[0]-'0');
+                startActivity(intent);
+                finish();
             }
         });
         cancelbtn.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +103,7 @@ public class AddFindActivity extends BaseActivity {
         });
     }
     public void onBackPressed(){
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         Intent intent = FinderActivity.newIntent(AddFindActivity.this,BuildID.toCharArray()[0]-'0');
         startActivity(intent);
         finish();
