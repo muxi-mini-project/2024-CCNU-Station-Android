@@ -32,9 +32,9 @@ public class CCNU_Application extends Application {
             "东一食堂",
             "佑铭体育馆",
             "南湖综合楼",
-            "桂香园",
-            "南湖食堂",
             "八号楼",
+            "南湖食堂",
+            "桂香园",
             "学子餐厅"
     };
     public static final String USERDETAILS = "User_Details";

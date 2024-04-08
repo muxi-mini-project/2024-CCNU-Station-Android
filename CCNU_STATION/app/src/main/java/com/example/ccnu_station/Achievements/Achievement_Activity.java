@@ -3,6 +3,7 @@ package com.example.ccnu_station.Achievements;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
     private TextView unfinished_textview;
     private String User_token = CCNU_Application.getUser_Token();
     private Achievement_Adapter achievementAdapter;
+    private CheckBox checkbox;
 
     public static Intent newIntent(Context packgeContext)
     {
@@ -55,6 +57,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
         recyclerView.setLayoutManager(linearLayoutManager);
         // 设置RecyclerView的适配器
         achievementAdapter = new Achievement_Adapter(data,Achievement_Activity.this);
+        achievementAdapter.setOnItemCheckChangeListener(this::onAchieveClick);
         recyclerView.setAdapter(achievementAdapter);
         finished_textview = (TextView) findViewById(R.id.finished_tv);
         unfinished_textview = (TextView) findViewById(R.id.unfinished_tv);
@@ -63,7 +66,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
     }
 
     @Override
-    public void onAchieveClick(String personal_id, int achID) {
+    public void onAchieveClick(int achID) {
         clickcheckbox(achID);
         if (achID >= 0 && achID < data.size()) {
             // 获取指定索引的成就对象
@@ -71,6 +74,7 @@ public class Achievement_Activity extends AppCompatActivity implements Achieveme
             // 修改成就的完成状态为true
             achievementToChange.setIsfinished(!data.get(achID).isIsfinished());
         }
+
     }
 
     //////?计划实现当点击checkbox后 根据achID将完成状况改变 获得一串“1”“0”组成的长度为100的字符串用以更新成就完成状况?

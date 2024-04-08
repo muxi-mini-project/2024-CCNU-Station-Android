@@ -9,19 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.ccnu_station.Finder.AddFindActivity;
-import com.example.ccnu_station.Finder.FindItem;
-import com.example.ccnu_station.Finder.FinderActivity;
-import com.example.ccnu_station.Finder.FinderResponseData;
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.RecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -86,6 +78,7 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     }
     @Override
     public void onBackPressed(){
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         Intent intent = HomePage.newIntent(CallActivity.this);
         startActivity(intent);
         finish();
