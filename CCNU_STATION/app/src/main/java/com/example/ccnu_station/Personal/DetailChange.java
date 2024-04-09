@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,6 +50,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,6 +76,10 @@ public class DetailChange extends BaseActivity {
     private int year=2000;
     private int month=1;
     private int day=1;
+    private TextView textYear;
+    private TextView textMonth;
+    private TextView textDay;
+
     public static Intent newIntent(Context packgeContext)
     {
         Intent intent = new Intent(packgeContext,DetailChange.class);
@@ -94,6 +100,7 @@ public class DetailChange extends BaseActivity {
                 }
             }
     );
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +112,9 @@ public class DetailChange extends BaseActivity {
         textGender = findViewById(R.id.textsex);
         textMBTI = findViewById(R.id.textMBTI);
         textNote = findViewById(R.id.edtnote);
+        textYear =findViewById(R.id.yeartextView);
+        textMonth =findViewById(R.id.monthtextView);
+        textDay =findViewById(R.id.daytextView);
         avatar = findViewById(R.id.imageviewAvatar);
         SignOutBtn = findViewById(R.id.btnLogOut);
         viewModel = new ViewModelProvider(this).get(CCNU_ViewModel.class);
@@ -115,61 +125,11 @@ public class DetailChange extends BaseActivity {
         User_token = CCNU_Application.getUser_Token();
         api = CCNU_Application.getApi();
         detailGet();
-        yearPicker = findViewById(R.id.yearnumberroll);
-        // 设置年份范围，这里设置为 1900 年至当前年份
-        Calendar calendar = Calendar.getInstance();
-        int currentYear = calendar.get(Calendar.YEAR);
-        yearPicker.setMinValue(2000);
-        yearPicker.setMaxValue(currentYear);
 
-        // 设置默认选中的年份为当前年份
-        yearPicker.setValue(year);
 
-        // 设置年份选择监听器
-        yearPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                year = newVal;
-                updateDayPicker();
-            }
-        });
-        monthPicker = findViewById(R.id.monthnnumberroll);
 
-        // 设置年份范围，这里设置为 1900 年至当前年份
-        int currentmonth = calendar.get(Calendar.MONTH);
-        monthPicker.setMinValue(01);
-        monthPicker.setMaxValue(12);
 
-        // 设置默认选中的年份为当前年份
-        monthPicker.setValue(month);
-        dayPicker.setValue(day);
 
-        // 设置年份选择监听器
-        monthPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                month = newVal;
-                updateDayPicker();
-            }
-        });
-        dayPicker = findViewById(R.id.daynumberroll);
-
-        // 设置年份范围，这里设置为 1900 年至当前年份
-        updateDayPicker();
-
-        // 设置年份选择监听器
-        dayPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                day = newVal;
-            }
-        });
-        checkbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         SignOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,11 +145,10 @@ public class DetailChange extends BaseActivity {
                 String nickname = textNickName.getText().toString();
                 String Mbti = textMBTI.getText().toString();
                 String note = textNote.getText().toString();
-                String date = ""+year+"-";
-                if(month<10) date+="0";
-                date+=month+"-";
-                if(day<10) date+="0";
-                date+=day;
+
+                String stdID = textID.getText().toString();
+                String date = setenrollmentdate(stdID);
+
                 UploadNew(User_token,nickname,"18",date,note,Mbti);
                 Intent intent = PersonalPage.newIntent(DetailChange.this,CCNU_Application.getUserID());
                 startActivity(intent);
@@ -228,7 +187,11 @@ public class DetailChange extends BaseActivity {
                     //Toast.makeText(DetailChange.this, "响应体为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 Data = body.getData();
+                String stdID = Data.getStuid();
+                String enrollday = setenrollmentdate(stdID);
+                Data.setDate(enrollday);
                 viewModel.updateData(Data);
             }
             @Override
@@ -269,6 +232,16 @@ public class DetailChange extends BaseActivity {
                 .into(avatar);
         textMBTI.setText(newData.getMbti());
         textNote.setText(newData.getSign());
+
+        ////入学日期直接写死
+        for (int i = 2000; i <2030 ; i++) {
+            if(newData.getStuid().substring(0,4)== ""+ i){
+                textYear.setText(""+i);
+                textMonth.setText("09");
+                textDay.setText("04");
+            }
+        }
+
     }
     public void UploadToQiniu(File avatarFile,String QiniuToken)
     {
@@ -329,4 +302,105 @@ public class DetailChange extends BaseActivity {
         });
     }
     //提交新建的record到服务器并返回成功与否
+
+    private String  setenrollmentdate(String stdID){
+        String date = null;
+        for (int i = 2000; i <2030 ; i++) {
+            if(stdID.substring(0,4).equals(""+ i)){
+                date = ""+ i + "-";
+                date += "09-"; // 月份前面加0以保持两位数
+                date += "04"; // 日份前面加0以保持两位数
+                textYear.setText(""+i);
+                textMonth.setText("09");
+                textDay.setText("04");
+            }
+        }
+        return date;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        yearPicker = findViewById(R.id.yearnumberroll);
+//// 设置年份范围，这里设置为 2000 年至当前年份
+//                Calendar calendar = Calendar.getInstance();
+//                int currentYear = calendar.get(Calendar.YEAR);
+//                yearPicker.setMinValue(2000);
+//                yearPicker.setMaxValue(currentYear);
+//
+//// 设置默认选中的年份为当前年份
+//                yearPicker.setValue(year);
+//
+//// 设置年份选择监听器
+//                yearPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//@Override
+//public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//        year = newVal;
+//        updateDayPicker();
+//        }
+//        });
+//
+//        monthPicker = findViewById(R.id.monthnnumberroll);
+//// 设置月份范围
+//        monthPicker.setMinValue(1);
+//        monthPicker.setMaxValue(12);
+//
+//// 设置默认选中的月份为当前月份
+//        monthPicker.setValue(month);
+//
+//// 设置月份选择监听器
+//        monthPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//@Override
+//public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//        month = newVal;
+//        updateDayPicker();
+//        }
+//        });
+//
+//        dayPicker = findViewById(R.id.daynumberroll);
+//// 初始化dayPicker后再设置值
+//        dayPicker.setMinValue(1);
+//        dayPicker.setMaxValue(31);
+//        dayPicker.setValue(day);
+//
+//// 设置日选择监听器
+//        dayPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//@Override
+//public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//        day = newVal;
+//        }
+//        });

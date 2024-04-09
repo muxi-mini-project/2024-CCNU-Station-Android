@@ -87,11 +87,11 @@ public class PersonalPage extends BaseActivity {
         DetailGet.enqueue(new Callback<JsonRespond<PersonalDetailData>>() {
             @Override
             public void onResponse(Call<JsonRespond<PersonalDetailData>> call, Response<JsonRespond<PersonalDetailData>> response) {
-                //Toast.makeText(PersonalPage.this,"请求成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(PersonalPage.this,"请求成功",Toast.LENGTH_SHORT).show();
                 JsonRespond<PersonalDetailData> body = response.body();
                 if(body==null)
                 {
-                    //Toast.makeText(PersonalPage.this,"响应体为空",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PersonalPage.this,"响应体为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(body.getCode()==2005){
