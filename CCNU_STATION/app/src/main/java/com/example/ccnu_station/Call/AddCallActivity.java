@@ -60,6 +60,7 @@ public class AddCallActivity extends BaseActivity {
                 String Time = time.getText().toString();
                 String Place = where.getText().toString();
                 UploadNewCall(Title,Req,Time,Place,User_token);
+                onBackPressed();
             }
         });
         cancelbtn.setOnClickListener(new View.OnClickListener() {

@@ -3,6 +3,7 @@ package com.example.ccnu_station.Record;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +46,9 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
     private static String Building_ID =
             "com.example.ccnu_station.RecordActivity.Building_ID";
     private ImageButton backButton;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ImageButton backButton;
+
 
     public static Intent newIntent(Context packgeContext,int buildingID)
     {
@@ -63,6 +67,7 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
         buildName = findViewById(R.id.textBuildName);
         buildName.setText(CCNU_Application.buildName[buildID.toCharArray()[0]-'0'-1]);
         recyclerView = findViewById(R.id.Recordrecyclerview);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         itemList = testList();
         generateItemList(buildID); // Create a list of MyItem objects
         adapter = new RecordAdapter(itemList,this);
@@ -71,12 +76,24 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
         addButton = findViewById(R.id.addRecord);
         backButton = findViewById(R.id.backbtn);
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 在这里执行刷新数据的操作
+                refreshData();
+            }
+        });
+
+
+        backButton = findViewById(R.id.backbtn);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +110,12 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
             }
         });
     }
+
+    private void refreshData() {
+        generateItemList(buildID);
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     public void onBackPressed(){
         Intent intent = BuildActivity.newIntent(RecordActivity.this,buildID.toCharArray()[0]-'0');
         startActivity(intent);
