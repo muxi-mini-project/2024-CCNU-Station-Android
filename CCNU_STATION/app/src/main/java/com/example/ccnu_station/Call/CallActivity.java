@@ -10,17 +10,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.ccnu_station.Finder.FindItem;
-import com.example.ccnu_station.Finder.FinderActivity;
-import com.example.ccnu_station.Finder.FinderResponseData;
 import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.RecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -39,12 +33,10 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     private ImageButton addButton;
     private CCNU_API api;
     private String user_token = CCNU_Application.getUser_Token();
-<<<<<<< Updated upstream
-=======
     private ImageButton backButton;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ImageButton backButton;
 
->>>>>>> Stashed changes
     public static Intent newIntent(Context packgeContext)
     {
         Intent intent = new Intent(packgeContext, CallActivity.class);
@@ -63,11 +55,9 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         addButton = findViewById(R.id.addCall);
-<<<<<<< Updated upstream
-=======
+
         backButton = findViewById(R.id.backbtn);
 
-        // 设置下拉刷新的监听器
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -75,13 +65,16 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
                 refreshData();
             }
         });
+
+        backButton = findViewById(R.id.backbtn);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
->>>>>>> Stashed changes
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +100,7 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
 
     @Override
     public void onBackPressed(){
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         Intent intent = HomePage.newIntent(CallActivity.this);
         startActivity(intent);
         finish();
@@ -117,14 +111,14 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     }
     private ArrayList<CallItem> testList(){
         ArrayList<CallItem> List = new ArrayList<>();
-        CallItem item = new CallItem();
-        item.setHeadimage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setTitle("标题测试");
-        item.setPostTime("2024:03:14:20:10");
-        item.setActivityTime("地点测试");
-        item.setWhere("测试地点");
-        item.setRequest("要求测试");
-        for(int i = 0;i<10;i++) List.add(item);
+//        CallItem item = new CallItem();
+//        item.setHeadimage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setTitle("标题测试");
+//        item.setPostTime("2024:03:14:20:10");
+//        item.setActivityTime("地点测试");
+//        item.setWhere("测试地点");
+//        item.setRequest("要求测试");
+//        for(int i = 0;i<10;i++) List.add(item);
         return List;
     }
     private void generateItemList(){
@@ -132,7 +126,7 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
         getCalls.enqueue(new Callback<JsonRespond<CallResponseData>>() {
             @Override
             public void onResponse(Call<JsonRespond<CallResponseData>> call, Response<JsonRespond<CallResponseData>> response) {
-                Toast.makeText(CallActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CallActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
                 JsonRespond<CallResponseData> body = response.body();
                 if(body==null) return;
                 if(body.getCode()!=1000) return;
@@ -153,8 +147,9 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
             @Override
             public void onFailure(Call<JsonRespond<CallResponseData>> call, Throwable t) {
                 Log.i("FindGet","Failed");
-                Toast.makeText(CallActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CallActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

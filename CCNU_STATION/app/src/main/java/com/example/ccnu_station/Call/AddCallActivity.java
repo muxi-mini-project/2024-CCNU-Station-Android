@@ -63,6 +63,14 @@ public class AddCallActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CallActivity.newIntent(AddCallActivity.this);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     public void onBackPressed(){
         Intent intent = CallActivity.newIntent(AddCallActivity.this);
@@ -80,7 +88,7 @@ public class AddCallActivity extends BaseActivity {
         postCall.enqueue(new Callback<JsonRespond<SimpleData>>() {
             @Override
             public void onResponse(Call<JsonRespond<SimpleData>> call, Response<JsonRespond<SimpleData>> response) {
-                Toast.makeText(AddCallActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddCallActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
                 JsonRespond<SimpleData> body = response.body();
                 if(body.getCode()==1000){
                     Toast.makeText(AddCallActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
@@ -91,14 +99,15 @@ public class AddCallActivity extends BaseActivity {
                     finishAffinity();
                 }
                 else{
-                    Toast.makeText(AddCallActivity.this,"发布失败",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(AddCallActivity.this,"发布失败",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonRespond<SimpleData>> call, Throwable t) {
-                Toast.makeText(AddCallActivity.this,"发布失败",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddCallActivity.this,"发布失败",Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

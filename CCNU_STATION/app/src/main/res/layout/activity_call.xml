@@ -4,43 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Call.CallActivity">
-    <ImageView
-        android:id="@+id/background"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Callrecyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ImageButton
-            android:id="@+id/addCall"
-            android:layout_width="80dp"
+        <LinearLayout
             android:layout_height="80dp"
-<<<<<<< Updated upstream
+
             android:backgroundTint="#00000000"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_input_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-=======
+
             android:orientation="horizontal"
             android:layout_width="match_parent">
 
@@ -81,6 +59,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/addbtn"/>
         </LinearLayout>
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -88,17 +67,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+
             android:id="@+id/Callrecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/background6"
             android:clickable="true">
 
+
             </androidx.recyclerview.widget.RecyclerView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
->>>>>>> Stashed changes
+
 </androidx.constraintlayout.widget.ConstraintLayout>

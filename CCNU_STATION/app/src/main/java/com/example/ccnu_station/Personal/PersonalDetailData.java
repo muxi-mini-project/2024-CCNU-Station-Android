@@ -1,20 +1,27 @@
 package com.example.ccnu_station.Personal;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PersonalDetailData {
     private Long age = 0l;
     private String college;
     private String date;
+    @SerializedName("fan_number")
     private Long fanNumber = 0l;
+    @SerializedName("follower_number")
     private Long followerNumber = 0l;
+    @SerializedName("friends_number")
     private Long friendsNumber = 0l;
     private String gender;
     private String grade;
     private String headimage;
     private String mbti;
     private String nickname;
+    @SerializedName("post_number")
     private Long postNumber = 0l;
     private String realName;
     private String sign;
+    @SerializedName("stay_date")
     private Long stayDate = 0l;
     private String stuid;
     private Boolean ynLogin;

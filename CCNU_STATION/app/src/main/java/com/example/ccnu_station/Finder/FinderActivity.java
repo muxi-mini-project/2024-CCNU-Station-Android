@@ -1,6 +1,5 @@
 package com.example.ccnu_station.Finder;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -12,17 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.ccnu_station.Buidings.BuildActivity;
-import com.example.ccnu_station.Call.CallActivity;
-import com.example.ccnu_station.Home.HomePage;
 import com.example.ccnu_station.Login.LoginActivity;
 import com.example.ccnu_station.Personal.PersonalPage;
 import com.example.ccnu_station.R;
-import com.example.ccnu_station.Record.Item;
-import com.example.ccnu_station.Record.RecordActivity;
-import com.example.ccnu_station.Record.addRecordActivity;
 import com.example.ccnu_station.Reuse.BaseActivity;
 import com.example.ccnu_station.Reuse.CCNU_API;
 import com.example.ccnu_station.Reuse.CCNU_Application;
@@ -42,15 +36,15 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     private CCNU_API api;
     private String buildID;
     private ImageView background;
+    private TextView buildName;
     private String user_token = CCNU_Application.getUser_Token();
     private static String Building_ID =
             "com.example.ccnu_station.FinderActivity.Building_ID";
-<<<<<<< Updated upstream
-=======
     private ImageButton backButton;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ImageButton backButton;
 
->>>>>>> Stashed changes
+
     public static Intent newIntent(Context packgeContext, int buildingID)
     {
         Intent intent = new Intent(packgeContext, FinderActivity.class);
@@ -64,6 +58,8 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
         api = CCNU_Application.getApi();
         buildID = ""+getIntent().getIntExtra(Building_ID,-1);
         background = findViewById(R.id.background);
+        buildName = findViewById(R.id.textBuildName);
+        buildName.setText(CCNU_Application.buildName[buildID.toCharArray()[0]-'0'-1]);
         background.setImageResource(CCNU_Application.buildBackGround[buildID.toCharArray()[0]-'0'-1]);
         recyclerView = findViewById(R.id.finderrecyclerview);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
@@ -73,8 +69,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         addButton = findViewById(R.id.addFinds);
-<<<<<<< Updated upstream
-=======
+
         backButton = findViewById(R.id.backbtn);
         
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -84,6 +79,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
                 refreshData();
             }
         });
+        backButton = findViewById(R.id.backbtn);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +87,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
                 onBackPressed();
             }
         });
->>>>>>> Stashed changes
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +104,6 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
             }
         });
     }
-<<<<<<< Updated upstream
-=======
 
     private void refreshData() {
         generateItemList(buildID);
@@ -117,8 +111,8 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     }
 
     @Override
->>>>>>> Stashed changes
     public void onBackPressed(){
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         Intent intent = BuildActivity.newIntent(FinderActivity.this,buildID.toCharArray()[0]-'0');
         startActivity(intent);
         finish();
@@ -129,15 +123,15 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     }
     private ArrayList<FindItem> testList(){
         ArrayList<FindItem> List = new ArrayList<>();
-        FindItem item = new FindItem();
-        item.setHeadImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setClue("测试测试测试测试");
-        item.setImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
-        item.setTime("2024:03:14:20:10");
-        item.setTitle("这是一个标题");
-        item.setDeadline("2024:03:14:20:10");
-        item.setThing("圣遗物");
-        for(int i = 0;i<10;i++) List.add(item);
+//        FindItem item = new FindItem();
+//        item.setHeadImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setClue("测试测试测试测试");
+//        item.setImage("https://pic.imgdb.cn/item/65e9ca429f345e8d03be51dc.jpg");
+//        item.setTime("2024:03:14:20:10");
+//        item.setTitle("这是一个标题");
+//        item.setDeadline("2024:03:14:20:10");
+//        item.setThing("圣遗物");
+//        for(int i = 0;i<10;i++) List.add(item);
         return List;
     }
     private void generateItemList(String buildID){
@@ -145,7 +139,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
         getFinds.enqueue(new Callback<JsonRespond<FinderResponseData>>() {
             @Override
             public void onResponse(Call<JsonRespond<FinderResponseData>> call, Response<JsonRespond<FinderResponseData>> response) {
-                Toast.makeText(FinderActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FinderActivity.this,"请求成功",Toast.LENGTH_SHORT).show();
                 JsonRespond<FinderResponseData> body = response.body();
                 if(body==null) return;
                 if(body.getCode()!=1000) return;
@@ -166,8 +160,9 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
             @Override
             public void onFailure(Call<JsonRespond<FinderResponseData>> call, Throwable t) {
                 Log.i("FindGet","Failed");
-                Toast.makeText(FinderActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FinderActivity.this,"请求失败",Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

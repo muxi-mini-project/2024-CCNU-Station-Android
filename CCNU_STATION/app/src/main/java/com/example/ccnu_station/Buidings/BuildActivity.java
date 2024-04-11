@@ -27,6 +27,7 @@ public class BuildActivity extends BaseActivity {
     private TextView textBuildingName;
     private int buildID;
     private ImageView background;
+    private TextView buildName;
     private static String Building_ID =
             "com.example.ccnu_station.BuildingActivity.Building_ID";
     public static Intent newIntent(Context packgeContext, int buildingID)
@@ -45,6 +46,8 @@ public class BuildActivity extends BaseActivity {
         btnFind = findViewById(R.id.btnFInder);
         background = findViewById(R.id.background);
         background.setImageResource(CCNU_Application.buildBackGround[buildID-1]);
+        buildName = findViewById(R.id.buildName);
+        buildName.setText(CCNU_Application.buildName[buildID-1]);
         btnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
