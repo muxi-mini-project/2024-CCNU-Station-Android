@@ -3,6 +3,7 @@ package com.example.ccnu_station.Finder;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +45,12 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
     private String user_token = CCNU_Application.getUser_Token();
     private static String Building_ID =
             "com.example.ccnu_station.FinderActivity.Building_ID";
+<<<<<<< Updated upstream
+=======
+    private ImageButton backButton;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+>>>>>>> Stashed changes
     public static Intent newIntent(Context packgeContext, int buildingID)
     {
         Intent intent = new Intent(packgeContext, FinderActivity.class);
@@ -59,12 +66,32 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
         background = findViewById(R.id.background);
         background.setImageResource(CCNU_Application.buildBackGround[buildID.toCharArray()[0]-'0'-1]);
         recyclerView = findViewById(R.id.finderrecyclerview);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         itemList = testList();
         generateItemList(buildID); // Create a list of MyItem objects
         adapter = new FindAdapter(itemList,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         addButton = findViewById(R.id.addFinds);
+<<<<<<< Updated upstream
+=======
+        backButton = findViewById(R.id.backbtn);
+        
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 在这里执行刷新数据的操作
+                refreshData();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+>>>>>>> Stashed changes
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +108,16 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
             }
         });
     }
+<<<<<<< Updated upstream
+=======
+
+    private void refreshData() {
+        generateItemList(buildID);
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+>>>>>>> Stashed changes
     public void onBackPressed(){
         Intent intent = BuildActivity.newIntent(FinderActivity.this,buildID.toCharArray()[0]-'0');
         startActivity(intent);

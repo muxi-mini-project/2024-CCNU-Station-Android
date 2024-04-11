@@ -2,6 +2,7 @@ package com.example.ccnu_station.Call;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,12 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     private ImageButton addButton;
     private CCNU_API api;
     private String user_token = CCNU_Application.getUser_Token();
+<<<<<<< Updated upstream
+=======
+    private ImageButton backButton;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+>>>>>>> Stashed changes
     public static Intent newIntent(Context packgeContext)
     {
         Intent intent = new Intent(packgeContext, CallActivity.class);
@@ -54,7 +61,27 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
         adapter = new CallAdapter(itemList,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         addButton = findViewById(R.id.addCall);
+<<<<<<< Updated upstream
+=======
+        backButton = findViewById(R.id.backbtn);
+
+        // 设置下拉刷新的监听器
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 在这里执行刷新数据的操作
+                refreshData();
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+>>>>>>> Stashed changes
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +99,12 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
         });
 
     }
+
+    private void refreshData() {
+        generateItemList();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     @Override
     public void onBackPressed(){
         Intent intent = HomePage.newIntent(CallActivity.this);
