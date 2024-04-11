@@ -47,7 +47,6 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.OnItem
             "com.example.ccnu_station.RecordActivity.Building_ID";
     private ImageButton backButton;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ImageButton backButton;
 
 
     public static Intent newIntent(Context packgeContext,int buildingID)

@@ -35,7 +35,6 @@ public class CallActivity extends BaseActivity implements CallAdapter.OnItemClic
     private String user_token = CCNU_Application.getUser_Token();
     private ImageButton backButton;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ImageButton backButton;
 
     public static Intent newIntent(Context packgeContext)
     {
