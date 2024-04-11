@@ -42,7 +42,7 @@ public class FinderActivity extends BaseActivity implements FindAdapter.OnItemCl
             "com.example.ccnu_station.FinderActivity.Building_ID";
     private ImageButton backButton;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ImageButton backButton;
+
 
 
     public static Intent newIntent(Context packgeContext, int buildingID)

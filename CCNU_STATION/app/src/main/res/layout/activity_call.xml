@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,47 +17,37 @@
 
         <LinearLayout
             android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent">
 
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_margin="15dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/back"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/none"/>
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_marginVertical="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="14"
+            android:scaleType="fitCenter"
+            android:src="@drawable/zmpic" />
+
+        <ImageButton
+            android:id="@+id/addCall"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
             android:backgroundTint="#00000000"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-            android:orientation="horizontal"
-            android:layout_width="match_parent">
-
-            <ImageButton
-                android:id="@+id/backbtn"
-                android:layout_margin="15dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:src="@drawable/back"
-                android:scaleType="centerCrop"
-                android:backgroundTint="@color/none"/>
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_marginVertical="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="14"
-                android:scaleType="fitCenter"
-                android:src="@drawable/zmpic" />
-
-            <ImageButton
-                android:id="@+id/addCall"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:backgroundTint="#00000000"
-                android:scaleType="centerCrop"
-                android:src="@drawable/addbtn"/>
-        </LinearLayout>
+            android:scaleType="centerCrop"
+            android:src="@drawable/addbtn"/>
+    </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -66,23 +55,22 @@
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
 
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/Callrecyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background6"
-            android:clickable="true">
+                android:id="@+id/Callrecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background6"
+                android:clickable="true">
 
 
             </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
